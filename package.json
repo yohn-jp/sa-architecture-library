@@ -1,0 +1,22 @@
+{
+  "name": "sa-architecture-library",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build && pagefind --site dist",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "astro": "^5.16.0",
+    "@astrojs/mdx": "^4.3.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.6",
+    "typescript": "^5.9.0",
+    "pagefind": "^1.4.0",
+    "@pagefind/default-ui": "^1.4.0"
+  }
+}

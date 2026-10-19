@@ -1,0 +1,5 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import { volumes } from '../../data/catalog';
+---
+<SiteLayout title="副読本"><section class="page-intro"><p class="eyebrow">DEEP DIVE / EIGHT DOMAINS</p><h1>専門領域別の副読本</h1><p>各巻の本文は準備中です。公開済みの教材はコンプリートテキストから読めます。</p></section><section class="book-list">{volumes.map((v,i)=><article class="book-item"><span class="volume">VOLUME {String(i+1).padStart(2,'0')}</span><div><h2>{v.title}</h2><p>{v.detail}</p><small>執筆準備中</small></div></article>)}</section></SiteLayout>
