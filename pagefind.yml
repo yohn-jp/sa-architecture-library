@@ -1,0 +1,6 @@
+# Keep the original standalone textbook searchable without editing its HTML.
+root_selector: main
+exclude_selectors:
+  - '[data-pagefind-ignore]'
+  - '.backlinks'
+  - '.reading-related'

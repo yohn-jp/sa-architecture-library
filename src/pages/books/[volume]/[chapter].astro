@@ -1,0 +1,16 @@
+---
+import { render, type CollectionEntry } from 'astro:content';
+import ReadingLayout from '../../../layouts/ReadingLayout.astro';
+import { publishedChapters, chapterNumber } from '../../../lib/books';
+export async function getStaticPaths() {
+  return (await publishedChapters()).map(entry => ({
+    params: { volume: entry.data.volume, chapter: chapterNumber(entry.data.order) },
+    props: { entry },
+  }));
+}
+interface Props { entry: CollectionEntry<'books'>; }
+const { entry } = Astro.props;
+const { Content, headings } = await render(entry);
+const siblings = (await publishedChapters()).filter(ch => ch.data.volume === entry.data.volume);
+---
+<ReadingLayout entry={entry} siblings={siblings} headings={headings}><Content /></ReadingLayout>

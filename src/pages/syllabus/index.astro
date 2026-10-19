@@ -1,4 +1,9 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro';
+import { syllabusPdf, syllabusItems } from '../../data/syllabus';
+import { publishedChapters, chapterUrl } from '../../lib/books';
+import '../../styles/reading.css';
+const chapters = await publishedChapters();
+const ids = [...new Set(chapters.flatMap(ch => ch.data.syllabus))].sort((a,b) => a.localeCompare(b, 'en', { numeric: true }));
 ---
-<SiteLayout title="シラバス対応"><section class="page-intro"><p class="eyebrow">SYLLABUS / VER. 5.2</p><h1>SAシラバスと知識体系</h1><p>IPAシステムアーキテクト試験の要求知識・要求技能に基づいて、各巻を設計しています。</p><p>分野：Ⅰ 契約・合意、Ⅱ 企画、Ⅲ 要件定義、Ⅳ 開発、Ⅴ 運用・保守。</p><p><a href="https://www.ipa.go.jp/shiken/syllabus/nq6ept00000014gx-att/syllabus_sa_ver5_2.pdf">IPA公式シラバス Ver.5.2（PDF）↗</a></p><p>小項目単位の対応索引は、本文公開にあわせて追加します。</p></section></SiteLayout>
+<SiteLayout title="シラバス対応"><section class="page-intro"><p class="eyebrow">SYLLABUS / VER. 5.2</p><h1>SAシラバスと副読本</h1><p>公開済みの本文から、対応する小項目へたどる索引です。対応付けは本書の編集上の整理であり、IPAが本教材の網羅性や正確性を認定したものではありません。</p><p>Ⅰ 契約・合意、Ⅱ 企画、Ⅲ 要件定義、Ⅳ 開発、Ⅴ 運用・保守。未掲載の小項目もあり、この一覧だけでシラバス全体を網羅するものではありません。</p><p><a href={syllabusPdf}>IPA公式シラバス Ver.5.2（PDF）↗</a></p><p>{ids.length}小項目に、公開済み{chapters.length}章を関連付けています。</p></section>{ids.map(id => <section class="syllabus-item" id={`item-${id}`}><h2>{id} {syllabusItems[id].title}</h2><a href={`${syllabusPdf}#page=${syllabusItems[id].page}`}>公式PDFの該当ページ ↗</a><ul>{chapters.filter(ch => ch.data.syllabus.includes(id)).map(ch => <li><a href={chapterUrl(ch)}>{ch.data.title}</a></li>)}</ul></section>)}</SiteLayout>

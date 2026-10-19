@@ -1,0 +1,24 @@
+---
+import SiteLayout from '../../../layouts/SiteLayout.astro';
+import { volumes } from '../../../data/catalog';
+import { base, publishedChapters, chapterNumber, chapterUrl } from '../../../lib/books';
+import '../../../styles/reading.css';
+export async function getStaticPaths() {
+  const entries = await publishedChapters();
+  return volumes.filter(book => entries.some(ch => ch.data.volume === book.slug)).map(book => ({ params: { volume: book.slug }, props: { book } }));
+}
+const { book } = Astro.props;
+const chapters = (await publishedChapters()).filter(ch => ch.data.volume === book.slug);
+---
+<SiteLayout title={book.title} description={book.detail}>
+  <section class="page-intro volume-intro">
+    <p class="eyebrow">VOLUME {chapterNumber(volumes.indexOf(book) + 1)} / DEEP DIVE</p>
+    <h1>{book.title}</h1><p>{book.detail}</p>
+    <p class="publication-status">{chapters.length}章公開。本文のある章だけを掲載しています。</p>
+    {book.slug === 'requirements' && <p>三つの倉庫を持つ架空の機材レンタル会社を舞台に、業務の遅れを調べ、要求を集め、モデルと検証可能な要件へ変えていく。数値・人物・業務ルールは説明用の設定であり、過去問題の再現ではありません。</p>}
+    <p>本文は独自解説です。規格・公式資料に由来する説明には出典を付け、適用条件や事例上の仮定と区別します。章末では、午前Ⅱの概念の識別、午後Ⅰの事例読解、午後Ⅱの設計理由の説明へ接続します。</p>
+    <a href={chapterUrl(chapters[0])}>最初の章から読む →</a>
+  </section>
+  <ol class="volume-index">{chapters.map(ch => <li><p class="eyebrow">CHAPTER {chapterNumber(ch.data.order)}</p><a href={chapterUrl(ch)}>{ch.data.title}</a><p>{ch.data.description}</p><small>出典照合日：{ch.data.reviewed}</small></li>)}</ol>
+  <p><a href={`${base}books/`}>← 副読本一覧</a></p>
+</SiteLayout>

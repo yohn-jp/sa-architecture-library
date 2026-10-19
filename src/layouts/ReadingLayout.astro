@@ -1,0 +1,87 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import type { MarkdownHeading } from 'astro';
+import SiteLayout from './SiteLayout.astro';
+import { volumes } from '../data/catalog';
+import { syllabusItems } from '../data/syllabus';
+import { base, chapterNumber, chapterUrl } from '../lib/books';
+import '../styles/reading.css';
+interface Props {
+  entry: CollectionEntry<'books'>;
+  siblings: CollectionEntry<'books'>[];
+  headings: MarkdownHeading[];
+}
+const { entry, siblings, headings } = Astro.props;
+const book = volumes.find(v => v.slug === entry.data.volume)!;
+const index = siblings.findIndex(ch => ch.id === entry.id);
+const previous = siblings[index - 1];
+const next = siblings[index + 1];
+---
+<SiteLayout title={`${entry.data.title}｜${book.title}`} description={entry.data.description} wide>
+  <link slot="head" rel="canonical" href={new URL(chapterUrl(entry), 'https://yohn-jp.github.io').href} />
+  <div class="reading-layout">
+    <aside class="reading-aside" data-pagefind-ignore>
+      <a class="reading-back" href={`${base}books/${book.slug}/`}>← {book.title}</a>
+      <details class="reading-nav" open>
+        <summary>巻の目次・この章の見出し</summary>
+        <nav aria-label="巻の目次"><ol>{siblings.map(ch => <li><a href={chapterUrl(ch)} aria-current={ch.id === entry.id ? 'page' : undefined}><span>{chapterNumber(ch.data.order)}</span> {ch.data.title}</a></li>)}</ol></nav>
+        <p class="toc-label">この章</p>
+        <nav aria-label="この章の目次"><ul>{headings.filter(h => h.depth === 2).map(h => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}</ul></nav>
+      </details>
+    </aside>
+    <article class="reading-article">
+      <header class="chapter-header">
+        <p class="eyebrow">VOLUME {chapterNumber(volumes.indexOf(book) + 1)} / CHAPTER {chapterNumber(entry.data.order)}</p>
+        <h1 data-pagefind-meta="title">{entry.data.title}</h1>
+        <p class="chapter-description">{entry.data.description}</p>
+        <p class="chapter-review">出典照合日：<time datetime={entry.data.reviewed}>{entry.data.reviewed}</time> · 独自解説</p>
+        <div class="reading-tools" hidden data-pagefind-ignore>
+          <label for="reading-size">文字サイズ</label><select id="reading-size"><option value="17">標準</option><option value="19">大</option><option value="21">特大</option></select>
+          <button id="reading-theme" type="button" aria-pressed="false">夜間表示</button>
+        </div>
+      </header>
+      <div class="reading-body"><slot /></div>
+      <section class="reading-related" data-pagefind-ignore aria-label="関連する教材">
+        <h2>コンプリートテキストへ戻る</h2>
+        <p>{entry.data.completeChapters.map(n => <a href={`${base}complete/#ch-${chapterNumber(n)}`}>第{chapterNumber(n)}章</a>)}</p>
+        <h2>対応するSAシラバス項目</h2>
+        <ul>{entry.data.syllabus.map(id => <li><a href={`${base}syllabus/#item-${id}`}>{id} {syllabusItems[id].title}</a></li>)}</ul>
+        <button id="mark-read" type="button" hidden data-chapter-id={entry.id} aria-pressed="false">この章を読了にする</button>
+        <small id="read-status" role="status"></small>
+      </section>
+      <nav class="chapter-pagination" aria-label="前後の章" data-pagefind-ignore>
+        {previous ? <a rel="prev" href={chapterUrl(previous)}>← {previous.data.title}</a> : <a href={`${base}books/${book.slug}/`}>← 巻の目次</a>}
+        {next ? <a rel="next" href={chapterUrl(next)}>{next.data.title} →</a> : <a href={`${base}books/`}>副読本一覧 →</a>}
+      </nav>
+    </article>
+  </div>
+</SiteLayout>
+<script>
+  const root = document.documentElement;
+  const size = document.querySelector<HTMLSelectElement>('#reading-size');
+  const theme = document.querySelector<HTMLButtonElement>('#reading-theme');
+  const read = document.querySelector<HTMLButtonElement>('#mark-read');
+  const status = document.querySelector<HTMLElement>('#read-status');
+  const load = (key: string) => { try { return localStorage.getItem(key); } catch { return null; } };
+  const save = (key: string, value: string) => { try { localStorage.setItem(key, value); return true; } catch { return false; } };
+  const applyTheme = (dark: boolean) => { root.dataset.readingTheme = dark ? 'dark' : 'light'; theme?.setAttribute('aria-pressed', String(dark)); };
+  document.querySelector<HTMLElement>('.reading-tools')?.removeAttribute('hidden');
+  if (size) {
+    const stored = load('sa-library:text-size');
+    if (stored && ['17', '19', '21'].includes(stored)) size.value = stored;
+    const apply = () => root.style.setProperty('--reading-font-size', size.value + 'px');
+    apply();
+    size.addEventListener('change', () => { apply(); save('sa-library:text-size', size.value); });
+  }
+  applyTheme(load('sa-library:theme') === 'dark');
+  theme?.addEventListener('click', () => { const dark = root.dataset.readingTheme !== 'dark'; applyTheme(dark); save('sa-library:theme', dark ? 'dark' : 'light'); });
+  if (read && status) {
+    const key = 'sa-library:read:' + read.dataset.chapterId;
+    let done = load(key) === 'true';
+    const paint = () => { read.setAttribute('aria-pressed', String(done)); read.textContent = done ? '読了を取り消す' : 'この章を読了にする'; };
+    paint(); read.hidden = false;
+    status.textContent = done ? 'この端末で読了済み' : '読了記録はこのブラウザ内だけに保存します。';
+    read.addEventListener('click', () => { done = !done; paint(); status.textContent = save(key, String(done)) ? (done ? '読了を保存しました。' : '読了を取り消しました。') : 'このブラウザでは記録を保存できません。本文はそのまま読めます。'; });
+  }
+  if (matchMedia('(max-width: 860px)').matches) document.querySelector('.reading-nav')?.removeAttribute('open');
+</script>

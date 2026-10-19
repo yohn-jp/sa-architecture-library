@@ -1,5 +1,7 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import { volumes } from '../../data/catalog';
+import { base, publishedChapters } from '../../lib/books';
+const chapters = await publishedChapters();
 ---
-<SiteLayout title="副読本"><section class="page-intro"><p class="eyebrow">DEEP DIVE / EIGHT DOMAINS</p><h1>専門領域別の副読本</h1><p>各巻の本文は準備中です。公開済みの教材はコンプリートテキストから読めます。</p></section><section class="book-list">{volumes.map((v,i)=><article class="book-item"><span class="volume">VOLUME {String(i+1).padStart(2,'0')}</span><div><h2>{v.title}</h2><p>{v.detail}</p><small>執筆準備中</small></div></article>)}</section></SiteLayout>
+<SiteLayout title="副読本"><section class="page-intro"><p class="eyebrow">DEEP DIVE / EIGHT DOMAINS</p><h1>専門領域別の副読本</h1><p>用語を見分ける知識から、条件を読み、設計の理由を説明する力へ。出典を照合した章から順次公開しています。</p></section><section class="book-list">{volumes.map((v,i) => { const count = chapters.filter(ch => ch.data.volume === v.slug).length; return <article class="book-item"><span class="volume">VOLUME {String(i+1).padStart(2,'0')}</span><div><h2>{count ? <a href={`${base}books/${v.slug}/`}>{v.title}</a> : v.title}</h2><p>{v.detail}</p>{count ? <a href={`${base}books/${v.slug}/`}>{count}章を読む →</a> : <small>執筆準備中</small>}</div></article>; })}</section></SiteLayout>
