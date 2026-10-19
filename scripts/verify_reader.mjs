@@ -77,11 +77,11 @@ try {
   await page.goto(base + 'search/');
   const input = page.locator('.pagefind-ui__search-input');
   await input.fill('八十分');
-  await page.waitForFunction(() => [...document.querySelectorAll('.pagefind-ui__result-link')].some(a => a.href.includes('/books/requirements/01/')), { timeout: 15000 });
+  await page.waitForFunction(() => [...document.querySelectorAll('.pagefind-ui__result-link')].some(a => a.href.includes('/books/requirements/01/')), null, { timeout: 15000 });
   const result = page.locator('.pagefind-ui__result-link').filter({ hasText: /./ }).first();
   assert((await result.getAttribute('href')).includes('/sa-architecture-library/'), 'Search result escaped project prefix');
   await input.fill('サーキットブレーカー');
-  await page.waitForFunction(() => [...document.querySelectorAll('.pagefind-ui__result-link')].some(a => a.href.includes('/complete/')), { timeout: 15000 });
+  await page.waitForFunction(() => [...document.querySelectorAll('.pagefind-ui__result-link')].some(a => a.href.includes('/complete/')), null, { timeout: 15000 });
   const complete = page.locator('.pagefind-ui__result-link[href*="/complete/"]').first();
   await complete.click();
   assert(page.url().startsWith(base + 'complete/'), 'Original textbook search target is broken');
