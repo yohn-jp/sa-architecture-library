@@ -1,7 +1,7 @@
 ---
 interface Props { title: string; description?: string; }
 const { title, description = 'システムアーキテクト試験と設計実務をつなぐ技術叢書' } = Astro.props;
-const base = import.meta.env.BASE_URL;
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 ---
 <!doctype html>
 <html lang="ja"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="description" content={description}/><title>{title} | System Architect Library</title><link rel="stylesheet" href={base + 'styles.css'}/></head>
