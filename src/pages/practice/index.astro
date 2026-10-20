@@ -1,0 +1,68 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+const years = [
+['2025','2025r07h','エエイウアアウイアエエエエイアウウエエウエウウエイ'],
+['2024','2024r06h','エイウエイアアアエアウイウイウエウアウエアアウエイ'],
+['2023','2023r05h','イイウアアイイアアエアアウウエウアエエイウウエエイ'],
+['2022','2022r04h','イイエイイイイエウアエイエウイエアイウエイエエイア'],
+['2021','2021r03h','イイウウウイアアイウイイアエウアアウイエイイウアイ'],
+['2019','2019r01a','イウイアウアイアエエウイイアウエエエエアウアウアウ'],
+['2018','2018h30a','イエエエアアアウウアエイイエウイウウイエイエアウイ'],
+['2017','2017h29a','エウアウイアウイアウウアイイウエエイウエアアウアエ'],
+['2016','2016h28a','ウエエウイイアエウイイウエイウエエエエアエエイアア']
+];
+---
+<SiteLayout title="午前Ⅱ 過去問演習" description="システムアーキテクト午前Ⅱ 25問の演習と採点">
+<section class="hero"><p class="eyebrow">PAST EXAM PRACTICE</p><h1>午前Ⅱ 過去問演習</h1><p class="lead">公式PDFを見ながら25問を解答。年度別に採点・復習できます。</p></section>
+<section class="practice">
+<div class="toolbar"><label>年度 <select id="year">{years.map(([label,id])=><option value={id}>{label}年度</option>)}</select></label><label>問題冊子PDF <input id="pdf" type="file" accept="application/pdf" /></label><button id="reset" type="button">この年度の回答を消去</button></div>
+<p class="hint">添付の午前Ⅱ問題冊子（ファイル名に <code>am2_qs</code> を含むPDF）を選んでください。PDFは端末内で表示し、サーバーには送信しません。回答はこのブラウザ内に保存されます。</p>
+<div class="split"><div class="pdfbox"><div id="pdfempty">問題冊子のPDFを選択すると、ここに表示されます。</div><iframe id="viewer" title="午前Ⅱ 問題冊子" hidden></iframe></div><div class="answerbox"><div class="status"><span id="answered">0 / 25 問回答済み</span><span id="timer">00:00</span></div><div id="questions" class="questions"></div><div class="actions"><button id="grade" type="button">採点する</button><button id="retry" type="button">採点結果を非表示</button></div><div id="result" aria-live="polite"></div></div></div>
+<p class="hint">正答は添付されたIPA「午前Ⅱ試験 解答例」から転記したものです。問題文・図表はPDF原本を参照してください。合格基準の目安は60点以上（25問中15問以上）です。</p>
+</section>
+<script define:vars={{years}}>
+const $=id=>document.getElementById(id);
+const options=['ア','イ','ウ','エ'];
+let current=years[0], answers=[], graded=false, seconds=0, pdfUrl=null;
+const key=()=> 'sa-am2-practice:'+current[1];
+function save(){try{localStorage.setItem(key(),JSON.stringify({answers,seconds}))}catch{}}
+function render(){
+ $('questions').replaceChildren();
+ current[2].split('').forEach((correct,i)=>{
+  const row=document.createElement('div');row.className='question';
+  const head=document.createElement('strong');head.textContent='問 '+(i+1);row.append(head);
+  const group=document.createElement('div');group.className='choices';
+  options.forEach(choice=>{
+   const label=document.createElement('label'),radio=document.createElement('input');
+   radio.type='radio';radio.name='q'+i;radio.value=choice;radio.checked=answers[i]===choice;
+   radio.addEventListener('change',()=>{answers[i]=choice;graded=false;save();render()});
+   label.append(radio,document.createTextNode(choice));
+   if(graded&&choice===correct)label.classList.add('correct');
+   if(graded&&choice===answers[i]&&choice!==correct)label.classList.add('wrong');
+   group.append(label);
+  });row.append(group);$('questions').append(row);
+ });
+ const n=answers.filter(x=>options.includes(x)).length;
+ $('answered').textContent=n+' / 25 問回答済み';
+ if(graded){const score=answers.filter((a,i)=>a===current[2][i]).length;
+  $('result').textContent=score+' / 25 問正解（'+(score*4)+'点） · '+(score>=15?'合格基準以上':'合格基準未満')+'。緑が正解、赤が誤答です。';
+ }else $('result').textContent='';
+ $('timer').textContent=String(Math.floor(seconds/60)).padStart(2,'0')+':'+String(seconds%60).padStart(2,'0');
+}
+function load(){current=years.find(y=>y[1]===$('year').value)||years[0];answers=Array(25).fill(null);seconds=0;graded=false;
+ try{const data=JSON.parse(localStorage.getItem(key())||'null');if(data){answers=Array.from({length:25},(_,i)=>options.includes(data.answers?.[i])?data.answers[i]:null);seconds=Number.isSafeInteger(data.seconds)&&data.seconds>=0?data.seconds:0}}catch{}
+ if(pdfUrl){URL.revokeObjectURL(pdfUrl);pdfUrl=null}$('pdf').value='';$('viewer').hidden=true;$('viewer').removeAttribute('src');$('pdfempty').hidden=false;render()}
+$('year').addEventListener('change',load);
+$('pdf').addEventListener('change',event=>{const file=event.target.files?.[0];if(pdfUrl)URL.revokeObjectURL(pdfUrl);pdfUrl=null;
+ if(file&&file.type==='application/pdf'){pdfUrl=URL.createObjectURL(file);$('viewer').src=pdfUrl;$('viewer').hidden=false;$('pdfempty').hidden=true}
+ else{$('viewer').hidden=true;$('pdfempty').hidden=false}});
+$('grade').addEventListener('click',()=>{graded=true;render()});
+$('retry').addEventListener('click',()=>{graded=false;render()});
+$('reset').addEventListener('click',()=>{if(confirm('この年度の回答と経過時間を消去しますか？')){localStorage.removeItem(key());answers=Array(25).fill(null);seconds=0;graded=false;render()}});
+setInterval(()=>{if(!document.hidden){seconds++;save();$('timer').textContent=String(Math.floor(seconds/60)).padStart(2,'0')+':'+String(seconds%60).padStart(2,'0')}},1000);
+load();
+</script>
+<style>
+.practice{max-width:1400px;margin:0 auto;padding:1rem}.toolbar,.status,.actions{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:1rem}.toolbar label{display:flex;gap:.5rem;align-items:center}.toolbar select,.toolbar input,.toolbar button,.actions button{font:inherit;padding:.5rem;border:1px solid #9ca3af;border-radius:6px}.hint{color:var(--muted,#666);font-size:.9rem;line-height:1.7}.split{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(310px,1fr);gap:1rem;align-items:start}.pdfbox{position:sticky;top:1rem;height:75vh;border:1px solid #aaa;border-radius:8px;overflow:hidden}.pdfbox iframe{width:100%;height:100%;border:0}.pdfbox #pdfempty{padding:2rem}.answerbox{border:1px solid #aaa;border-radius:8px;padding:1rem}.status{justify-content:space-between}.questions{display:grid;gap:.5rem}.question{display:flex;align-items:center;gap:1rem;border-bottom:1px solid #ddd;padding:.5rem 0}.question strong{min-width:4rem}.choices{display:flex;flex-wrap:wrap;gap:.4rem}.choices label{cursor:pointer;border:1px solid #aaa;padding:.35rem .55rem;border-radius:5px;display:flex;gap:.2rem;align-items:center}.choices .correct{border:2px solid #14804a}.choices .wrong{border:2px solid #c22}#result{font-weight:700;line-height:1.7}@media(max-width:850px){.split{grid-template-columns:1fr}.pdfbox{position:static;height:50vh}.answerbox{padding:.7rem}} 
+</style>
+</SiteLayout>
