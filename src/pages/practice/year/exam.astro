@@ -15,7 +15,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
       <div class="practice-clock"><small>経過時間</small><strong id="timer" role="timer" aria-label="経過時間">00:00</strong></div>
     </div>
     <div class="exam-layout">
-      <main class="exam-main" id="question-area">
+      <section class="exam-main" id="question-area">
         <div class="exam-question-head">
           <h2 id="question-title">問 1 / 25</h2>
           <p id="answered-count">0 / 25問回答済み</p>
@@ -37,7 +37,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
         </div>
         <button id="submit-mobile" class="practice-button full exam-submit-mobile" type="button">採点して試験を終了 →</button>
         <p id="exam-error" class="practice-error" role="alert" hidden></p>
-      </main>
+      </section>
       <aside class="exam-side" aria-label="解答状況">
         <h3>解答状況 <span id="aside-count" class="practice-note">0 / 25</span></h3>
         <div id="question-grid" class="practice-grid">
