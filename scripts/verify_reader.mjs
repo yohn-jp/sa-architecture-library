@@ -87,6 +87,39 @@ try {
   assert(page.url().startsWith(base + 'complete/'), 'Original textbook search target is broken');
   assert(await page.locator('#ch-07').count(), 'Original textbook chapter missing');
 
+  // AM2 exercise: original question image, answer selection, grading,
+  // local persistence, year switching and mobile containment.
+  assert((await page.goto(base + 'practice/')).ok(), 'Practice page missing');
+  const problem = page.locator('#question-image');
+  await page.waitForFunction(() => {
+    const img = document.getElementById('question-image');
+    return img.complete && img.naturalWidth >= 1000;
+  });
+  assert((await problem.getAttribute('src')).includes('2025r07h/q01.webp'), 'Wrong first question image');
+  await page.locator('input[name="answer"][value="エ"]').check();
+  assert((await page.locator('#answered-count').innerText()).includes('1 / 25'), 'Answer was not recorded');
+  await page.locator('#next').click();
+  assert((await problem.getAttribute('src')).includes('2025r07h/q02.webp'), 'Next question image mismatch');
+  await page.reload();
+  assert((await problem.getAttribute('src')).includes('2025r07h/q02.webp'), 'Question position did not persist');
+  await page.locator('#previous').click();
+  assert(await page.locator('input[name="answer"][value="エ"]').isChecked(), 'Answer did not persist');
+  await page.locator('#grade').click();
+  assert((await page.locator('#result').innerText()).includes('4点'), 'Grade did not include the correct answer');
+  assert((await page.locator('#answer-feedback').innerText()).includes('正解：エ'), 'Official answer mismatch');
+
+  for (const year of ['2016h28a','2017h29a','2018h30a','2019r01a','2021r03h','2022r04h','2023r05h','2024r06h','2025r07h']) {
+    await page.locator('#year').selectOption(year);
+    await page.waitForFunction(id => {
+      const img = document.getElementById('question-image');
+      return img.src.includes(id+'/q01.webp') && img.complete && img.naturalWidth >= 1000;
+    }, year);
+    assert((await problem.getAttribute('src')).includes(year+'/q01.webp'), 'Year change failed: '+year);
+  }
+  await phone.goto(base + 'practice/');
+  assert(await phone.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'Practice mobile page overflows the viewport');
+  assert(await phone.locator('#question-grid button').count() === 25, 'Mobile question navigation incomplete');
+
   const noScript = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 390, height: 844 } });
   const plain = await noScript.newPage();
   await plain.goto(base + routes[0]);
