@@ -52,5 +52,14 @@ for source in sorted(Path('src/content/books').glob('*/*.md')):
 def original_unchanged(data):
     assert hashlib.sha256(data).hexdigest() == 'bffcc3548d670c1078ec7bb8a548eff2e48323211eb83c431d206b15223e2e01', 'Published original textbook differs'
 
+fetch('practice/', require_text('年度別模擬試験'))
+fetch('practice/year/', require_text('試験を開始'))
+fetch('practice/year/exam/', require_text('採点して試験を終了'))
+fetch('practice/year/result/', require_text('採点結果'))
+fetch('practice/random/', require_text('全年度ランダム演習'))
+fetch('practice/questions/2025r07h/q01.webp', lambda data: (
+    data.startswith(b'RIFF') and b'WEBP' in data[:16] and len(data) > 1000
+    or (_ for _ in ()).throw(AssertionError('Question image missing or invalid'))
+))
 fetch('complete/', original_unchanged)
 print(f'PASS: {count} live chapters, stylesheet, catalogue and unchanged original textbook')
