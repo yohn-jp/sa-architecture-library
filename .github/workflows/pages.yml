@@ -21,6 +21,16 @@ jobs:
         with:
           node-version: '22'
       - run: npm install --no-audit --no-fund
+      - name: Cache original IPA AM2 question PDFs
+        uses: actions/cache@v4
+        with:
+          path: .cache/ipa-am2
+          key: sa-am2-ipa-originals-2026-10
+      - name: Generate all 225 per-question images
+        run: |
+          python3 -m venv .venv-practice
+          .venv-practice/bin/pip install --disable-pip-version-check -q 'PyMuPDF==1.26.5' 'Pillow==11.3.0' 'numpy==2.3.4'
+          .venv-practice/bin/python scripts/generate_practice_assets.py
       - run: npm run check
       - run: npm run build
       - name: Verify reading pages and project paths
