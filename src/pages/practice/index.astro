@@ -49,9 +49,10 @@ function render(){
  }else $('result').textContent='';
  $('timer').textContent=String(Math.floor(seconds/60)).padStart(2,'0')+':'+String(seconds%60).padStart(2,'0');
 }
+const officialPdf={'2025r07h':'https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_sa_am2_qs.pdf'};
 function load(){current=years.find(y=>y[1]===$('year').value)||years[0];answers=Array(25).fill(null);seconds=0;graded=false;
  try{const data=JSON.parse(localStorage.getItem(key())||'null');if(data){answers=Array.from({length:25},(_,i)=>options.includes(data.answers?.[i])?data.answers[i]:null);seconds=Number.isSafeInteger(data.seconds)&&data.seconds>=0?data.seconds:0}}catch{}
- if(pdfUrl){URL.revokeObjectURL(pdfUrl);pdfUrl=null}$('pdf').value='';$('viewer').hidden=true;$('viewer').removeAttribute('src');$('pdfempty').hidden=false;render()}
+ if(pdfUrl){URL.revokeObjectURL(pdfUrl);pdfUrl=null}$('pdf').value='';if(officialPdf[current[1]]){$('viewer').src=officialPdf[current[1]];$('viewer').hidden=false;$('pdfempty').hidden=true}else{$('viewer').hidden=true;$('viewer').removeAttribute('src');$('pdfempty').hidden=false}render()}
 $('year').addEventListener('change',load);
 $('pdf').addEventListener('change',event=>{const file=event.target.files?.[0];if(pdfUrl)URL.revokeObjectURL(pdfUrl);pdfUrl=null;
  if(file&&file.type==='application/pdf'){pdfUrl=URL.createObjectURL(file);$('viewer').src=pdfUrl;$('viewer').hidden=false;$('pdfempty').hidden=true}
