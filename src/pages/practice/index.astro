@@ -19,6 +19,7 @@ const years = [
     <p class="eyebrow">SYSTEM ARCHITECT · AM II PRACTICE</p>
     <h1>午前Ⅱ 過去問演習</h1>
     <p>各問の問題文・選択肢・図表を、IPA公開の原本PDFから切り出して表示します。25問ずつ、年度別に演習できます。</p>
+    <p><a href={base + "practice/random"}>全年度ランダム演習（1問ずつ採点） →</a></p>
     <div class="exam-settings">
       <label for="year">出題年度</label>
       <select id="year">{years.map(({label,id})=><option value={id}>{label}</option>)}</select>
