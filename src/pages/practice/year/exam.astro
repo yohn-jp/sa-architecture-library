@@ -1,0 +1,172 @@
+---
+import SiteLayout from '../../../layouts/SiteLayout.astro';
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+---
+<SiteLayout title="年度別模擬試験・解答中" description="午前Ⅱ年度別模擬試験。25問を解き、採点確定で計時を終了します。">
+  <link slot="head" rel="stylesheet" href={base + 'practice-ui.css'} />
+  <div class="practice-shell">
+    <nav class="practice-breadcrumb" aria-label="現在の位置">
+      <a href={base + 'practice/'}>演習モードを選ぶ</a><span aria-hidden="true">/</span>
+      <a href={base + 'practice/year/'}>年度別模擬試験</a><span aria-hidden="true">/</span>
+      <span aria-current="page">解答中</span>
+    </nav>
+    <div class="practice-topline">
+      <div><p class="eyebrow">TIMED EXAM / IN PROGRESS</p><h1 id="year-heading" style="font-size:clamp(24px,3.3vw,34px);line-height:1.4;margin:4px 0">年度別模擬試験</h1><p class="practice-note" style="margin:3px 0">制限時間の目安40分 · 採点確定までは計時が続きます。</p></div>
+      <div class="practice-clock"><small>経過時間</small><strong id="timer" role="timer" aria-label="経過時間">00:00</strong></div>
+    </div>
+    <div class="exam-layout">
+      <main class="exam-main" id="question-area">
+        <div class="exam-question-head">
+          <h2 id="question-title">問 1 / 25</h2>
+          <p id="answered-count">0 / 25問回答済み</p>
+        </div>
+        <figure class="exam-paper">
+          <a id="enlarge" href="#" target="_blank" rel="noopener noreferrer" aria-label="問題文を拡大して開く">
+            <img id="question-image" width="1210" alt="問題文と選択肢" />
+          </a>
+          <figcaption>IPA公式問題冊子から切り出した原本画像。クリックで拡大できます。</figcaption>
+        </figure>
+        <p id="image-error" class="practice-error" role="alert" hidden>問題画像を読み込めませんでした。</p>
+        <fieldset id="answer-options" class="exam-choices">
+          <legend>解答を選択</legend>
+          {['ア','イ','ウ','エ'].map(choice => <label><input type="radio" name="answer" value={choice}/><span>{choice}</span></label>)}
+        </fieldset>
+        <div class="exam-navigation">
+          <button id="previous" class="practice-button secondary" type="button">← 前の問題</button>
+          <button id="next" class="practice-button" type="button">次の問題 →</button>
+        </div>
+        <button id="submit-mobile" class="practice-button full exam-submit-mobile" type="button">採点して試験を終了 →</button>
+        <p id="exam-error" class="practice-error" role="alert" hidden></p>
+      </main>
+      <aside class="exam-side" aria-label="解答状況">
+        <h3>解答状況 <span id="aside-count" class="practice-note">0 / 25</span></h3>
+        <div id="question-grid" class="practice-grid">
+          {Array.from({length:25},(_,i) => <button type="button" class="practice-index" data-index={i} aria-label={'問'+(i+1)}>{i+1}</button>)}
+        </div>
+        <p class="practice-aside-note">色付きの番号は解答済みです。番号を選ぶとその問題に移動できます。</p>
+        <div class="exam-submit">
+          <p>採点を確定すると時計が停止し、全問の正誤を確認できる結果画面に移ります。</p>
+          <button id="submit" class="practice-button full" type="button">採点して試験を終了 →</button>
+        </div>
+      </aside>
+    </div>
+  </div>
+  <noscript><p>年度別模擬試験にはJavaScriptが必要です。</p></noscript>
+</SiteLayout>
+
+<script>
+  import { findAm2Year } from '../../../data/am2';
+  import { loadYearSession, setYearAnswer, setYearIndex, finishYearSession, elapsedYearSeconds, formatYearElapsed } from '../../../lib/am2-session';
+  import type { Am2Choice, YearSession } from '../../../lib/am2-session';
+  const $ = (id: string) => document.getElementById(id)!;
+  const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+  const yearId = new URLSearchParams(location.search).get('year');
+  const year = findAm2Year(yearId);
+  let session: YearSession | null = year ? loadYearSession(year.id) : null;
+  const setupUrl = base + 'practice/year/' + (year ? '?year=' + year.id : '');
+  const resultsUrl = base + 'practice/year/result/?year=' + (year?.id ?? '');
+  const message = $('exam-error');
+  const image = $('question-image') as HTMLImageElement;
+  const timer = $('timer');
+
+  function fail(messageText: string) {
+    message.textContent = messageText;
+    message.hidden = false;
+  }
+
+  function renderQuestion() {
+    if (!year || !session) return;
+    $('year-heading').textContent = year.label;
+    $('question-title').textContent = '問 ' + (session.index + 1) + ' / 25';
+    const answered = session.answers.filter(Boolean).length;
+    $('answered-count').textContent = answered + ' / 25問回答済み';
+    $('aside-count').textContent = answered + ' / 25';
+    const url = base + 'practice/questions/' + year.id + '/q' + String(session.index + 1).padStart(2, '0') + '.webp';
+    if (image.getAttribute('src') !== url) {
+      $('image-error').hidden = true;
+      image.hidden = false;
+      image.src = url;
+    }
+    image.alt = year.label + ' 問' + (session.index + 1) + 'の問題文と選択肢';
+    ($('enlarge') as HTMLAnchorElement).href = url;
+    for (const radio of document.querySelectorAll<HTMLInputElement>('input[name="answer"]')) {
+      radio.checked = radio.value === session.answers[session.index];
+    }
+    ($('previous') as HTMLButtonElement).disabled = session.index === 0;
+    ($('next') as HTMLButtonElement).disabled = session.index === 24;
+    for (const button of document.querySelectorAll<HTMLButtonElement>('#question-grid button')) {
+      const n = Number(button.dataset.index);
+      button.classList.toggle('is-active', n === session.index);
+      button.classList.toggle('is-answered', Boolean(session.answers[n]));
+      button.setAttribute('aria-current', n === session.index ? 'step' : 'false');
+    }
+    renderTimer();
+  }
+
+  function renderTimer() {
+    if (session) timer.textContent = formatYearElapsed(elapsedYearSeconds(session));
+  }
+
+  function goToQuestion(index: number, scroll = false) {
+    if (!year || !session || index < 0 || index >= 25) return;
+    const next = setYearIndex(year.id, index);
+    if (!next) return fail('進捗を保存できませんでした。ページを再読み込みして確認してください。');
+    session = next;
+    message.hidden = true;
+    renderQuestion();
+    if (scroll) $('question-area').scrollIntoView({ block: 'start', behavior: 'smooth' });
+  }
+
+  function submitExam() {
+    if (!year || !session) return;
+    const unfinished = session.answers.filter(answer => !answer).length;
+    const prompt = unfinished > 0
+      ? '未回答が' + unfinished + '問あります。採点を確定して計時を終了しますか？ 確定後は回答を変更できません。'
+      : '採点を確定して計時を終了しますか？ 確定後は回答を変更できません。';
+    if (!confirm(prompt)) return;
+    const finished = finishYearSession(year.id);
+    if (!finished) return fail('採点を保存できませんでした。もう一度実行してください。');
+    session = finished;
+    location.assign(resultsUrl);
+  }
+
+  if (!year || !session) {
+    location.replace(setupUrl);
+  } else if (session.finishedAt !== null) {
+    location.replace(resultsUrl);
+  } else {
+    $('question-grid').addEventListener('click', event => {
+      const button = (event.target as HTMLElement).closest<HTMLButtonElement>('button[data-index]');
+      if (button) goToQuestion(Number(button.dataset.index), true);
+    });
+    $('previous').addEventListener('click', () => goToQuestion((session?.index ?? 0) - 1));
+    $('next').addEventListener('click', () => goToQuestion((session?.index ?? 0) + 1));
+    $('answer-options').addEventListener('change', event => {
+      const input = event.target as HTMLInputElement;
+      if (!year || !session || input.name !== 'answer') return;
+      const updated = setYearAnswer(year.id, session.index, input.value as Am2Choice);
+      if (!updated) {
+        fail('解答を保存できませんでした。ページを再読み込みして確認してください。');
+        renderQuestion();
+        return;
+      }
+      session = updated;
+      message.hidden = true;
+      renderQuestion();
+    });
+    $('submit').addEventListener('click', submitExam);
+    $('submit-mobile').addEventListener('click', submitExam);
+    image.addEventListener('error', () => {
+      image.hidden = true;
+      $('image-error').hidden = false;
+    });
+    window.addEventListener('storage', event => {
+      if (event.key !== 'sa-am2-year-v2:' + year.id) return;
+      const updated = loadYearSession(year.id);
+      if (updated?.finishedAt !== null && updated?.finishedAt !== undefined) location.replace(resultsUrl);
+      else if (updated) { session = updated; renderQuestion(); }
+    });
+    renderQuestion();
+    setInterval(renderTimer, 500);
+  }
+</script>
