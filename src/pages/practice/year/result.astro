@@ -1,0 +1,135 @@
+---
+import SiteLayout from '../../../layouts/SiteLayout.astro';
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+---
+<SiteLayout title="年度別模擬試験・採点結果" description="午前Ⅱ年度別模擬試験の採点結果と全25問の復習">
+  <link slot="head" rel="stylesheet" href={base + 'practice-ui.css'} />
+  <div class="practice-shell practice-result">
+    <nav class="practice-breadcrumb" aria-label="現在の位置">
+      <a href={base + 'practice/'}>演習モードを選ぶ</a><span aria-hidden="true">/</span>
+      <a href={base + 'practice/year/'}>年度別模擬試験</a><span aria-hidden="true">/</span>
+      <span aria-current="page">採点結果</span>
+    </nav>
+    <header class="practice-intro">
+      <p class="eyebrow">TIMED EXAM / RESULT</p>
+      <h1 id="result-heading">採点結果</h1>
+      <p>採点は確定しました。計時は停止しており、結果と回答はこのブラウザ内に保存されています。</p>
+    </header>
+    <section class="practice-card" aria-label="採点サマリー" style="margin-top:26px">
+      <div class="result-top">
+        <div>
+          <p class="result-label">SCORE / 100</p>
+          <div class="result-score"><span id="score">—</span><small> 点</small></div>
+          <p class="result-status" id="result-status">採点結果を読み込んでいます</p>
+        </div>
+        <div class="practice-controls">
+          <a id="again" class="practice-button secondary" href={base + 'practice/year/'}>年度別演習に戻る</a>
+          <a class="practice-button secondary" href={base + 'practice/'}>モード選択に戻る</a>
+        </div>
+      </div>
+      <dl class="result-stats">
+        <div><dt>正解</dt><dd id="correct">— / 25</dd></div>
+        <div><dt>解答済み</dt><dd id="answered">— / 25</dd></div>
+        <div><dt>経過時間（確定済み）</dt><dd id="elapsed">—</dd></div>
+      </dl>
+      <p class="practice-note">合格基準の目安：60点（15問正解）。これは過去問演習の採点結果であり、実際の試験結果ではありません。</p>
+    </section>
+    <section aria-labelledby="review-heading">
+      <div class="review-header">
+        <div><p class="eyebrow">QUESTION REVIEW</p><h2 id="review-heading">25問の解答と復習</h2><p>各問を開くと問題画像、正解、解説欄を確認できます。</p></div>
+      </div>
+      <div id="review-list" class="review-list"></div>
+    </section>
+  </div>
+  <noscript><p>採点結果の表示にはJavaScriptが必要です。</p></noscript>
+</SiteLayout>
+
+<script>
+  import { findAm2Year } from '../../../data/am2';
+  import { findAm2Explanation } from '../../../data/am2-explanations';
+  import { loadYearSession, elapsedYearSeconds, formatYearElapsed } from '../../../lib/am2-session';
+  const $ = (id: string) => document.getElementById(id)!;
+  const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+  const year = findAm2Year(new URLSearchParams(location.search).get('year'));
+  const session = year ? loadYearSession(year.id) : null;
+
+  if (!year || !session || session.finishedAt === null) {
+    location.replace(base + 'practice/year/' + (year ? '?year=' + year.id : ''));
+  } else {
+    const correct = session.answers.filter((answer, i) => answer === year.key[i]).length;
+    const answered = session.answers.filter(Boolean).length;
+    const score = correct * 4;
+    $('result-heading').textContent = year.label + ' · 採点結果';
+    $('score').textContent = String(score);
+    $('correct').textContent = correct + ' / 25';
+    $('answered').textContent = answered + ' / 25';
+    $('elapsed').textContent = formatYearElapsed(elapsedYearSeconds(session));
+    $('result-status').textContent = score >= 60 ? '60点以上：合格基準に到達' : '60点未満：合格基準に未達';
+    ($('again') as HTMLAnchorElement).href = base + 'practice/year/?year=' + year.id;
+
+    const list = $('review-list');
+    for (let i = 0; i < 25; i++) {
+      const answer = session.answers[i];
+      const expected = year.key[i];
+      const passed = answer === expected;
+      const item = document.createElement('details');
+      item.className = 'review-item ' + (passed ? 'is-correct' : 'is-incorrect');
+      const summary = document.createElement('summary');
+      const number = document.createElement('strong');
+      number.textContent = '問 ' + (i + 1);
+      const status = document.createElement('span');
+      status.className = 'mark ' + (passed ? 'is-correct' : 'is-incorrect');
+      status.textContent = passed ? '正解' : (answer ? '不正解' : '未回答');
+      const comparison = document.createElement('span');
+      comparison.className = 'summary-detail';
+      comparison.textContent = 'あなたの解答：' + (answer ?? '—') + ' / 正解：' + expected;
+      summary.append(number, status, comparison);
+      item.append(summary);
+
+      const body = document.createElement('div');
+      body.className = 'review-content';
+      const figure = document.createElement('figure');
+      const link = document.createElement('a');
+      const imageUrl = base + 'practice/questions/' + year.id + '/q' + String(i + 1).padStart(2, '0') + '.webp';
+      link.href = imageUrl;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      const image = document.createElement('img');
+      image.loading = 'lazy';
+      image.decoding = 'async';
+      image.width = 1210;
+      image.alt = year.label + ' 問' + (i + 1) + 'の問題文と選択肢';
+      image.src = imageUrl;
+      link.append(image);
+      figure.append(link);
+      body.append(figure);
+
+      const box = document.createElement('section');
+      box.className = 'explanation';
+      const heading = document.createElement('h3');
+      heading.textContent = '解説';
+      box.append(heading);
+      const detail = findAm2Explanation(year.id, i + 1);
+      const explanation = document.createElement('p');
+      explanation.textContent = detail?.text ?? 'この問題の個別解説はまだ収録されていません。正解はIPA公式の解答例に基づいています。';
+      box.append(explanation);
+      for (const source of detail?.sources ?? []) {
+        const reference = document.createElement('a');
+        reference.href = source.url;
+        reference.target = '_blank';
+        reference.rel = 'noopener noreferrer';
+        reference.textContent = source.title;
+        box.append(reference);
+      }
+      body.append(box);
+      const official = document.createElement('a');
+      official.href = 'https://www.ipa.go.jp/shiken/mondai-kaiotu/' + year.list + '.html';
+      official.target = '_blank';
+      official.rel = 'noopener noreferrer';
+      official.textContent = 'IPA公式の問題・解答例を確認 ↗';
+      body.append(official);
+      item.append(body);
+      list.append(item);
+    }
+  }
+</script>
