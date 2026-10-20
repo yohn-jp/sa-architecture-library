@@ -70,5 +70,20 @@ for page in ROOT.rglob('*.html'):
                 cache[path] = Document(path)
             assert unquote(target.fragment) in cache[path].ids, f'Missing anchor in {relative}: {link}'
 
+# The practice page must contain the complete 225-question image set.
+import json
+practice = ROOT / 'practice/index.html'
+assert practice.is_file(), 'Practice page is missing'
+assert 'id="question-image"' in practice.read_text(encoding='utf-8'), 'Practice question renderer missing'
+manifest_path = ROOT / 'practice/questions/manifest.json'
+assert manifest_path.is_file(), 'Practice asset manifest is missing'
+manifest = json.loads(manifest_path.read_text(encoding='utf-8'))
+assert len(manifest) == 9, f'Expected 9 exam years, got {len(manifest)}'
+for year, info in manifest.items():
+    assert len(info['questions']) == 25, f'{year}: incomplete question image index'
+    for n in range(1, 26):
+        crop = ROOT / 'practice/questions' / year / f'q{n:02}.webp'
+        assert crop.is_file() and crop.stat().st_size > 1000, f'Missing or empty problem crop: {crop}'
+
 assert (ROOT / 'pagefind/pagefind.js').is_file(), 'Search bundle missing'
 print(f'PASS: {len(chapters)} chapters; internal links, assets, anchors, cross-references and original SHA-256 verified')
