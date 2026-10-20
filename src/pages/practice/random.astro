@@ -14,7 +14,7 @@ const years = [
 ];
 ---
 <SiteLayout title="午前Ⅱ 全年度ランダム演習">
-<section class="random"><p class="eyebrow">RANDOM PRACTICE · 225 QUESTIONS</p><h1>全年度ランダム演習</h1><p>9回分225問から重複なくランダム出題。各問を回答後すぐに採点します。</p><p><a href={base+'practice/'}>← 年度別演習に戻る</a></p>
+<section class="random"><p class="eyebrow">RANDOM PRACTICE · 225 QUESTIONS</p><h1>全年度ランダム演習</h1><p>9回分225問から重複なくランダム出題。各問を回答後すぐに採点します。</p><p><a href={base+'practice/'}>← 演習モードを選ぶ</a>　 /　 <a href={base+'practice/year/'}>年度別模擬試験へ</a></p>
 <div class="toolbar"><span id="progress">1 / 225</span><span id="stats">正解 0 / 解答 0</span><button id="restart" type="button">最初からやり直す</button></div>
 <div class="question"><h2 id="heading">問題</h2><a id="large" target="_blank" rel="noopener noreferrer"><img id="question" alt="問題文と選択肢" width="1210" /></a><p id="load-error" hidden role="alert">画像の読み込みに失敗しました。</p><fieldset id="choices"><legend>解答を選択</legend><label><input type="radio" name="choice" value="ア"> ア</label><label><input type="radio" name="choice" value="イ"> イ</label><label><input type="radio" name="choice" value="ウ"> ウ</label><label><input type="radio" name="choice" value="エ"> エ</label></fieldset><button id="check" type="button">この問題を採点</button><p id="feedback" role="status" aria-live="polite"></p><section id="explanation" hidden><h3>解説</h3><p id="explanation-text"></p><p><a id="official" target="_blank" rel="noopener noreferrer">IPA公式問題・解答例</a></p></section><button id="next" type="button" hidden>次の問題 →</button></div></section>
 </SiteLayout>
