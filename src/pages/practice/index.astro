@@ -1,260 +1,35 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro';
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
-const assetBase = base + 'practice/questions/';
-const years = [
-  {label:'2025年度（令和7年・春期）',id:'2025r07h',list:'2025r07',key:'エエイウアアウイアエエエエイアウウエエウエウウエイ'},
-  {label:'2024年度（令和6年・春期）',id:'2024r06h',list:'2024r06',key:'エイウエイアアアエアウイウイウエウアウエアアウエイ'},
-  {label:'2023年度（令和5年・春期）',id:'2023r05h',list:'2023r05',key:'イイウアアイイアアエアアウウエウアエエイウウエエイ'},
-  {label:'2022年度（令和4年・春期）',id:'2022r04h',list:'2022r04',key:'イイエイイイイエウアエイエウイエアイウエイエエイア'},
-  {label:'2021年度（令和3年・春期）',id:'2021r03h',list:'2021r03',key:'イイウウウイアアイウイイアエウアアウイエイイウアイ'},
-  {label:'2019年度（令和元年・秋期）',id:'2019r01a',list:'2019h31',key:'イウイアウアイアエエウイイアウエエエエアウアウアウ'},
-  {label:'2018年度（平成30年・秋期）',id:'2018h30a',list:'2018h30',key:'イエエエアアアウウアエイイエウイウウイエイエアウイ'},
-  {label:'2017年度（平成29年・秋期）',id:'2017h29a',list:'2017h29',key:'エウアウイアウイアウウアイイウエエイウエアアウアエ'},
-  {label:'2016年度（平成28年・秋期）',id:'2016h28a',list:'2016h28',key:'ウエエウイイアエウイイウエイウエエエエアエエイアア'}
-];
 ---
-<SiteLayout title="午前Ⅱ 過去問演習" description="システムアーキテクト試験・午前Ⅱ。9回分225問を原本の問題画像を使って演習・採点">
-  <section class="practice-header">
-    <p class="eyebrow">SYSTEM ARCHITECT · AM II PRACTICE</p>
-    <h1>午前Ⅱ 過去問演習</h1>
-    <p>各問の問題文・選択肢・図表を、IPA公開の原本PDFから切り出して表示します。25問ずつ、年度別に演習できます。</p>
-    <p><a href={base + "practice/random"}>全年度ランダム演習（1問ずつ採点） →</a></p>
-    <div class="exam-settings">
-      <label for="year">出題年度</label>
-      <select id="year">{years.map(({label,id})=><option value={id}>{label}</option>)}</select>
-      <span id="timer" role="timer" aria-label="経過時間">00:00</span>
-      <button id="reset" type="button" class="secondary">回答を消去</button>
-    </div>
-    <p class="exam-meta">25問・四肢択一・40分 ／ 60点以上が合格基準 ／ 回答と経過時間はこの端末に保存されます。</p>
-  </section>
-
-  <section class="exercise" aria-label="問題演習">
-    <div class="exercise-main" id="problem-area">
-      <div class="question-top">
-        <div><p class="eyebrow">QUESTION</p><h2 id="question-title">問 1 <small>/ 25</small></h2></div>
-        <span id="answered-count" class="answered-count">0 / 25 問解答済み</span>
-      </div>
-      <figure class="exam-page">
-        <a id="enlarge" href={assetBase + '2025r07h/q01.webp'} target="_blank" rel="noopener noreferrer" aria-label="問題画像を拡大して開く">
-          <img id="question-image" src={assetBase + '2025r07h/q01.webp'} width="1210" alt="2025年度 午前Ⅱ 問1の問題文・選択肢" fetchpriority="high" />
-        </a>
-        <figcaption>IPA公式問題冊子から抽出した画像です。クリックすると拡大できます。</figcaption>
-        <p id="image-error" hidden role="alert">問題画像を読み込めませんでした。ページを再読み込みしてください。</p>
-      </figure>
-      <fieldset class="answer-options" id="answer-options">
-        <legend>解答を選択</legend>
-        {['ア','イ','ウ','エ'].map(option=><label class="option"><input type="radio" name="answer" value={option} /><span>{option}</span></label>)}
-      </fieldset>
-      <p id="answer-feedback" aria-live="polite" class="answer-feedback" hidden></p>
-      <div class="question-actions">
-        <button id="previous" type="button" class="secondary">← 前の問題</button>
-        <button id="next" type="button">次の問題 →</button>
-      </div>
-    </div>
-    <aside class="exercise-side" aria-label="解答状況と採点">
-      <h3>問題一覧</h3>
-      <div class="question-grid" id="question-grid">
-        {Array.from({length:25},(_,i)=><button type="button" class="question-index" data-index={i} aria-label={'問'+(i+1)}>{i+1}</button>)}
-      </div>
-      <p class="legend"><span class="legend-mark filled"></span>解答済み　<span class="legend-mark current"></span>表示中</p>
-      <button id="grade" type="button" class="grade">採点する</button>
-      <div id="result" aria-live="polite" hidden></div>
-      <button id="ungrade" type="button" class="secondary ungrade" hidden>採点結果を閉じる</button>
-      <div class="source">出典：独立行政法人情報処理推進機構（IPA）<a id="source-link" href="https://www.ipa.go.jp/shiken/mondai-kaiotu/2025r07.html" target="_blank" rel="noopener noreferrer">該当年度の公式問題・解答例</a></div>
-    </aside>
-  </section>
+<SiteLayout title="午前Ⅱ 演習モードを選ぶ" description="システムアーキテクト試験午前Ⅱ。年度別模擬試験と全225問ランダム演習から選択できます。">
+  <link slot="head" rel="stylesheet" href={base + 'practice-ui.css'} />
+  <div class="practice-shell">
+    <nav class="practice-breadcrumb" aria-label="現在の位置">
+      <a href={base}>ライブラリ</a><span aria-hidden="true">/</span>
+      <span aria-current="page">午前Ⅱ 過去問演習</span>
+    </nav>
+    <header class="practice-intro">
+      <p class="eyebrow">SYSTEM ARCHITECT / AM II</p>
+      <h1>学んだ知識を、問題で確かめる。</h1>
+      <p>IPA午前Ⅱの過去問9回分、全225問を収録。問題文は公式問題冊子から切り出した原本画像を表示します。目的に合った演習方法を選んでください。</p>
+    </header>
+    <section aria-label="演習モードの選択" class="mode-grid">
+      <a class="mode-card" href={base + 'practice/year/'}>
+        <span class="mode-tag">01 / TIMED EXAM</span>
+        <h2>年度別模擬試験</h2>
+        <p class="mode-description">1年分25問を試験形式で解き、最後にまとめて採点。試験開始から採点確定まで時間を計測し、採点画面で全問を復習できます。</p>
+        <div class="mode-facts"><span>1回25問</span><span>40分目安</span><span>一括採点</span></div>
+        <span class="mode-action">年度を選んで開始 <span aria-hidden="true">→</span></span>
+      </a>
+      <a class="mode-card" href={base + 'practice/random/'}>
+        <span class="mode-tag">02 / DAILY PRACTICE</span>
+        <h2>全年度ランダム演習</h2>
+        <p class="mode-description">9回分225問をシャッフルして、1問ずつ解答・即時採点。正誤を確認しながら続けられる反復学習モードです。</p>
+        <div class="mode-facts"><span>全225問</span><span>1問ずつ採点</span><span>進捗保存</span></div>
+        <span class="mode-action">ランダム演習を開く <span aria-hidden="true">→</span></span>
+      </a>
+    </section>
+    <p class="practice-note">両モードの回答は、このブラウザ内に保存されます。アカウント登録やファイルのアップロードは不要です。</p>
+  </div>
 </SiteLayout>
-<script define:vars={{years,assetBase}}>
-  const $ = id => document.getElementById(id);
-  const options = ['ア','イ','ウ','エ'];
-  const state = {year:years[0],answers:Array(25).fill(null),index:0,seconds:0,graded:false};
-  const key = () => 'sa-am2-practice:'+state.year.id;
-  const two = n => String(n).padStart(2,'0');
-  const imageUrl = index => assetBase+state.year.id+'/q'+two(index+1)+'.webp';
-
-  function persist(){
-    try{
-      localStorage.setItem(key(),JSON.stringify({answers:state.answers,seconds:state.seconds,index:state.index}));
-    }catch{/* Offline/local storage may be blocked; exercise still works. */}
-  }
-
-  function setYear(id){
-    const selected = years.find(y=>y.id===id);
-    if(!selected)return;
-    state.year = selected;
-    state.answers = Array(25).fill(null);
-    state.seconds = 0;
-    state.index = 0;
-    state.graded = false;
-    try{
-      const saved = JSON.parse(localStorage.getItem(key())||'null');
-      if(saved){
-        state.answers = Array.from({length:25},(_,i)=>options.includes(saved.answers?.[i])?saved.answers[i]:null);
-        state.seconds = Number.isSafeInteger(saved.seconds)&&saved.seconds>=0?saved.seconds:0;
-        state.index = Number.isInteger(saved.index)&&saved.index>=0&&saved.index<25?saved.index:0;
-      }
-    }catch{/* Invalid saved data must not prevent exercise. */}
-    $('year').value=id;
-    $('source-link').href='https://www.ipa.go.jp/shiken/mondai-kaiotu/'+selected.list+'.html';
-    render();
-  }
-
-  function showQuestion(index,scroll=false){
-    if(index<0||index>=25)return;
-    state.index=index;
-    persist();
-    render();
-    if(scroll)$('problem-area').scrollIntoView({behavior:'smooth',block:'start'});
-  }
-
-  function render(){
-    const {year,answers,index,graded}=state;
-    $('question-title').innerHTML='問 '+(index+1)+' <small>/ 25</small>';
-    const img=$('question-image');
-    const src=imageUrl(index);
-    if(img.getAttribute('src')!==src){
-      $('image-error').hidden=true;
-      img.hidden=false;
-      img.src=src;
-    }
-    img.alt=year.label+' 午前Ⅱ 問'+(index+1)+'の問題文・選択肢';
-    $('enlarge').href=src;
-    const answered=answers.filter(answer=>options.includes(answer)).length;
-    $('answered-count').textContent=answered+' / 25 問解答済み';
-    $('timer').textContent=two(Math.floor(state.seconds/60))+':'+two(state.seconds%60);
-    for(const input of document.querySelectorAll('input[name="answer"]')){
-      input.checked=answers[index]===input.value;
-      input.closest('.option').classList.toggle('correct',graded&&input.value===year.key[index]);
-      input.closest('.option').classList.toggle('incorrect',graded&&input.value===answers[index]&&input.value!==year.key[index]);
-    }
-    $('previous').disabled=index===0;
-    $('next').disabled=index===24;
-    const grid=$('question-grid').querySelectorAll('button');
-    for(let i=0;i<grid.length;i++){
-      grid[i].classList.toggle('answered',options.includes(answers[i]));
-      grid[i].classList.toggle('active',index===i);
-      grid[i].classList.toggle('passed',graded&&answers[i]===year.key[i]);
-      grid[i].classList.toggle('failed',graded&&answers[i]!==year.key[i]);
-      grid[i].setAttribute('aria-current',index===i?'step':'false');
-      grid[i].title='問'+(i+1)+(graded?('・正解：'+year.key[i]):'');
-    }
-    $('answer-feedback').hidden=!graded;
-    if(graded){
-      const correct=year.key[index],answer=answers[index];
-      $('answer-feedback').textContent='問'+(index+1)+'：'+(answer===correct?'正解':'不正解')+'　あなたの解答：'+(answer??'未回答')+' ／ 正解：'+correct;
-    }
-    const score=answers.filter((a,i)=>a===year.key[i]).length;
-    $('result').hidden=!graded;
-    $('ungrade').hidden=!graded;
-    if(graded){
-      $('result').textContent=score+' / 25 問正解（'+(score*4)+'点）・'+(score>=15?'合格基準以上':'合格基準未満')+'。問題一覧の緑が正解、赤が誤答・未回答です。';
-    }
-  }
-
-  $('year').addEventListener('change',e=>setYear(e.target.value));
-  $('question-grid').addEventListener('click',e=>{
-    const button=e.target.closest('button[data-index]');
-    if(button)showQuestion(Number(button.dataset.index),true);
-  });
-  $('previous').addEventListener('click',()=>showQuestion(state.index-1));
-  $('next').addEventListener('click',()=>showQuestion(state.index+1));
-  $('answer-options').addEventListener('change',e=>{
-    if(e.target.name!=='answer'||!options.includes(e.target.value))return;
-    state.answers[state.index]=e.target.value;
-    state.graded=false;
-    persist();
-    render();
-  });
-  $('grade').addEventListener('click',()=>{
-    state.graded=true;
-    render();
-    $('result').scrollIntoView({behavior:'smooth',block:'nearest'});
-  });
-  $('ungrade').addEventListener('click',()=>{
-    state.graded=false;
-    render();
-  });
-  $('reset').addEventListener('click',()=>{
-    if(!confirm('この年度の回答と経過時間を削除しますか？'))return;
-    try{localStorage.removeItem(key())}catch{}
-    state.answers=Array(25).fill(null);
-    state.index=0;
-    state.seconds=0;
-    state.graded=false;
-    render();
-  });
-  $('question-image').addEventListener('error',()=>{
-    $('question-image').hidden=true;
-    $('image-error').hidden=false;
-  });
-  setInterval(()=>{
-    if(!document.hidden){
-      state.seconds++;
-      persist();
-      $('timer').textContent=two(Math.floor(state.seconds/60))+':'+two(state.seconds%60);
-    }
-  },1000);
-  setYear(years[0].id);
-</script>
-<style>
-  .practice-header{padding:58px 0 30px;border-bottom:1px solid var(--line)}
-  .practice-header h1{font:700 clamp(28px,3.5vw,42px)/1.5 "Yu Mincho",serif;margin:8px 0}
-  .practice-header>p{max-width:780px;color:var(--muted);line-height:1.7}
-  .exam-settings{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:25px}
-  .exam-settings label{font-weight:700}
-  .exam-settings select{font:inherit;border:1px solid var(--line);background:white;padding:10px;min-width:min(300px,100%);border-radius:6px}
-  .exam-settings #timer{font-variant-numeric:tabular-nums;font-size:18px;margin-left:auto;font-weight:700}
-  .exam-meta{font-size:13px}
-  .exercise{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:26px;margin-top:32px;align-items:start}
-  .exercise-main,.exercise-side{background:white;border:1px solid var(--line);border-radius:10px;padding:20px;min-width:0}
-  .exercise-side{position:sticky;top:20px}
-  .question-top{display:flex;justify-content:space-between;align-items:end;gap:12px}
-  .question-top h2{font-size:28px;margin:0 0 12px}
-  .question-top h2 small{font-size:15px;color:var(--muted);font-weight:400}
-  .answered-count{font-size:13px;color:var(--muted);margin-bottom:12px}
-  .exam-page{margin:0;border:1px solid var(--line);border-radius:8px;overflow:hidden}
-  .exam-page a{display:block}
-  .exam-page img{display:block;width:100%;height:auto;background:#fff;object-fit:contain}
-  .exam-page figcaption{font-size:12px;color:var(--muted);padding:8px 12px;background:#fafafa}
-  .answer-options{border:0;padding:18px 0 8px;margin:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}
-  .answer-options legend{font-weight:700;padding-top:15px}
-  .option{border:1px solid var(--line);border-radius:7px;display:flex;align-items:center;justify-content:center;gap:7px;padding:10px;cursor:pointer;font-size:20px;font-weight:700}
-  .option:has(input:checked){border-color:var(--accent);background:#e8f5f3}
-  .option.correct{border:2px solid #218150}
-  .option.incorrect{border:2px solid #af3c37}
-  button{font:inherit;cursor:pointer;background:var(--accent);color:white;border:1px solid var(--accent);border-radius:7px;padding:9px 15px}
-  button:disabled{opacity:.35;cursor:default}
-  button.secondary{background:white;border-color:var(--line);color:var(--ink)}
-  .question-actions{display:flex;justify-content:space-between;gap:14px;margin-top:17px}
-  .exercise-side h3{margin:0 0 12px}
-  .question-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
-  .question-index{padding:7px 0;text-align:center;border-color:var(--line);background:white;color:var(--ink);border-radius:5px;font-size:13px}
-  .question-index.answered{background:#e8f5f3;border-color:var(--accent)}
-  .question-index.active{outline:2px solid var(--ink);outline-offset:1px}
-  .question-index.passed{background:#d9f5e8;border-color:#218150}
-  .question-index.failed{background:#fde7e4;border-color:#af3c37}
-  .legend{font-size:12px;color:var(--muted)}
-  .legend-mark{width:11px;height:11px;display:inline-block;vertical-align:middle;border-radius:2px;margin-right:3px}
-  .legend-mark.filled{background:#e8f5f3;border:1px solid var(--accent)}
-  .legend-mark.current{background:white;outline:2px solid var(--ink)}
-  .grade{width:100%;font-weight:700;margin-top:10px}
-  #result{margin-top:15px;line-height:1.65;font-weight:700}
-  .ungrade{width:100%;margin-top:12px}
-  .answer-feedback{color:var(--ink);font-weight:700}
-  .source{border-top:1px solid var(--line);margin-top:20px;padding-top:14px;color:var(--muted);font-size:12px;line-height:1.7}
-  .source a{display:block;margin-top:5px}
-  @media(max-width:760px){
-    .exercise{grid-template-columns:1fr;gap:14px}
-    .exercise-side{position:static;grid-row:1}
-    .exam-settings #timer{margin-left:0}
-    .practice-header{padding:35px 0 24px}
-    .exercise-main,.exercise-side{padding:14px}
-    .exam-page{overflow-x:auto}
-    .exam-page a{min-width:690px}
-    .question-grid{grid-template-columns:repeat(13,minmax(0,1fr));gap:4px}
-    .question-index{font-size:11px;padding:5px 0}
-    .answered-count{font-size:12px}
-  }
-  @media(max-width:420px){.question-grid{grid-template-columns:repeat(9,minmax(0,1fr))}.question-top h2{font-size:24px}}
-</style>
