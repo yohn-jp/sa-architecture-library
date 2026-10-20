@@ -1,0 +1,110 @@
+---
+import SiteLayout from '../../../layouts/SiteLayout.astro';
+import { am2Years } from '../../../data/am2';
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+---
+<SiteLayout title="年度別模擬試験・開始" description="受験年度を選択して25問・40分の午前Ⅱ模擬試験を開始">
+  <link slot="head" rel="stylesheet" href={base + 'practice-ui.css'} />
+  <div class="practice-shell">
+    <nav class="practice-breadcrumb" aria-label="現在の位置">
+      <a href={base + 'practice/'}>演習モードを選ぶ</a><span aria-hidden="true">/</span>
+      <span aria-current="page">年度別模擬試験</span>
+    </nav>
+    <header class="practice-intro">
+      <p class="eyebrow">TIMED EXAM / AM II</p>
+      <h1>年度別模擬試験</h1>
+      <p>年度を選択してから「試験を開始」を押してください。計時は開始時から採点を確定するまで続き、画面を閉じても経過時間を保持します。</p>
+    </header>
+    <div class="practice-steps" aria-label="試験の進め方">
+      <div class="practice-step"><b>STEP 01</b><strong>年度を選ぶ</strong><p>収録済みの9回分から選択します。</p></div>
+      <div class="practice-step"><b>STEP 02</b><strong>25問を解く</strong><p>制限時間の目安は40分。未回答の問題へ戻れます。</p></div>
+      <div class="practice-step"><b>STEP 03</b><strong>採点と復習</strong><p>採点確定で時計が停止し、結果画面に切り替わります。</p></div>
+    </div>
+    <section class="practice-card practice-settings" aria-labelledby="setup-heading">
+      <h2 id="setup-heading">受験する年度</h2>
+      <label class="practice-label" for="year">問題冊子を選択</label>
+      <select id="year" class="practice-year-select">
+        {am2Years.map(year => <option value={year.id}>{year.label}</option>)}
+      </select>
+      <div class="practice-status" aria-live="polite">
+        <strong id="session-status">新しい試験を開始できます</strong>
+        <p id="session-details">まだ開始していません。計時は開始ボタンを押した時点から始まります。</p>
+      </div>
+      <div class="practice-controls">
+        <button type="button" class="practice-button" id="primary">試験を開始 →</button>
+        <button type="button" class="practice-button secondary" id="new-attempt" hidden>最初から解き直す</button>
+        <button type="button" class="practice-button secondary" id="legacy" hidden>以前の回答を引き継いで開始</button>
+      </div>
+      <p id="setup-error" class="practice-error" role="alert" hidden></p>
+      <p class="practice-note">採点を確定した試験は編集できません。再挑戦すると、その年度の前回の回答・採点結果は上書きされます。</p>
+    </section>
+    <p style="margin-top:22px"><a href={base + 'practice/random/'}>1問ずつ採点するランダム演習はこちら →</a></p>
+  </div>
+</SiteLayout>
+
+<script>
+  import { am2Years, findAm2Year } from '../../../data/am2';
+  import { loadPreviousYearProgress, loadYearSession, startYearSession, elapsedYearSeconds, formatYearElapsed } from '../../../lib/am2-session';
+  const $ = (id: string) => document.getElementById(id)!;
+  const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+  const select = $('year') as HTMLSelectElement;
+  const primary = $('primary') as HTMLButtonElement;
+  const newAttempt = $('new-attempt') as HTMLButtonElement;
+  const legacyButton = $('legacy') as HTMLButtonElement;
+  const error = $('setup-error');
+  const initial = new URLSearchParams(location.search).get('year');
+  if (findAm2Year(initial)) select.value = initial!;
+  else select.value = am2Years[0].id;
+  const selectedId = () => select.value;
+  const examUrl = () => base + 'practice/year/exam/?year=' + encodeURIComponent(selectedId());
+  const resultUrl = () => base + 'practice/year/result/?year=' + encodeURIComponent(selectedId());
+
+  function displayState() {
+    error.hidden = true;
+    const session = loadYearSession(selectedId());
+    const old = loadPreviousYearProgress(selectedId());
+    newAttempt.hidden = true;
+    legacyButton.hidden = true;
+    if (session?.finishedAt !== null && session?.finishedAt !== undefined) {
+      $('session-status').textContent = '採点済みの結果があります';
+      $('session-details').textContent = '所要時間 ' + formatYearElapsed(elapsedYearSeconds(session)) + '。採点結果と全25問の正誤を確認できます。';
+      primary.textContent = '採点結果を見る →';
+      newAttempt.hidden = false;
+    } else if (session) {
+      const count = session.answers.filter(Boolean).length;
+      $('session-status').textContent = '進行中の試験があります';
+      $('session-details').textContent = count + ' / 25問解答済み。計時は画面を閉じている間も継続しています。';
+      primary.textContent = '試験を再開 →';
+      newAttempt.hidden = false;
+    } else {
+      $('session-status').textContent = '新しい試験を開始できます';
+      $('session-details').textContent = '「試験を開始」を押すまで時間は計測されません。';
+      primary.textContent = '試験を開始 →';
+      legacyButton.hidden = !old;
+    }
+  }
+  function begin(fromPrevious = false) {
+    if (!startYearSession(selectedId(), fromPrevious)) {
+      error.textContent = '回答を保存できませんでした。ブラウザの保存設定を確認してから再度実行してください。';
+      error.hidden = false;
+      return;
+    }
+    location.assign(examUrl());
+  }
+  select.addEventListener('change', displayState);
+  primary.addEventListener('click', () => {
+    const session = loadYearSession(selectedId());
+    if (session?.finishedAt !== null && session?.finishedAt !== undefined) {
+      location.assign(resultUrl());
+    } else if (session) {
+      location.assign(examUrl());
+    } else {
+      begin();
+    }
+  });
+  newAttempt.addEventListener('click', () => {
+    if (confirm('この年度の回答・結果を破棄して、新しく試験を開始しますか？')) begin();
+  });
+  legacyButton.addEventListener('click', () => begin(true));
+  displayState();
+</script>
