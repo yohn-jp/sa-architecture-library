@@ -10,7 +10,7 @@ import sys
 import time
 
 base = sys.argv[1].rstrip('/') + '/'
-assert base == 'https://yohn-jp.github.io/sa-architecture-library/', f'Unexpected publication target: {base}'
+assert base == 'https://architect.library.yohn.jp/', f'Unexpected publication target: {base}'
 revision = os.environ.get('GITHUB_SHA', '')
 
 def fetch(path, check):
@@ -21,7 +21,7 @@ def fetch(path, check):
             with urlopen(request, timeout=20) as response:
                 data = response.read()
                 assert response.status == 200, f'HTTP {response.status}'
-                assert urlsplit(response.url).netloc == 'yohn-jp.github.io'
+                assert urlsplit(response.url).netloc == 'architect.library.yohn.jp'
             check(data)
             print('PASS public HTTP:', base + path)
             return

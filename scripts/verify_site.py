@@ -6,8 +6,8 @@ import hashlib
 import re
 
 ROOT = Path('dist')
-BASE = '/sa-architecture-library/'
-ORIGIN = 'https://yohn-jp.github.io'
+BASE = '/'
+ORIGIN = 'https://architect.library.yohn.jp'
 ORIGINAL_SHA256 = 'bffcc3548d670c1078ec7bb8a548eff2e48323211eb83c431d206b15223e2e01'
 
 class Document(HTMLParser):
@@ -58,7 +58,7 @@ for page in ROOT.rglob('*.html'):
     url = ORIGIN + BASE + relative.removesuffix('index.html')
     for link in doc.links:
         target = urlsplit(urljoin(url, link))
-        if target.netloc != 'yohn-jp.github.io' or target.scheme not in ('http', 'https'):
+        if target.netloc != 'architect.library.yohn.jp' or target.scheme not in ('http', 'https'):
             continue
         assert target.path.startswith(BASE), f'Broken project base in {relative}: {link}'
         path = ROOT / unquote(target.path[len(BASE):])

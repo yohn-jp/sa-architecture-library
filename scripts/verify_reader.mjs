@@ -8,9 +8,9 @@ import { setTimeout as delay } from 'node:timers/promises';
 import { chromium } from 'playwright';
 
 const root = await mkdtemp(join(tmpdir(), 'sa-reader-'));
-const base = 'http://127.0.0.1:4173/sa-architecture-library/';
-await symlink(resolve('dist'), join(root, 'sa-architecture-library'));
-const server = spawn('python3', ['-m', 'http.server', '4173', '--bind', '127.0.0.1', '--directory', root], { stdio: 'ignore' });
+const base = 'http://127.0.0.1:4173/';
+await symlink(resolve('dist'), join(root, 'site'));
+const server = spawn('python3', ['-m', 'http.server', '4173', '--bind', '127.0.0.1', '--directory', resolve('dist')], { stdio: 'ignore' });
 const errors = [];
 server.on('error', error => errors.push(error.message));
 let browser;
@@ -79,7 +79,7 @@ try {
   await input.fill('八十分');
   await page.waitForFunction(() => [...document.querySelectorAll('.pagefind-ui__result-link')].some(a => a.href.includes('/books/requirements/01/')), null, { timeout: 15000 });
   const result = page.locator('.pagefind-ui__result-link').filter({ hasText: /./ }).first();
-  assert((await result.getAttribute('href')).includes('/sa-architecture-library/'), 'Search result escaped project prefix');
+  assert((await result.getAttribute('href')).startsWith('/'), 'Search result is not root-relative');
   await input.fill('サーキットブレーカー');
   await page.waitForFunction(() => [...document.querySelectorAll('.pagefind-ui__result-link')].some(a => a.href.includes('/complete/')), null, { timeout: 15000 });
   const complete = page.locator('.pagefind-ui__result-link[href*="/complete/"]').first();
