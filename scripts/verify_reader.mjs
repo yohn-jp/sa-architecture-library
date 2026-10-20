@@ -87,38 +87,96 @@ try {
   assert(page.url().startsWith(base + 'complete/'), 'Original textbook search target is broken');
   assert(await page.locator('#ch-07').count(), 'Original textbook chapter missing');
 
-  // AM2 exercise: original question image, answer selection, grading,
-  // local persistence, year switching and mobile containment.
-  assert((await page.goto(base + 'practice/')).ok(), 'Practice page missing');
-  const problem = page.locator('#question-image');
+  // AM2 mode selection and timed annual journey: start -> persist -> submit -> review.
+  assert((await page.goto(base + 'practice/')).ok(), 'Practice mode selector missing');
+  assert.equal(await page.locator('.mode-card').count(), 2, 'Both practice modes must be visible');
+  await page.goto(base + 'practice/year/exam/?year=2016h28a');
+  await page.waitForURL(/\/practice\/year\/\?year=2016h28a/);
+  assert.equal(await page.locator('#year').inputValue(), '2016h28a', 'Direct exam URL must require explicit start');
+
+  await page.goto(base + 'practice/');
+  await page.locator('.mode-card').first().click();
+  await page.waitForURL(base + 'practice/year/');
+  assert.equal(await page.locator('#year option').count(), 9, 'Annual year chooser incomplete');
+  await page.locator('#year').selectOption('2025r07h');
+  assert((await page.locator('#session-status').innerText()).includes('新しい試験'), 'Exam should not start before clicking start');
+  await page.locator('#primary').click();
+  await page.waitForURL(/\/practice\/year\/exam\/\?year=2025r07h/);
+  const examImage = page.locator('#question-image');
   await page.waitForFunction(() => {
     const img = document.getElementById('question-image');
     return img.complete && img.naturalWidth >= 1000;
   });
-  assert((await problem.getAttribute('src')).includes('2025r07h/q01.webp'), 'Wrong first question image');
+  assert((await examImage.getAttribute('src')).includes('2025r07h/q01.webp'), 'Wrong exam question image');
+  await page.waitForFunction(() => document.getElementById('timer').textContent !== '00:00', null, { timeout: 5000 });
+
   await page.locator('input[name="answer"][value="エ"]').check();
-  assert((await page.locator('#answered-count').innerText()).includes('1 / 25'), 'Answer was not recorded');
+  assert((await page.locator('#answered-count').innerText()).includes('1 / 25'), 'Answer not recorded');
   await page.locator('#next').click();
-  assert((await problem.getAttribute('src')).includes('2025r07h/q02.webp'), 'Next question image mismatch');
+  assert((await examImage.getAttribute('src')).includes('2025r07h/q02.webp'), 'Next question image mismatch');
   await page.reload();
-  assert((await problem.getAttribute('src')).includes('2025r07h/q02.webp'), 'Question position did not persist');
+  assert((await examImage.getAttribute('src')).includes('2025r07h/q02.webp'), 'Question location did not persist');
   await page.locator('#previous').click();
   assert(await page.locator('input[name="answer"][value="エ"]').isChecked(), 'Answer did not persist');
-  await page.locator('#grade').click();
-  assert((await page.locator('#result').innerText()).includes('4点'), 'Grade did not include the correct answer');
-  assert((await page.locator('#answer-feedback').innerText()).includes('正解：エ'), 'Official answer mismatch');
 
-  for (const year of ['2016h28a','2017h29a','2018h30a','2019r01a','2021r03h','2022r04h','2023r05h','2024r06h','2025r07h']) {
-    await page.locator('#year').selectOption(year);
-    await page.waitForFunction(id => {
-      const img = document.getElementById('question-image');
-      return img.src.includes(id+'/q01.webp') && img.complete && img.naturalWidth >= 1000;
-    }, year);
-    assert((await problem.getAttribute('src')).includes(year+'/q01.webp'), 'Year change failed: '+year);
-  }
+  const timerBeforeLeaving = await page.locator('#timer').innerText();
+  await page.goto(base + 'practice/');
+  await delay(1200);
+  await page.goto(base + 'practice/year/?year=2025r07h');
+  assert((await page.locator('#session-status').innerText()).includes('進行中'), 'Resume state missing');
+  await page.locator('#primary').click();
+  await page.waitForURL(/\/practice\/year\/exam\/\?year=2025r07h/);
+  assert.notEqual(await page.locator('#timer').innerText(), timerBeforeLeaving, 'Elapsed time did not continue across navigation');
+
+  page.once('dialog', dialog => dialog.accept());
+  await page.locator('#submit').click();
+  await page.waitForURL(/\/practice\/year\/result\/\?year=2025r07h/);
+  assert.equal((await page.locator('#score').innerText()).trim(), '4', 'Official answer score mismatch');
+  assert((await page.locator('#correct').innerText()).includes('1 / 25'), 'Incorrect number of correct answers');
+  assert.equal(await page.locator('#review-list details').count(), 25, 'All 25 questions must be reviewable');
+  await page.locator('#review-list details').first().locator('summary').click();
+  assert((await page.locator('#review-list details').first().innerText()).includes('解説'), 'Review explanation slot missing');
+  const frozen = await page.locator('#elapsed').innerText();
+  await delay(1200);
+  assert.equal(await page.locator('#elapsed').innerText(), frozen, 'Exam clock did not stop upon grading');
+  await page.reload();
+  assert.equal(await page.locator('#elapsed').innerText(), frozen, 'Graded time changed after reload');
+  await page.goto(base + 'practice/year/exam/?year=2025r07h');
+  await page.waitForURL(/\/practice\/year\/result\/\?year=2025r07h/, { timeout: 5000 });
+
+  await page.locator('#again').click();
+  await page.waitForURL(/\/practice\/year\/\?year=2025r07h/);
+  assert((await page.locator('#session-status').innerText()).includes('採点済み'), 'Completed exam state missing');
+  page.once('dialog', dialog => dialog.accept());
+  await page.locator('#new-attempt').click();
+  await page.waitForURL(/\/practice\/year\/exam\/\?year=2025r07h/);
+  assert((await page.locator('#answered-count').innerText()).includes('0 / 25'), 'Retake failed to reset answers');
+
+  // Random practice retains immediate grading and independent progress.
+  await page.goto(base + 'practice/random/');
+  await page.waitForFunction(() => {
+    const img = document.getElementById('question');
+    return img.complete && img.naturalWidth >= 1000;
+  });
+  await page.locator('input[name="choice"][value="ア"]').check();
+  await page.locator('#check').click();
+  assert((await page.locator('#feedback').innerText()).includes('正解：'), 'Random immediate grading failed');
+  await page.locator('#next').click();
+  assert((await page.locator('#progress').innerText()).includes('2 / 225'), 'Random next question failed');
+
+  // Mobile: mode selection, annual exam image containment, and results.
   await phone.goto(base + 'practice/');
-  assert(await phone.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'Practice mobile page overflows the viewport');
-  assert(await phone.locator('#question-grid button').count() === 25, 'Mobile question navigation incomplete');
+  assert(await phone.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'Mobile mode selector overflows');
+  await phone.goto(base + 'practice/year/');
+  await phone.locator('#year').selectOption('2024r06h');
+  await phone.locator('#primary').click();
+  await phone.waitForURL(/\/practice\/year\/exam\/\?year=2024r06h/);
+  assert(await phone.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'Mobile annual exam overflows');
+  phone.once('dialog', dialog => dialog.accept());
+  await phone.locator('#submit-mobile').click();
+  await phone.waitForURL(/\/practice\/year\/result\/\?year=2024r06h/);
+  assert(await phone.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'Mobile result screen overflows');
+  assert.equal(await phone.locator('#review-list details').count(), 25, 'Mobile review list incomplete');
 
   const noScript = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 390, height: 844 } });
   const plain = await noScript.newPage();
