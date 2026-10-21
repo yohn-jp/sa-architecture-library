@@ -30,6 +30,18 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
         <span class="mode-action">ランダム演習を開く <span aria-hidden="true">→</span></span>
       </a>
     </section>
-    <p class="practice-note">両モードの回答は、このブラウザ内に保存されます。アカウント登録やファイルのアップロードは不要です。</p>
+    <a class="review-entry" href={base + 'practice/review/'}>
+      <div><span class="eyebrow">MISTAKE NOTEBOOK</span><h2>間違えた問題を復習する</h2><p>両モードで間違えた問題を自動保存。解説を確認して、復習済みの問題を整理できます。</p></div>
+      <span class="review-entry-arrow" aria-hidden="true">→</span>
+    </a>
+    <p class="practice-note">回答と復習記録は、このブラウザ内に保存されます。アカウント登録やファイルのアップロードは不要です。</p>
   </div>
+<style>
+  .review-entry{display:flex;align-items:center;justify-content:space-between;gap:24px;border:1px solid var(--line);background:#fff;border-radius:12px;padding:24px 28px;margin-bottom:24px;color:var(--ink);text-decoration:none}
+  .review-entry:hover,.review-entry:focus-visible{border-color:var(--accent);box-shadow:0 7px 22px rgba(32,107,112,.08)}
+  .review-entry h2{font-size:21px;line-height:1.5;margin:5px 0}
+  .review-entry p{font-size:14px;color:var(--muted);line-height:1.7;margin:0}
+  .review-entry-arrow{font-size:24px;color:var(--accent);font-weight:800}
+  @media(max-width:630px){.review-entry{padding:20px}}
+</style>
 </SiteLayout>
