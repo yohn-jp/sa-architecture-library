@@ -25,6 +25,7 @@ try {
       order: Array.from({ length: 225 }, (_, i) => i), index: 0, results: {}
     }));
     localStorage.setItem('sa-am2-random-fast-v1', 'false');
+    localStorage.removeItem('sa-am2-mistakes-v1');
   });
   await page.goto(base + 'practice/random/');
   const card = page.locator('#question-card');
@@ -86,8 +87,50 @@ try {
   await delay(1050);
   assert((await progress.innerText()).includes('1 / 225'), 'Reset retained an old timer');
   assert(await page.locator('#fast-mode').isChecked(), 'Reset unexpectedly changed fast mode');
+  // Wrong answers survive restart, have stable IDs and are reviewable later.
+  await page.goto(base + 'practice/review/');
+  assert((await page.locator('#total-count').innerText()) === '3', 'Wrong answers must be recorded without duplicates');
+  assert.equal(await page.locator('#pending-count').innerText(), '3', 'Wrong answers must be pending');
+  assert.equal(await page.locator('#mistake-list details').count(), 3);
+  await page.locator('#mistake-list details').first().locator('summary').click();
+  assert(await page.locator('#mistake-list details').first().locator('img').getAttribute('src'), 'Question image must load on review');
+  assert((await page.locator('#mistake-list details').first().innerText()).includes('正解：'), 'Correct answer missing');
+  assert(await page.locator('#mistake-list details').first().locator('.explanation a').count() > 0, 'External explanation link missing');
+  await page.locator('#mistake-list details').first().locator('button').click();
+  assert.equal(await page.locator('#pending-count').innerText(), '2', 'Reviewed state not persisted');
+  await page.locator('#filter').selectOption('all');
+  assert.equal(await page.locator('#mistake-list details').count(), 3);
+  await page.reload();
+  assert.equal(await page.locator('#pending-count').innerText(), '2', 'Review state lost on reload');
+
+  // A completed annual exam must contribute wrong answers to the same notebook.
+  await page.goto(base + 'practice/');
+  await page.evaluate(() => {
+    const answers = Array(25).fill(null);
+    answers[10] = 'ア'; // 2021 question 11 correct answer is イ
+    const startedAt = Date.now() - 90_000;
+    localStorage.setItem('sa-am2-year-v2:2021r03h', JSON.stringify({
+      version: 2, yearId: '2021r03h', answers, index: 10, startedAt, finishedAt: startedAt + 85_000
+    }));
+  });
+  await page.goto(base + 'practice/year/result/?year=2021r03h');
+  await page.waitForFunction(() => document.getElementById('score').textContent === '0');
+  await page.goto(base + 'practice/review/');
+  assert.equal(await page.locator('#total-count').innerText(), '4', 'Annual mistake not imported');
+  await page.reload();
+  assert.equal(await page.locator('#total-count').innerText(), '4', 'Annual mistake was double-counted');
+  await page.locator('#filter').selectOption('all');
+  assert((await page.locator('#mistake-list').innerText()).includes('令和3年'), 'Annual question missing from notebook');
+
+  // A new random attempt must not erase accumulated mistakes.
+  await page.goto(base + 'practice/random/');
+  page.once('dialog', dialog => dialog.accept());
+  await page.evaluate(() => document.getElementById('restart').click());
+  await page.goto(base + 'practice/review/');
+  assert.equal(await page.locator('#total-count').innerText(), '4', 'Random restart erased mistake history');
+
   assert.deepEqual(errors, []);
-  console.log('PASS: normal/rapid feedback colors, auto-advance, toggle, reload, reset');
+  console.log('PASS: random modes, persistent mistake notebook, annual imports, reviewed states and explanations');
 } finally {
   await browser?.close();
   server.kill();
