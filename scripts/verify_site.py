@@ -96,12 +96,11 @@ answers_source = Path('src/data/am2.ts').read_text(encoding='utf-8')
 key_match = re.search(r"id:'2025r07h'.*?key:'([アイウエ]{25})'", answers_source)
 assert key_match, '2025 answer key is missing'
 for n, answer in enumerate(key_match[1][:10], start=1):
-    entry = re.search(
-        r"  '2025r07h:" + str(n) + r"': \\{\\s*text: (\"(?:[^\\\"\\\\]|\\\\.)*\")",
-        explanations_source,
-    )
-    assert entry, f'2025 question {n} has no individual explanation'
-    explanation = json.loads(entry[1])
+    marker = f"  '2025r07h:{n}': {{"
+    assert marker in explanations_source, f'2025 question {n} has no individual explanation'
+    line = explanations_source.split(marker, 1)[1].splitlines()[1].strip()
+    assert line.startswith('text: '), f'2025 question {n}: invalid explanation record'
+    explanation = json.loads(line.removeprefix('text: '))
     assert len(explanation) >= 120, f'2025 question {n}: explanation too short'
     assert explanation.startswith('正解：' + answer), f'2025 question {n}: explanation disagrees with answer key'
 
