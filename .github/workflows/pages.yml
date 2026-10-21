@@ -39,6 +39,8 @@ jobs:
         run: npx playwright install --with-deps chromium
       - name: Verify desktop, mobile and search
         run: npm run verify:reader
+      - name: Verify random grading and rapid mode
+        run: node scripts/verify_random.mjs
       - uses: actions/upload-pages-artifact@v3
         if: github.ref == 'refs/heads/main'
         with:
