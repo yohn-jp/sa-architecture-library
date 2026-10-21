@@ -1,0 +1,183 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+---
+<SiteLayout title="午前Ⅱ 間違えた問題の復習" description="年度別・ランダム演習で間違えた問題を自動記録して復習">
+  <link slot="head" rel="stylesheet" href={base + 'practice-ui.css'} />
+  <div class="practice-shell">
+    <nav class="practice-breadcrumb" aria-label="現在の位置">
+      <a href={base + 'practice/'}>演習モードを選ぶ</a><span aria-hidden="true">/</span>
+      <span aria-current="page">間違えた問題の復習</span>
+    </nav>
+    <header class="practice-intro">
+      <p class="eyebrow">MISTAKE NOTEBOOK / AM II</p>
+      <h1>間違えた問題を、理解に変える。</h1>
+      <p>年度別模擬試験と全年度ランダム演習で間違えた問題を自動で記録します。演習を最初からやり直しても記録は残り、復習済みの問題を分けて管理できます。</p>
+    </header>
+    <section class="practice-card" aria-label="復習状況" style="margin-top:25px">
+      <div class="review-overview">
+        <div><span>復習待ち</span><strong id="pending-count">0</strong><small>問</small></div>
+        <div><span>復習済み</span><strong id="reviewed-count">0</strong><small>問</small></div>
+        <div><span>記録された問題</span><strong id="total-count">0</strong><small>問</small></div>
+      </div>
+    </section>
+    <section aria-labelledby="mistake-heading">
+      <div class="review-header">
+        <div>
+          <p class="eyebrow">YOUR QUESTIONS</p>
+          <h2 id="mistake-heading">復習リスト</h2>
+          <p>問題を開くと原本画像・正解・解説を確認できます。</p>
+        </div>
+        <div class="review-filter">
+          <label for="filter">表示</label>
+          <select id="filter">
+            <option value="pending">復習待ち</option>
+            <option value="all">すべて</option>
+            <option value="reviewed">復習済み</option>
+          </select>
+        </div>
+      </div>
+      <div id="mistake-list" class="review-list"></div>
+      <div id="empty-state" class="practice-card empty-state" hidden>
+        <h3 id="empty-title">まだ復習する問題はありません</h3>
+        <p id="empty-detail">演習で不正解になった問題がここに記録されます。</p>
+        <a class="practice-button" href={base + 'practice/random/'}>ランダム演習へ →</a>
+      </div>
+    </section>
+  </div>
+</SiteLayout>
+
+<script>
+  import { findAm2Year } from '../../data/am2';
+  import { findAm2Explanation, externalAm2ExplanationUrl } from '../../data/am2-explanations';
+  import { listMistakes, setMistakeReviewed, syncExistingMistakes } from '../../lib/am2-review';
+
+  const $ = (id: string) => document.getElementById(id)!;
+  const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+  const filter = $('filter') as HTMLSelectElement;
+  const list = $('mistake-list');
+  const empty = $('empty-state');
+
+  function render(): void {
+    const mistakes = listMistakes();
+    const pending = mistakes.filter(item => item.reviewedAt === null);
+    $('pending-count').textContent = String(pending.length);
+    $('reviewed-count').textContent = String(mistakes.length - pending.length);
+    $('total-count').textContent = String(mistakes.length);
+    const shown = mistakes.filter(item => filter.value === 'all' || (filter.value === 'pending' ? item.reviewedAt === null : item.reviewedAt !== null));
+    list.replaceChildren();
+    empty.hidden = shown.length > 0;
+    if (!shown.length) {
+      $('empty-title').textContent = mistakes.length === 0 ? 'まだ間違えた問題はありません' : 'この条件に該当する問題はありません';
+      $('empty-detail').textContent = mistakes.length === 0
+        ? '年度別またはランダム演習で不正解になった問題が、ここに自動記録されます。'
+        : '表示条件を切り替えると、ほかの復習記録を確認できます。';
+      return;
+    }
+    for (const mistake of shown) {
+      const year = findAm2Year(mistake.yearId);
+      if (!year) continue;
+      const expected = year.key[mistake.questionNumber - 1];
+      const details = document.createElement('details');
+      details.className = 'review-item ' + (mistake.reviewedAt === null ? 'is-incorrect' : 'is-correct');
+      const summary = document.createElement('summary');
+      const title = document.createElement('strong');
+      title.className = 'review-question-name';
+      title.textContent = year.label + ' · 問' + mistake.questionNumber;
+      const mark = document.createElement('span');
+      mark.className = 'mark ' + (mistake.reviewedAt === null ? 'is-incorrect' : 'is-correct');
+      mark.textContent = mistake.reviewedAt === null ? '復習待ち' : '復習済み';
+      const count = document.createElement('span');
+      count.className = 'summary-detail';
+      count.textContent = mistake.wrongCount + '回不正解';
+      summary.append(title, mark, count);
+      details.append(summary);
+
+      const body = document.createElement('div');
+      body.className = 'review-content';
+      const answer = document.createElement('p');
+      answer.className = 'answer-line';
+      answer.textContent = '前回の誤答：' + mistake.lastAnswer + ' ／ 正解：' + expected;
+      body.append(answer);
+      const imageLink = document.createElement('a');
+      imageLink.href = base + 'practice/questions/' + year.id + '/q' + String(mistake.questionNumber).padStart(2, '0') + '.webp';
+      imageLink.target = '_blank';
+      imageLink.rel = 'noopener noreferrer';
+      const image = document.createElement('img');
+      image.alt = year.label + ' 問' + mistake.questionNumber + 'の問題文と選択肢';
+      image.width = 1210;
+      image.decoding = 'async';
+      image.loading = 'lazy';
+      imageLink.append(image);
+      body.append(imageLink);
+      details.addEventListener('toggle', () => {
+        if (details.open && !image.getAttribute('src')) image.src = imageLink.href;
+      });
+
+      const explanation = document.createElement('section');
+      explanation.className = 'explanation';
+      const heading = document.createElement('h3');
+      heading.textContent = '解説';
+      const text = document.createElement('p');
+      const note = findAm2Explanation(year.id, mistake.questionNumber);
+      text.textContent = note?.text ??
+        'この問題の独自解説はまだ収録されていません。外部解説の年度ページで該当する問題を確認できます。';
+      explanation.append(heading, text);
+      const external = externalAm2ExplanationUrl(year.id);
+      if (external) {
+        const externalLink = document.createElement('a');
+        externalLink.href = external;
+        externalLink.target = '_blank';
+        externalLink.rel = 'noopener noreferrer';
+        externalLink.textContent = '外部の詳しい解説（問' + mistake.questionNumber + '）を読む ↗';
+        explanation.append(externalLink);
+      }
+      body.append(explanation);
+
+      const actions = document.createElement('div');
+      actions.className = 'review-actions';
+      const button = document.createElement('button');
+      button.className = 'practice-button secondary';
+      button.type = 'button';
+      button.textContent = mistake.reviewedAt === null ? '復習済みにする' : '復習待ちに戻す';
+      button.addEventListener('click', () => {
+        if (setMistakeReviewed(mistake.yearId, mistake.questionNumber, mistake.reviewedAt === null)) render();
+      });
+      actions.append(button);
+      const official = document.createElement('a');
+      official.href = 'https://www.ipa.go.jp/shiken/mondai-kaiotu/' + year.list + '.html';
+      official.target = '_blank';
+      official.rel = 'noopener noreferrer';
+      official.textContent = 'IPA公式問題・解答例 ↗';
+      actions.append(official);
+      body.append(actions);
+      details.append(body);
+      list.append(details);
+    }
+  }
+  syncExistingMistakes();
+  filter.addEventListener('change', render);
+  window.addEventListener('storage', event => {
+    if (event.key === 'sa-am2-mistakes-v1') render();
+  });
+  render();
+</script>
+
+<style>
+  .review-overview{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+  .review-overview>div{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap}
+  .review-overview span{display:block;width:100%;font-size:13px;color:var(--muted);font-weight:700}
+  .review-overview strong{font-size:32px;line-height:1.1;font-variant-numeric:tabular-nums;color:var(--accent)}
+  .review-overview small{color:var(--muted)}
+  .review-filter{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:700}
+  .review-filter select{font:inherit;border:1px solid #b7c7c5;background:#fff;padding:9px;border-radius:7px}
+  .review-question-name{min-width:0!important;font-size:14px}
+  .answer-line{font-weight:800;font-size:15px}
+  .review-content img{border:1px solid var(--line);border-radius:8px}
+  .review-content .explanation p{white-space:pre-line;line-height:1.8}
+  .review-actions{display:flex;align-items:center;flex-wrap:wrap;gap:18px;margin-top:16px}
+  .review-actions a{font-size:13px}
+  .empty-state{margin-top:12px;text-align:center;padding:32px}
+  .empty-state p{color:var(--muted)}
+  @media(max-width:630px){.review-overview{gap:8px}.review-overview strong{font-size:26px}.review-question-name{width:100%}}
+</style>
