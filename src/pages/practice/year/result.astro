@@ -24,7 +24,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
         </div>
         <div class="practice-controls">
           <a id="again" class="practice-button secondary" href={base + 'practice/year/'}>年度別演習に戻る</a>
-          <a class="practice-button secondary" href={base + 'practice/'}>モード選択に戻る</a>
+          <a class="practice-button secondary" href={base + 'practice/'}>モード選択に戻る</a><a class="practice-button" href={base + 'practice/review/'}>間違えた問題を復習 →</a>
         </div>
       </div>
       <dl class="result-stats">
@@ -46,12 +46,14 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 
 <script>
   import { findAm2Year } from '../../../data/am2';
-  import { findAm2Explanation } from '../../../data/am2-explanations';
+  import { findAm2Explanation, externalAm2ExplanationUrl } from '../../../data/am2-explanations';
+  import { syncExistingMistakes } from '../../../lib/am2-review';
   import { loadYearSession, elapsedYearSeconds, formatYearElapsed } from '../../../lib/am2-session';
   const $ = (id: string) => document.getElementById(id)!;
   const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   const year = findAm2Year(new URLSearchParams(location.search).get('year'));
   const session = year ? loadYearSession(year.id) : null;
+  syncExistingMistakes();
 
   if (!year || !session || session.finishedAt === null) {
     location.replace(base + 'practice/year/' + (year ? '?year=' + year.id : ''));
@@ -111,7 +113,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
       box.append(heading);
       const detail = findAm2Explanation(year.id, i + 1);
       const explanation = document.createElement('p');
-      explanation.textContent = detail?.text ?? 'この問題の個別解説はまだ収録されていません。正解はIPA公式の解答例に基づいています。';
+      explanation.textContent = detail?.text ?? 'この問題の独自解説はまだ収録されていません。外部解説の年度ページで、該当する問を確認できます。';
       box.append(explanation);
       for (const source of detail?.sources ?? []) {
         const reference = document.createElement('a');
@@ -120,6 +122,15 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
         reference.rel = 'noopener noreferrer';
         reference.textContent = source.title;
         box.append(reference);
+      }
+      const external = externalAm2ExplanationUrl(year.id);
+      if (external) {
+        const link = document.createElement('a');
+        link.href = external;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.textContent = '外部の詳しい解説（問' + (i + 1) + '）を読む ↗';
+        box.append(link);
       }
       body.append(box);
       const official = document.createElement('a');
