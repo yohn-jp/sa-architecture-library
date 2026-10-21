@@ -47,6 +47,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 <script>
   import { findAm2Year } from '../../../data/am2';
   import { findAm2Explanation, externalAm2ExplanationUrl } from '../../../data/am2-explanations';
+  import { findAm2QuestionIndex } from '../../../data/am2-question-index';
   import { syncExistingMistakes } from '../../../lib/am2-review';
   import { loadYearSession, elapsedYearSeconds, formatYearElapsed } from '../../../lib/am2-session';
   const $ = (id: string) => document.getElementById(id)!;
@@ -113,8 +114,19 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
       box.append(heading);
       const detail = findAm2Explanation(year.id, i + 1);
       const explanation = document.createElement('p');
-      explanation.textContent = detail?.text ?? 'この問題の独自解説はまだ収録されていません。外部解説の年度ページで、該当する問を確認できます。';
+      const indexEntry = findAm2QuestionIndex(year.id, i + 1);
+      explanation.textContent = detail?.text ??
+        (indexEntry ? 'テーマ：' + indexEntry.title + '。理解のポイント：' + indexEntry.tip + '\n\n詳しい正答根拠と選択肢別の説明は外部解説を参照してください。'
+          : 'この問題の独自解説はまだ収録されていません。外部解説を参照してください。');
       box.append(explanation);
+      if (indexEntry) {
+        const chapter = document.createElement('a');
+        chapter.href = base + 'complete/#ch-' + String(indexEntry.chapter).padStart(2, '0');
+        chapter.target = '_blank';
+        chapter.rel = 'noopener noreferrer';
+        chapter.textContent = '関連教材：第' + indexEntry.chapter + '章を読む ↗';
+        box.append(chapter, document.createTextNode('　'));
+      }
       for (const source of detail?.sources ?? []) {
         const reference = document.createElement('a');
         reference.href = source.url;
