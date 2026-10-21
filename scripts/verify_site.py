@@ -90,6 +90,21 @@ assert 'id="mistake-list"' in review.read_text(encoding='utf-8'), 'Mistake noteb
 question_index = Path('src/data/am2-question-index.ts').read_text(encoding='utf-8')
 indexed = re.findall(r'^  "(20[0-9]{2}:[0-9]{1,2})": [{]', question_index, re.M)
 assert len(indexed) == 225 and len(set(indexed)) == 225, 'All 225 questions need unique textbook study references'
+# Every new explanation must match the published answer key.
+explanations_source = Path('src/data/am2-explanations.ts').read_text(encoding='utf-8')
+answers_source = Path('src/data/am2.ts').read_text(encoding='utf-8')
+key_match = re.search(r"id:'2025r07h'.*?key:'([アイウエ]{25})'", answers_source)
+assert key_match, '2025 answer key is missing'
+for n, answer in enumerate(key_match[1][:10], start=1):
+    entry = re.search(
+        r"  '2025r07h:" + str(n) + r"': \\{\\s*text: (\"(?:[^\\\"\\\\]|\\\\.)*\")",
+        explanations_source,
+    )
+    assert entry, f'2025 question {n} has no individual explanation'
+    explanation = json.loads(entry[1])
+    assert len(explanation) >= 120, f'2025 question {n}: explanation too short'
+    assert explanation.startswith('正解：' + answer), f'2025 question {n}: explanation disagrees with answer key'
+
 manifest_path = ROOT / 'practice/questions/manifest.json'
 assert manifest_path.is_file(), 'Practice asset manifest is missing'
 manifest = json.loads(manifest_path.read_text(encoding='utf-8'))
