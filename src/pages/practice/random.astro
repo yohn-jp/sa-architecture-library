@@ -15,42 +15,99 @@ const years = [
 ---
 <SiteLayout title="午前Ⅱ 全年度ランダム演習">
 <section class="random"><p class="eyebrow">RANDOM PRACTICE · 225 QUESTIONS</p><h1>全年度ランダム演習</h1><p>9回分225問から重複なくランダム出題。各問を回答後すぐに採点します。</p><p><a href={base+'practice/'}>← 演習モードを選ぶ</a>　 /　 <a href={base+'practice/year/'}>年度別模擬試験へ</a></p>
-<div class="toolbar"><span id="progress">1 / 225</span><span id="stats">正解 0 / 解答 0</span><button id="restart" type="button">最初からやり直す</button></div>
-<div class="question"><h2 id="heading">問題</h2><a id="large" target="_blank" rel="noopener noreferrer"><img id="question" alt="問題文と選択肢" width="1210" /></a><p id="load-error" hidden role="alert">画像の読み込みに失敗しました。</p><fieldset id="choices"><legend>解答を選択</legend><label><input type="radio" name="choice" value="ア"> ア</label><label><input type="radio" name="choice" value="イ"> イ</label><label><input type="radio" name="choice" value="ウ"> ウ</label><label><input type="radio" name="choice" value="エ"> エ</label></fieldset><button id="check" type="button">この問題を採点</button><p id="feedback" role="status" aria-live="polite"></p><section id="explanation" hidden><h3>解説</h3><p id="explanation-text"></p><p><a id="official" target="_blank" rel="noopener noreferrer">IPA公式問題・解答例</a></p></section><button id="next" type="button" hidden>次の問題 →</button></div></section>
+<div class="toolbar"><span id="progress">1 / 225</span><span id="stats">正解 0 / 解答 0</span><div class="toolbar-actions"><label class="fast-toggle" for="fast-mode"><input id="fast-mode" type="checkbox" role="switch" aria-describedby="fast-hint" /><span class="toggle-track" aria-hidden="true"></span><span>高速演習</span></label><button id="restart" type="button">最初からやり直す</button></div></div><p id="fast-hint" class="fast-hint" hidden>高速演習：選択すると即時採点し、約0.8秒後に次の問題へ進みます。解説は表示しません。</p>
+<div class="question" id="question-card"><h2 id="heading" tabindex="-1">問題</h2><a id="large" target="_blank" rel="noopener noreferrer"><img id="question" alt="問題文と選択肢" width="1210" /></a><p id="load-error" hidden role="alert">画像の読み込みに失敗しました。</p><fieldset id="choices"><legend>解答を選択</legend><label><input type="radio" name="choice" value="ア"> ア</label><label><input type="radio" name="choice" value="イ"> イ</label><label><input type="radio" name="choice" value="ウ"> ウ</label><label><input type="radio" name="choice" value="エ"> エ</label></fieldset><button id="check" type="button">この問題を採点</button><p id="feedback" role="status" aria-live="polite"></p><section id="explanation" hidden><h3>解説</h3><p id="explanation-text"></p><p><a id="official" target="_blank" rel="noopener noreferrer">IPA公式問題・解答例</a></p></section><button id="next" type="button" hidden>次の問題 →</button></div></section>
 </SiteLayout>
 <script define:vars={{years,base}}>
 const $=id=>document.getElementById(id);
 const all=years.flatMap(y=>Array.from({length:25},(_,i)=>({id:y.id,label:y.label,list:y.list,number:i+1,correct:y.key[i]})));
 const storeKey='sa-am2-random-v1';
+const fastKey='sa-am2-random-fast-v1';
+const advanceDelayMs=800;
+let fastMode=false,advanceTimer=null;
+try{fastMode=localStorage.getItem(fastKey)==='true'}catch{}
+$('fast-mode').checked=fastMode;
+function cancelAdvance(){if(advanceTimer!==null){clearTimeout(advanceTimer);advanceTimer=null}}
+function scheduleAdvance(index){
+  cancelAdvance();
+  advanceTimer=setTimeout(()=>{
+    advanceTimer=null;
+    if(fastMode&&state.index===index&&state.results[state.order[index]])goNext();
+  },advanceDelayMs);
+}
 const state={order:[],index:0,results:{}};
 const randomOrder=()=>{const a=Array.from({length:225},(_,i)=>i);for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
 function persist(){try{localStorage.setItem(storeKey,JSON.stringify(state))}catch{}}
-function initialize(reset=false){let saved=null;if(!reset){try{saved=JSON.parse(localStorage.getItem(storeKey)||'null')}catch{}}
+function initialize(reset=false){cancelAdvance();let saved=null;if(!reset){try{saved=JSON.parse(localStorage.getItem(storeKey)||'null')}catch{}}
 if(saved&&Array.isArray(saved.order)&&saved.order.length===225&&new Set(saved.order).size===225&&saved.order.every(n=>Number.isInteger(n)&&n>=0&&n<225)&&Number.isInteger(saved.index)&&saved.index>=0&&saved.index<=225&&saved.results&&typeof saved.results==='object'){
 state.order=saved.order;state.index=saved.index;state.results=saved.results;
 }else{state.order=randomOrder();state.index=0;state.results={};persist()}render()}
 const current=()=>all[state.order[state.index]];
+function goNext(){
+  cancelAdvance();
+  if(state.index>=225||!state.results[state.order[state.index]])return;
+  state.index++;persist();render();
+  $('heading').focus({preventScroll:true});
+  window.scrollTo({top:Math.max(0,$('question-card').getBoundingClientRect().top+window.scrollY-16),behavior:'auto'});
+}
+function grade(choice){
+  if(state.index>=225||!['ア','イ','ウ','エ'].includes(choice))return;
+  const n=state.order[state.index];
+  if(state.results[n])return;
+  state.results[n]=choice;persist();render();
+}
 function render(){const answered=Object.keys(state.results).length;const correct=Object.entries(state.results).filter(([i,v])=>all[Number(i)]?.correct===v).length;
 $('stats').textContent='正解 '+correct+' / 解答 '+answered;
 $('progress').textContent=Math.min(state.index+1,225)+' / 225';
-if(state.index===225){$('heading').textContent='全225問を完了しました';$('question').hidden=true;$('choices').hidden=true;$('check').hidden=true;$('next').hidden=true;$('explanation').hidden=true;$('feedback').textContent='正解 '+correct+' / 225 問';return}
+$('fast-hint').hidden=!fastMode;
+$('question-card').classList.remove('is-correct','is-incorrect');
+if(state.index===225){cancelAdvance();$('heading').textContent='全225問を完了しました';$('question').hidden=true;$('choices').hidden=true;$('check').hidden=true;$('next').hidden=true;$('explanation').hidden=true;$('feedback').textContent='正解 '+correct+' / 225 問';return}
 const q=current(),n=state.order[state.index],result=state.results[n];
 $('heading').textContent=q.label+' · 問'+q.number;
-const url=base+'practice/questions/'+q.id+'/q'+String(q.number).padStart(2,'0')+'.webp';$('question').hidden=false;$('question').src=url;$('question').alt=q.label+' 問'+q.number+'の問題文と選択肢';$('large').href=url;$('load-error').hidden=true;
+const url=base+'practice/questions/'+q.id+'/q'+String(q.number).padStart(2,'0')+'.webp';$('question').hidden=false;if($('question').getAttribute('src')!==url){$('question').src=url;$('load-error').hidden=true}$('question').alt=q.label+' 問'+q.number+'の問題文と選択肢';$('large').href=url;$('load-error').hidden=true;
 $('choices').hidden=false;for(const radio of document.querySelectorAll('input[name=choice]')){radio.checked=radio.value===result;radio.disabled=Boolean(result)}
-$('check').hidden=Boolean(result);$('next').hidden=!result;
+$('check').hidden=fastMode||Boolean(result);$('next').hidden=fastMode||!result;
+$('question-card').classList.toggle('is-correct',Boolean(result&&result===q.correct));
+$('question-card').classList.toggle('is-incorrect',Boolean(result&&result!==q.correct));
 $('next').textContent=state.index===224?'結果を見る':'次の問題 →';
 $('feedback').textContent=result?((result===q.correct?'正解':'不正解')+' · あなたの解答：'+result+' ／ 正解：'+q.correct):'';
-$('explanation').hidden=!result;
+$('explanation').hidden=fastMode||!result;
 $('explanation-text').textContent='この問題の個別解説は現在準備中です。正答は公式解答例に基づいています。';
 $('official').href='https://www.ipa.go.jp/shiken/mondai-kaiotu/'+q.list+'.html';
+if(fastMode&&result)scheduleAdvance(state.index);else cancelAdvance();
 }
-$('check').addEventListener('click',()=>{const choice=document.querySelector('input[name=choice]:checked');if(!choice){$('feedback').textContent='解答を選択してください。';return}const n=state.order[state.index];if(state.results[n])return;state.results[n]=choice.value;persist();render()});
-$('next').addEventListener('click',()=>{if(!state.results[state.order[state.index]])return;state.index++;persist();render();window.scrollTo({top:0,behavior:'smooth'})});
+$('check').addEventListener('click',()=>{const choice=document.querySelector('input[name=choice]:checked');if(!choice){$('feedback').textContent='解答を選択してください。';return}grade(choice.value)});
+$('choices').addEventListener('change',event=>{if(fastMode&&event.target.name==='choice')grade(event.target.value)});
+$('fast-mode').addEventListener('change',event=>{
+  fastMode=event.target.checked;
+  try{localStorage.setItem(fastKey,String(fastMode))}catch{}
+  if(fastMode&&state.index<225&&!state.results[state.order[state.index]]){
+    const selected=document.querySelector('input[name=choice]:checked');
+    if(selected){grade(selected.value);return}
+  }
+  render();
+});
+$('next').addEventListener('click',goNext);
 $('restart').addEventListener('click',()=>{if(confirm('ランダム演習の進捗を消去して最初からやり直しますか？'))initialize(true)});
 $('question').addEventListener('error',()=>{$('load-error').hidden=false});
+window.addEventListener('pagehide',cancelAdvance);
 initialize();
 </script>
 <style>
 .random{max-width:900px;margin:0 auto;padding:55px 0}.random h1{font-size:clamp(27px,4vw,40px)}.toolbar{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin:22px 0}.toolbar span{font-weight:700}.toolbar button{margin-left:auto}.question{background:#fff;border:1px solid var(--line);border-radius:10px;padding:24px}.question h2{font-size:21px}.question img{width:100%;height:auto;display:block}.question>a{display:block;overflow-x:auto}fieldset{border:0;padding:20px 0;display:grid;grid-template-columns:repeat(4,1fr);gap:10px}legend{font-weight:700}fieldset label{display:flex;gap:8px;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:8px;padding:12px;font-size:20px;cursor:pointer}button{font:inherit;background:var(--accent);color:white;border:0;border-radius:7px;padding:10px 18px;cursor:pointer}#feedback{font-weight:700}#explanation{padding:15px 20px;background:#f5f7f5;border-radius:8px;margin:16px 0}@media(max-width:650px){.random{padding:30px 0}.question{padding:12px}.question>a img{min-width:690px}.toolbar button{margin-left:0}}
+.toolbar-actions{display:flex;align-items:center;gap:12px;margin-left:auto;flex-wrap:wrap}
+.toolbar-actions button{margin-left:0}
+.fast-toggle{display:inline-flex;align-items:center;gap:9px;font-weight:700;cursor:pointer;white-space:nowrap}
+.fast-toggle input{position:absolute;width:1px;height:1px;opacity:0}
+.toggle-track{position:relative;width:42px;height:24px;flex:none;border-radius:99px;background:#b3c3bf;transition:background .15s}
+.toggle-track::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;background:white;border-radius:50%;box-shadow:0 1px 3px #0002;transition:transform .15s}
+.fast-toggle input:checked+.toggle-track{background:var(--accent)}
+.fast-toggle input:checked+.toggle-track::after{transform:translateX(18px)}
+.fast-toggle input:focus-visible+.toggle-track{outline:3px solid #d18a36;outline-offset:3px}
+.fast-hint{font-size:13px;color:var(--muted);margin:-8px 0 16px}
+.question{transition:background-color .12s,border-color .12s}
+.question.is-correct{background:#edf8f0;border-color:#9bcfad}
+.question.is-incorrect{background:#fff0ef;border-color:#e6b0ac}
+@media(max-width:650px){.toolbar-actions{margin-left:0}.fast-hint{margin:0 0 14px}}
+@media(prefers-reduced-motion:reduce){.question,.toggle-track,.toggle-track::after{transition:none}}
 </style>
