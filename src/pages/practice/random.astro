@@ -5,11 +5,12 @@ const base=import.meta.env.BASE_URL.replace(/\/?$/, '/');
 <SiteLayout title="午前Ⅱ 全年度ランダム演習">
 <section class="random"><p class="eyebrow">RANDOM PRACTICE · 225 QUESTIONS</p><h1>全年度ランダム演習</h1><p>9回分225問から重複なくランダム出題。各問を回答後すぐに採点します。</p><p><a href={base+'practice/'}>← 演習モードを選ぶ</a>　 /　 <a href={base+'practice/year/'}>年度別模擬試験へ</a>　 /　 <a href={base+'practice/review/'}>間違えた問題を復習</a></p>
 <div class="toolbar"><span id="progress">1 / 225</span><span id="stats">正解 0 / 解答 0</span><div class="toolbar-actions"><a id="review-link" href={base+"practice/review/"} class="review-link">復習ノート <span id="mistake-count">0</span>問</a><label class="fast-toggle" for="fast-mode"><input id="fast-mode" type="checkbox" role="switch" aria-describedby="fast-hint" /><span class="toggle-track" aria-hidden="true"></span><span>高速演習</span></label><button id="restart" type="button">最初からやり直す</button></div></div><p id="fast-hint" class="fast-hint" hidden>高速演習：選択すると即時採点し、約0.8秒後に次の問題へ進みます。解説は表示しません。</p>
-<div class="question" id="question-card"><h2 id="heading" tabindex="-1">問題</h2><a id="large" target="_blank" rel="noopener noreferrer"><img id="question" alt="問題文と選択肢" width="1210" /></a><p id="load-error" hidden role="alert">画像の読み込みに失敗しました。</p><p id="save-error" hidden role="alert">復習履歴を保存できませんでした。ブラウザの保存設定を確認してください。</p><fieldset id="choices"><legend>解答を選択</legend><label><input type="radio" name="choice" value="ア"> ア</label><label><input type="radio" name="choice" value="イ"> イ</label><label><input type="radio" name="choice" value="ウ"> ウ</label><label><input type="radio" name="choice" value="エ"> エ</label></fieldset><button id="check" type="button">この問題を採点</button><p id="feedback" role="status" aria-live="polite"></p><section id="explanation" hidden><h3>解説</h3><p id="explanation-text"></p><p><a id="external-explanation" target="_blank" rel="noopener noreferrer" hidden>外部サイトの詳しい解説を読む ↗</a></p><p><a id="official" target="_blank" rel="noopener noreferrer">IPA公式問題・解答例</a></p></section><button id="next" type="button" hidden>次の問題 →</button></div></section>
+<div class="question" id="question-card"><h2 id="heading" tabindex="-1">問題</h2><a id="large" target="_blank" rel="noopener noreferrer"><img id="question" alt="問題文と選択肢" width="1210" /></a><p id="load-error" hidden role="alert">画像の読み込みに失敗しました。</p><p id="save-error" hidden role="alert">復習履歴を保存できませんでした。ブラウザの保存設定を確認してください。</p><fieldset id="choices"><legend>解答を選択</legend><label><input type="radio" name="choice" value="ア"> ア</label><label><input type="radio" name="choice" value="イ"> イ</label><label><input type="radio" name="choice" value="ウ"> ウ</label><label><input type="radio" name="choice" value="エ"> エ</label></fieldset><button id="check" type="button">この問題を採点</button><p id="feedback" role="status" aria-live="polite"></p><section id="explanation" hidden><h3>解説</h3><p id="explanation-text"></p><p><a id="related-chapter" target="_blank" rel="noopener noreferrer" hidden>関連するコンプリートテキストを読む ↗</a></p><p><a id="external-explanation" target="_blank" rel="noopener noreferrer" hidden>外部サイトの詳しい解説を読む ↗</a></p><p><a id="official" target="_blank" rel="noopener noreferrer">IPA公式問題・解答例</a></p></section><button id="next" type="button" hidden>次の問題 →</button></div></section>
 </SiteLayout>
 <script>
 import { am2Years } from '../../data/am2';
 import { findAm2Explanation, externalAm2ExplanationUrl } from '../../data/am2-explanations';
+import { findAm2QuestionIndex } from '../../data/am2-question-index';
 import { recordMistake, listMistakes, syncExistingMistakes } from '../../lib/am2-review';
 import type { Am2Choice } from '../../lib/am2-session';
 
@@ -143,8 +144,16 @@ function render(): void {
     : '';
   $('explanation').hidden = fastMode || !result;
   const explanation = findAm2Explanation(q.id, q.number);
+  const indexEntry = findAm2QuestionIndex(q.id, q.number);
   $('explanation-text').textContent = explanation?.text ??
-    'この問題の独自解説はまだ収録されていません。以下の外部解説で、該当する問' + q.number + 'を確認できます。';
+    (indexEntry ? 'テーマ：' + indexEntry.title + '。理解のポイント：' + indexEntry.tip + '\n\n詳しい正答根拠と各選択肢の説明は、以下の外部解説を参照してください。'
+      : 'この問題の独自解説はまだ収録されていません。外部解説を参照してください。');
+  const related = $<HTMLAnchorElement>('related-chapter');
+  related.hidden = !indexEntry;
+  if (indexEntry) {
+    related.href = base + 'complete/#ch-' + String(indexEntry.chapter).padStart(2, '0');
+    related.textContent = '関連教材：第' + indexEntry.chapter + '章を読む ↗';
+  }
   const external = externalAm2ExplanationUrl(q.id);
   const link = $<HTMLAnchorElement>('external-explanation');
   link.hidden = !external;
