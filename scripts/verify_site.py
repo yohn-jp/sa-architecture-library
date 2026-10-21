@@ -88,7 +88,7 @@ assert 'id="question-image"' in annual_exam.read_text(encoding='utf-8'), 'Exam q
 assert 'id="review-list"' in annual_result.read_text(encoding='utf-8'), 'Result review list is missing'
 assert 'id="mistake-list"' in review.read_text(encoding='utf-8'), 'Mistake notebook is missing'
 question_index = Path('src/data/am2-question-index.ts').read_text(encoding='utf-8')
-indexed = re.findall(r'^  "(20\\d{2}:\\d{1,2})": \\{', question_index, re.M)
+indexed = re.findall(r'^  "(20[0-9]{2}:[0-9]{1,2})": [{]', question_index, re.M)
 assert len(indexed) == 225 and len(set(indexed)) == 225, 'All 225 questions need unique textbook study references'
 manifest_path = ROOT / 'practice/questions/manifest.json'
 assert manifest_path.is_file(), 'Practice asset manifest is missing'
