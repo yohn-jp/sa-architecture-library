@@ -45,6 +45,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 <script>
   import { am2Years, findAm2Year } from '../../../data/am2';
   import { loadPreviousYearProgress, loadYearSession, startYearSession, elapsedYearSeconds, formatYearElapsed } from '../../../lib/am2-session';
+  import { syncExistingMistakes } from '../../../lib/am2-review';
   const $ = (id: string) => document.getElementById(id)!;
   const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   const select = $('year') as HTMLSelectElement;
@@ -84,6 +85,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     }
   }
   function begin(fromPrevious = false) {
+    syncExistingMistakes();
     if (!startYearSession(selectedId(), fromPrevious)) {
       error.textContent = '回答を保存できませんでした。ブラウザの保存設定を確認してから再度実行してください。';
       error.hidden = false;
