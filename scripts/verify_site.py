@@ -80,11 +80,13 @@ annual_setup = ROOT / 'practice/year/index.html'
 annual_exam = ROOT / 'practice/year/exam/index.html'
 annual_result = ROOT / 'practice/year/result/index.html'
 random = ROOT / 'practice/random/index.html'
-for page in [annual_setup, annual_exam, annual_result, random]:
+review = ROOT / 'practice/review/index.html'
+for page in [annual_setup, annual_exam, annual_result, random, review]:
     assert page.is_file(), f'Practice journey page is missing: {page}'
 assert 'id="primary"' in annual_setup.read_text(encoding='utf-8'), 'Explicit annual start is missing'
 assert 'id="question-image"' in annual_exam.read_text(encoding='utf-8'), 'Exam question renderer is missing'
 assert 'id="review-list"' in annual_result.read_text(encoding='utf-8'), 'Result review list is missing'
+assert 'id="mistake-list"' in review.read_text(encoding='utf-8'), 'Mistake notebook is missing'
 manifest_path = ROOT / 'practice/questions/manifest.json'
 assert manifest_path.is_file(), 'Practice asset manifest is missing'
 manifest = json.loads(manifest_path.read_text(encoding='utf-8'))
