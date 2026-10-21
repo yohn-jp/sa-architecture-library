@@ -29,22 +29,25 @@ try {
   await page.goto(base + 'practice/random/');
   const card = page.locator('#question-card');
   const progress = page.locator('#progress');
-  const color = () => card.evaluate(el => getComputedStyle(el).backgroundColor);
+  const waitColor = rgb => page.waitForFunction(
+    expected => getComputedStyle(document.getElementById('question-card')).backgroundColor === expected,
+    rgb, { timeout: 650 }
+  );
 
   // Normal mode: grading requires the button, and the explanation remains visible.
   assert.equal(await page.locator('#fast-mode').isChecked(), false);
   await page.locator('input[name="choice"][value="エ"]').check(); // 2025 q1 correct
-  assert(await page.locator('#feedback').isEmpty(), 'Normal mode graded before button');
+  assert.equal(await page.locator('#feedback').innerText(), '', 'Normal mode graded before button');
   await page.locator('#check').click();
   assert((await page.locator('#feedback').innerText()).includes('正解'));
-  assert.equal(await color(), 'rgb(237, 248, 240)');
+  await waitColor('rgb(237, 248, 240)');
   assert(await page.locator('#explanation').isVisible());
   await page.locator('#next').click();
 
   await page.locator('input[name="choice"][value="ア"]').check(); // 2025 q2 incorrect
   await page.locator('#check').click();
   assert((await page.locator('#feedback').innerText()).includes('不正解'));
-  assert.equal(await color(), 'rgb(255, 240, 239)');
+  await waitColor('rgb(255, 240, 239)');
   await page.locator('#next').click();
 
   // Rapid mode persists across reload and grades on selection without explanation.
@@ -55,13 +58,13 @@ try {
   assert(await page.locator('#check').isHidden());
   await page.locator('input[name="choice"][value="イ"]').check(); // 2025 q3 correct
   assert((await page.locator('#feedback').innerText()).includes('正解'));
-  assert.equal(await color(), 'rgb(237, 248, 240)');
+  await waitColor('rgb(237, 248, 240)');
   assert(await page.locator('#explanation').isHidden());
   await page.waitForFunction(() => document.getElementById('progress').textContent.includes('4 / 225'), null, { timeout: 4000 });
 
   await page.locator('input[name="choice"][value="ア"]').check(); // 2025 q4 incorrect
   assert((await page.locator('#feedback').innerText()).includes('不正解'));
-  assert.equal(await color(), 'rgb(255, 240, 239)');
+  await waitColor('rgb(255, 240, 239)');
   await page.waitForFunction(() => document.getElementById('progress').textContent.includes('5 / 225'), null, { timeout: 4000 });
 
   // Toggling off during the feedback window cancels auto-advance.
@@ -78,7 +81,7 @@ try {
   // Reset during a pending auto-advance must not move the new run forward.
   await page.locator('input[name="choice"][value="ア"]').check();
   page.once('dialog', dialog => dialog.accept());
-  await page.locator('#restart').click();
+  await page.evaluate(() => document.getElementById('restart').click());
   assert((await progress.innerText()).includes('1 / 225'));
   await delay(1050);
   assert((await progress.innerText()).includes('1 / 225'), 'Reset retained an old timer');
