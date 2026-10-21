@@ -146,7 +146,7 @@ function render(): void {
   const explanation = findAm2Explanation(q.id, q.number);
   const indexEntry = findAm2QuestionIndex(q.id, q.number);
   $('explanation-text').textContent = explanation?.text ??
-    (indexEntry ? 'テーマ：' + indexEntry.title + '。理解のポイント：' + indexEntry.tip + '\n\n詳しい正答根拠と各選択肢の説明は、以下の外部解説を参照してください。'
+    (indexEntry ? 'テーマ：' + indexEntry.title + '。詳しい正答根拠と各選択肢の説明は、以下の外部解説を参照してください。'
       : 'この問題の独自解説はまだ収録されていません。外部解説を参照してください。');
   const related = $<HTMLAnchorElement>('related-chapter');
   related.hidden = !indexEntry;
