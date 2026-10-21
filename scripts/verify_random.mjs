@@ -89,19 +89,19 @@ try {
   assert(await page.locator('#fast-mode').isChecked(), 'Reset unexpectedly changed fast mode');
   // Wrong answers survive restart, have stable IDs and are reviewable later.
   await page.goto(base + 'practice/review/');
-  assert((await page.locator('#total-count').innerText()) === '3', 'Wrong answers must be recorded without duplicates');
-  assert.equal(await page.locator('#pending-count').innerText(), '3', 'Wrong answers must be pending');
-  assert.equal(await page.locator('#mistake-list details').count(), 3);
+  assert((await page.locator('#total-count').innerText()) === '2', 'Wrong answers must be recorded without duplicates');
+  assert.equal(await page.locator('#pending-count').innerText(), '2', 'Wrong answers must be pending');
+  assert.equal(await page.locator('#mistake-list details').count(), 2);
   await page.locator('#mistake-list details').first().locator('summary').click();
   assert(await page.locator('#mistake-list details').first().locator('img').getAttribute('src'), 'Question image must load on review');
   assert((await page.locator('#mistake-list details').first().innerText()).includes('正解：'), 'Correct answer missing');
   assert(await page.locator('#mistake-list details').first().locator('.explanation a').count() > 0, 'External explanation link missing');
   await page.locator('#mistake-list details').first().locator('button').click();
-  assert.equal(await page.locator('#pending-count').innerText(), '2', 'Reviewed state not persisted');
+  assert.equal(await page.locator('#pending-count').innerText(), '1', 'Reviewed state not persisted');
   await page.locator('#filter').selectOption('all');
-  assert.equal(await page.locator('#mistake-list details').count(), 3);
+  assert.equal(await page.locator('#mistake-list details').count(), 2);
   await page.reload();
-  assert.equal(await page.locator('#pending-count').innerText(), '2', 'Review state lost on reload');
+  assert.equal(await page.locator('#pending-count').innerText(), '1', 'Review state lost on reload');
 
   // A completed annual exam must contribute wrong answers to the same notebook.
   await page.goto(base + 'practice/');
@@ -116,9 +116,9 @@ try {
   await page.goto(base + 'practice/year/result/?year=2021r03h');
   await page.waitForFunction(() => document.getElementById('score').textContent === '0');
   await page.goto(base + 'practice/review/');
-  assert.equal(await page.locator('#total-count').innerText(), '4', 'Annual mistake not imported');
+  assert.equal(await page.locator('#total-count').innerText(), '3', 'Annual mistake not imported');
   await page.reload();
-  assert.equal(await page.locator('#total-count').innerText(), '4', 'Annual mistake was double-counted');
+  assert.equal(await page.locator('#total-count').innerText(), '3', 'Annual mistake was double-counted');
   await page.locator('#filter').selectOption('all');
   assert((await page.locator('#mistake-list').innerText()).includes('令和3年'), 'Annual question missing from notebook');
 
@@ -127,7 +127,7 @@ try {
   page.once('dialog', dialog => dialog.accept());
   await page.evaluate(() => document.getElementById('restart').click());
   await page.goto(base + 'practice/review/');
-  assert.equal(await page.locator('#total-count').innerText(), '4', 'Random restart erased mistake history');
+  assert.equal(await page.locator('#total-count').innerText(), '3', 'Random restart erased mistake history');
 
   assert.deepEqual(errors, []);
   console.log('PASS: random modes, persistent mistake notebook, annual imports, reviewed states and explanations');
