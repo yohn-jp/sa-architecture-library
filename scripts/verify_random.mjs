@@ -93,6 +93,7 @@ try {
   assert.equal(await page.locator('#pending-count').innerText(), '2', 'Wrong answers must be pending');
   assert.equal(await page.locator('#mistake-list details').count(), 2);
   await page.locator('#mistake-list details').first().locator('summary').click();
+  await page.waitForFunction(() => Boolean(document.querySelector('#mistake-list details img')?.getAttribute('src')));
   assert(await page.locator('#mistake-list details').first().locator('img').getAttribute('src'), 'Question image must load on review');
   assert((await page.locator('#mistake-list details').first().innerText()).includes('正解：'), 'Correct answer missing');
   assert(await page.locator('#mistake-list details').first().locator('.explanation a').count() > 0, 'External explanation link missing');
