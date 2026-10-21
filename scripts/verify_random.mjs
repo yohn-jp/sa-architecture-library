@@ -130,6 +130,13 @@ try {
   await page.goto(base + 'practice/review/');
   assert.equal(await page.locator('#total-count').innerText(), '3', 'Random restart erased mistake history');
 
+  const mobile = await browser.newPage({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+  mobile.on('pageerror', error => errors.push(error.message));
+  await mobile.goto(base + 'practice/review/');
+  assert(await mobile.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'Mistake notebook overflows mobile viewport');
+  assert.equal(await mobile.locator('#total-count').innerText(), '0', 'Separate browser context should have independent local records');
+  await mobile.close();
+
   assert.deepEqual(errors, []);
   console.log('PASS: random modes, persistent mistake notebook, annual imports, reviewed states and explanations');
 } finally {
