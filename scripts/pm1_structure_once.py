@@ -107,7 +107,7 @@ def parse_table(year,question,page_no,table_no,table):
         multi=next((label for label in labels if len(CIRCLED.findall(label))>1),None)
         if multi:
             raw_answer=str(row[body[-1][0]])
-            parts=[compact(v) for v in re.split(r'\n(?=・)',raw_answer) if compact(v)]
+            parts=[compact(v) for v in (re.split(r'\n(?=・)',raw_answer) if '\n・' in raw_answer else raw_answer.splitlines()) if compact(v)]
             if len(parts)!=len(CIRCLED.findall(multi)):
                 raise ValueError(f'Ambiguous combined answers: {year} Q{question} {label}: {answer}')
             for symbol,part in zip(CIRCLED.findall(multi),parts):
@@ -124,6 +124,9 @@ def main():
     subprocess.run(['git','config','user.email','41898282+github-actions[bot]@users.noreply.github.com'],check=True,cwd=ROOT)
     for year in SOURCES:
         year_id=year['id']
+        if (OUT/f'{year_id}.json').is_file():
+            print('SKIP already committed',year_id,flush=True)
+            continue
         audit=read_json(ROOT/'src/data/pm1-audit'/f'{year_id}.json')
         tables=read_json(ROOT/'src/data/pm1-tables'/f'{year_id}.json')
         heads=headings(audit)
