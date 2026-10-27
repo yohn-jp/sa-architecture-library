@@ -106,7 +106,8 @@ def parse_table(year,question,page_no,table_no,table):
         # The original answer cell may combine several separately numbered answers.
         multi=next((label for label in labels if len(CIRCLED.findall(label))>1),None)
         if multi:
-            parts=[compact(v) for v in re.split(r'\n(?=・)',body[-1][1]) if compact(v)]
+            raw_answer=str(row[body[-1][0]])
+            parts=[compact(v) for v in re.split(r'\n(?=・)',raw_answer) if compact(v)]
             if len(parts)!=len(CIRCLED.findall(multi)):
                 raise ValueError(f'Ambiguous combined answers: {year} Q{question} {label}: {answer}')
             for symbol,part in zip(CIRCLED.findall(multi),parts):
