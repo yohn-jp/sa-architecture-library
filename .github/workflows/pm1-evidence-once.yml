@@ -1,0 +1,47 @@
+name: One-time official PM1 source transcription
+on:
+  push:
+    branches: [feat/pm1-official-structured-answers]
+    paths:
+      - .github/workflows/pm1-evidence-once.yml
+permissions:
+  contents: write
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/pm1-official-structured-answers
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install PDF parser and Japanese OCR model once
+        run: |
+          python -m pip install -q 'PyMuPDF==1.26.5'
+          command -v tesseract
+          mkdir -p "$RUNNER_TEMP/tessdata"
+          if tesseract --list-langs 2>&1 | grep -qx jpn; then
+            echo "Japanese OCR available on runner"
+          else
+            curl -fLSs --retry 3 -o "$RUNNER_TEMP/tessdata/jpn.traineddata" https://raw.githubusercontent.com/tesseract-ocr/tessdata_fast/main/jpn.traineddata
+            test -s "$RUNNER_TEMP/tessdata/jpn.traineddata"
+            echo "TESSDATA_PREFIX=$RUNNER_TEMP/tessdata" >> "$GITHUB_ENV"
+          fi
+      - name: Extract originals and commit year by year
+        run: |
+          python scripts/pm1_ingest_evidence_once.py
+      - name: Confirm full source set
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          source=json.loads(Path('src/data/pm1-sources.json').read_text())
+          for year in source:
+              token=year['id']
+              assert Path('src/data/pm1-audit',token+'.json').is_file(), token
+              assert Path('public/practice/pm1/answers',token+'.pdf').is_file(), token
+          print('PASS: 9 official answer PDFs and original problem OCR source records')
+          PY
