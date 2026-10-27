@@ -18,18 +18,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Install PDF parser and Japanese OCR model once
+      - name: Install Japanese OCR and PDF parser for this one-time import
         run: |
           python -m pip install -q 'PyMuPDF==1.26.5'
-          command -v tesseract
-          mkdir -p "$RUNNER_TEMP/tessdata"
-          if tesseract --list-langs 2>&1 | grep -qx jpn; then
-            echo "Japanese OCR available on runner"
-          else
-            curl -fLSs --retry 3 -o "$RUNNER_TEMP/tessdata/jpn.traineddata" https://raw.githubusercontent.com/tesseract-ocr/tessdata_fast/main/jpn.traineddata
-            test -s "$RUNNER_TEMP/tessdata/jpn.traineddata"
-            echo "TESSDATA_PREFIX=$RUNNER_TEMP/tessdata" >> "$GITHUB_ENV"
-          fi
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends tesseract-ocr tesseract-ocr-jpn
+          tesseract --list-langs 2>&1 | grep -qx jpn
       - name: Extract originals and commit year by year
         run: |
           python scripts/pm1_ingest_evidence_once.py
