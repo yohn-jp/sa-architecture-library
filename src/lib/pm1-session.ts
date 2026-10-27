@@ -1,4 +1,5 @@
 import { findPm1Year, PM1_DURATION_MINUTES, PM1_SELECTION_COUNT } from '../data/pm1';
+import pm1Fields from '../data/pm1-fields.json';
 
 export type Pm1Answer = { id: string; label: string; text: string; limit: number | null };
 export type Pm1Session = {
@@ -78,8 +79,13 @@ export function startPm1Session(yearId: string, selected: number[]): Pm1Session 
     !selected.every(n => Number.isInteger(n) && n >= 1 && n <= year.questionCount)) return null;
   const now = Date.now();
   const answers: Record<string, Pm1Answer[]> = {};
+  const templates = pm1Fields as Record<string, Record<string, Array<{ id: string; label: string; limit: number | null }>>>;
   for (const number of selected) {
-    answers[String(number)] = [{ id: 'a1', label: '設問1', text: '', limit: null }];
+    const fields = templates[yearId]?.[String(number)];
+    if (!fields || fields.length === 0 || fields.length > MAX_FIELDS) return null;
+    answers[String(number)] = fields.map(field => ({
+      id: field.id, label: field.label, text: '', limit: field.limit
+    }));
   }
   const session: Pm1Session = {
     version: 1, yearId, selected: [...selected].sort((a, b) => a - b),
