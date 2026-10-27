@@ -102,7 +102,7 @@ export function startPm1Session(yearId: string, selected: number[]): Pm1Session 
  * answers and pairs canonical fields with the official key without rewriting data.
  */
 export function reconcileOfficialFields(session: Pm1Session): Pm1Session {
-  if (session.finishedAt !== null) return session;
+  if (session.finishedAt !== null || pm1Expired(session)) return session;
   const templates = pm1Fields as Record<string, Record<string,
     Array<{ id: string; label: string; limit: number | null }>>>;
   const answers: Record<string, Pm1Answer[]> = {};
