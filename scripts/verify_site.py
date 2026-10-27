@@ -143,5 +143,39 @@ assert '午後Ⅰ' in hub and '/practice/pm1/' in hub, 'Practice home does not l
 assert 'id="pm1-pdf"' in (ROOT / 'practice/pm1/exam/index.html').read_text(encoding='utf-8'), 'PM1 PDF reader missing'
 assert 'id="answer-fields"' in (ROOT / 'practice/pm1/exam/index.html').read_text(encoding='utf-8'), 'PM1 answer editor missing'
 
+# All nine official answer PDFs and their structured fields are canonical.
+fieldbook = json.loads(Path('src/data/pm1-fields.json').read_text(encoding='utf-8'))
+answerbook = json.loads(Path('src/data/pm1-official-answers.json').read_text(encoding='utf-8'))
+assert list(fieldbook) == am2_year_ids, 'PM1 field calendar mismatch'
+assert list(answerbook) == am2_year_ids, 'PM1 official-answer calendar mismatch'
+total_fields = total_limits = total_questions = 0
+for year in sources:
+    y = year['id']
+    assert list(fieldbook[y]) == [str(i) for i in range(1, year['questionCount']+1)], y
+    assert list(answerbook[y]['questions']) == list(fieldbook[y]), y
+    original_answer = Path('public/practice/pm1/answers') / (y+'.pdf')
+    published_answer = ROOT / 'practice/pm1/answers' / (y+'.pdf')
+    assert original_answer.is_file() and published_answer.is_file(), 'Missing original answer PDF '+y
+    bytes_original = original_answer.read_bytes()
+    assert bytes_original.startswith(b'%PDF-') and bytes_original == published_answer.read_bytes(), y
+    assert hashlib.sha256(bytes_original).hexdigest() == answerbook[y]['sha256'], y
+    assert answerbook[y]['sourcePdf'].startswith('https://www.ipa.go.jp/'), y
+    for n in fieldbook[y]:
+        fields = fieldbook[y][n]
+        examples = answerbook[y]['questions'][n]
+        assert 0 < len(fields) <= 60 and len(fields) == len(examples), y+'/'+n
+        assert [f['id'] for f in fields] == [a['id'] for a in examples], y+'/'+n
+        assert [f['label'] for f in fields] == [a['label'] for a in examples], y+'/'+n
+        assert len({f['id'] for f in fields}) == len(fields), y+'/'+n
+        assert all(a['text'].strip() and a['source']['answerPage'] >= 1 for a in examples), y+'/'+n
+        for field in fields:
+            limit = field['limit']
+            assert limit is None or (isinstance(limit, int) and 1 <= limit <= 10000), y+'/'+n
+            if limit is not None: total_limits += 1
+            total_fields += 1
+        total_questions += 1
+assert (total_questions,total_fields,total_limits)==(34,322,230), 'Incomplete original-answer coverage'
+assert 'IPA公式解答例' in (ROOT/'practice/pm1/result/index.html').read_text(encoding='utf-8')
+
 assert (ROOT / 'pagefind/pagefind.js').is_file(), 'Search bundle missing'
 print(f'PASS: {len(chapters)} chapters; internal links, assets, anchors, cross-references and original SHA-256 verified')

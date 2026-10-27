@@ -95,5 +95,6 @@ def verify_pdf_head(year):
 for pm1_year in pm1_sources:
     verify_pdf_head(pm1_year)
 
+fetch('practice/pm1/result/', require_text('IPA公式解答例'))
 fetch('complete/', original_unchanged)
 print(f'PASS: {count} live chapters, stylesheet, catalogue and unchanged original textbook')

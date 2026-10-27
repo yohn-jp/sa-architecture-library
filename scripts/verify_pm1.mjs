@@ -169,7 +169,7 @@ try {
   await page.goto(base+'practice/pm1/exam/?year=2022r04h');
   await page.waitForURL('**/practice/pm1/result/?year=2022r04h');
   assert((await page.locator('#result-questions').innerText()).includes('時間内の回答'));
-  assert.equal(await page.locator('.pm1-official-response').count(),fields['2022r04h']['1'].length+fields['2022r04h']['3'].length+1);
+  assert.equal(await page.locator('.pm1-official-response').count(),fields['2022r04h']['1'].length+fields['2022r04h']['3'].length+2);
 
   const mobile=await browser.newPage({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
   mobile.on('pageerror',e=>errors.push(e.message));
