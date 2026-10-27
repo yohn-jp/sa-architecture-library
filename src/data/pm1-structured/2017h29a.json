@@ -1,0 +1,412 @@
+{
+  "yearId": "2017h29a",
+  "officialAnswerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000fqpm-att/2017h29a_sa_pm1_ans.pdf",
+  "answerSha256": "9edc403a60c610bfde6901f9e07aa553219a36033daa816318105e8832b201bd",
+  "questionSha256": "465509e525a1169a912c1a3c616492920e61310e08b6f4be940a3ab3b2cde6f2",
+  "questions": {
+    "1": [
+      {
+        "label": "設問1",
+        "answer": "契約管理システムでマイナンバー申告書の印刷を制御するため",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 1
+        },
+        "id": "f001"
+      },
+      {
+        "label": "設問2",
+        "answer": "訂正支払調書を格納したCD を作成するため",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 2
+        },
+        "id": "f002"
+      },
+      {
+        "label": "設問3（1）",
+        "answer": "契約者マイナンバー又は受取人マイナンバーが空白である顧客番号",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 3
+        },
+        "id": "f003"
+      },
+      {
+        "label": "設問3（2）・申告書ステータスの値",
+        "answer": "不備対応中",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 4
+        },
+        "id": "f004"
+      },
+      {
+        "label": "設問3（2）・理由",
+        "answer": "A 社にマイナンバー申告書が届いていない顧客を対象とするから",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 5
+        },
+        "id": "f005"
+      },
+      {
+        "label": "設問4（1）・機能",
+        "answer": "支払調書提出機能",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 6
+        },
+        "id": "f006"
+      },
+      {
+        "label": "設問4（1）・理由",
+        "answer": "支払調書を提出してから7 年後の日付を設定する必要があるから",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 7
+        },
+        "id": "f007"
+      },
+      {
+        "label": "設問4（2）",
+        "answer": "顧客からマイナンバーの変更の連絡があった場合に削除するため",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 8
+        },
+        "id": "f008"
+      }
+    ],
+    "2": [
+      {
+        "label": "設問1（1）",
+        "answer": "設備機械，作業者などの生産能力の状況",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 1
+        },
+        "id": "f001"
+      },
+      {
+        "label": "設問1（2）・①",
+        "answer": "・販売計画情報",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 2
+        },
+        "id": "f002"
+      },
+      {
+        "label": "設問1（2）・②",
+        "answer": "・製品在庫状況情報",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 2
+        },
+        "id": "f003"
+      },
+      {
+        "label": "設問2（1）",
+        "answer": "加工オーダの作業工程ごとの着手予定日，完了予定日",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 3
+        },
+        "id": "f004"
+      },
+      {
+        "label": "設問2（2）",
+        "answer": "作業工程で使用する設備機械",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 4
+        },
+        "id": "f005"
+      },
+      {
+        "label": "設問3・①",
+        "answer": "・加工対象の数量",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 5
+        },
+        "id": "f006"
+      },
+      {
+        "label": "設問3・②",
+        "answer": "・単位当たりの標準作業時間",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 5
+        },
+        "id": "f007"
+      },
+      {
+        "label": "設問4・生産技術部門",
+        "answer": "製造基準の見直しや製造方法の改善",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 6
+        },
+        "id": "f008"
+      },
+      {
+        "label": "設問4・経理部門",
+        "answer": "原価計算処理の加工費計算",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 7
+        },
+        "id": "f009"
+      }
+    ],
+    "3": [
+      {
+        "label": "設問1（1）",
+        "answer": "制度改正に対して人事給与パッケージの標準保守で対応できるようにしたいから",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 1
+        },
+        "id": "f001"
+      },
+      {
+        "label": "設問1（2）",
+        "answer": "7，11",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 2
+        },
+        "id": "f002"
+      },
+      {
+        "label": "設問2（1）",
+        "answer": "前月の出勤簿の記録を庶務事務システムに入力，確定する作業",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 3
+        },
+        "id": "f003"
+      },
+      {
+        "label": "設問2（2）",
+        "answer": "毎朝の出勤時間帯にアクセスが集中するから",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 4
+        },
+        "id": "f004"
+      },
+      {
+        "label": "設問3（1）",
+        "answer": "PC が貸与されていない職員に給与支給明細書を印刷して配布するから",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 5
+        },
+        "id": "f005"
+      },
+      {
+        "label": "設問3（2）",
+        "answer": "一括支給を毎月支給に変更する。",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 6
+        },
+        "id": "f006"
+      },
+      {
+        "label": "設問3（3）・状況",
+        "answer": "支給対象期間中に，世帯の区分の変更，支給対象地域をまたぐ異動などが生じた場合",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 7
+        },
+        "id": "f007"
+      },
+      {
+        "label": "設問3（3）・機能",
+        "answer": "追給及び返納の機能",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 8
+        },
+        "id": "f008"
+      }
+    ],
+    "4": [
+      {
+        "label": "設問1（1）・①",
+        "answer": "・環境モニタリング機能",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 1,
+          "row": 1
+        },
+        "id": "f001"
+      },
+      {
+        "label": "設問1（1）・②",
+        "answer": "・無線LAN 中継機能",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 1,
+          "row": 1
+        },
+        "id": "f002"
+      },
+      {
+        "label": "設問1（2）",
+        "answer": "隣接するモニタリングポストの発電量データと比較する。",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 1,
+          "row": 2
+        },
+        "id": "f003"
+      },
+      {
+        "label": "設問2（1）・(a)",
+        "answer": "データ通信切断時に自動的に走行を停止する。",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 1,
+          "row": 3
+        },
+        "id": "f004"
+      },
+      {
+        "label": "設問2（1）・(b)",
+        "answer": "サーバがデータを受け取ったことを確認する機能",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 1,
+          "row": 4
+        },
+        "id": "f005"
+      },
+      {
+        "label": "設問2（2）・(a)",
+        "answer": "モニタリングポストの位置情報",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 1,
+          "row": 5
+        },
+        "id": "f006"
+      },
+      {
+        "label": "設問2（2）・(b)",
+        "answer": "データ送受信の遅延による位置ずれ",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 1,
+          "row": 6
+        },
+        "id": "f007"
+      },
+      {
+        "label": "設問2（3）",
+        "answer": "前方の障害物を高精度に検出できる。",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 1,
+          "row": 7
+        },
+        "id": "f008"
+      },
+      {
+        "label": "設問3・データ",
+        "answer": "農業機械の動作履歴",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 1,
+          "row": 8
+        },
+        "id": "f009"
+      },
+      {
+        "label": "設問3・機能",
+        "answer": "故障予測",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 1,
+          "row": 9
+        },
+        "id": "f010"
+      },
+      {
+        "label": "設問4",
+        "answer": "高い応答性が要求される。",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 1,
+          "row": 10
+        },
+        "id": "f011"
+      }
+    ]
+  }
+}
