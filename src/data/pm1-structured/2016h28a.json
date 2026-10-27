@@ -1,0 +1,500 @@
+{
+  "yearId": "2016h28a",
+  "officialAnswerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000g6fw-att/2016h28a_sa_pm1_ans.pdf",
+  "answerSha256": "76ae582aaa35da7d9148e4a1f82c09289daeaeae4ff979576730bea9adc502b2",
+  "questionSha256": "a822e819655c6255abf38cab398c5883f5b4951c92de1364cd92303ea90a2067",
+  "questions": {
+    "1": [
+      {
+        "label": "設問1（1）",
+        "answer": "不定貫商品の価格を確定させる必要があるから",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 1
+        },
+        "id": "f001"
+      },
+      {
+        "label": "設問1（2）",
+        "answer": "定貫商品か不定貫商品かを表す区分",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 2
+        },
+        "id": "f002"
+      },
+      {
+        "label": "設問1（3）・属性名・①",
+        "answer": "・原単価",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 3
+        },
+        "id": "f003"
+      },
+      {
+        "label": "設問1（3）・属性名・②",
+        "answer": "・売単価",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 3
+        },
+        "id": "f004"
+      },
+      {
+        "label": "設問1（3）・意味",
+        "answer": "100 グラム当たりの金額を表す。",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 4
+        },
+        "id": "f005"
+      },
+      {
+        "label": "設問2（1）",
+        "answer": "実際に納品された商品の価格が，納品伝票に記載された価格と不一致となる。",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 5
+        },
+        "id": "f006"
+      },
+      {
+        "label": "設問2（2）",
+        "answer": "値札に印字された店舗名を見てピッキングする。",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 6
+        },
+        "id": "f007"
+      },
+      {
+        "label": "設問3（1）",
+        "answer": "商品ごとに原価，売価が異なり，数量だけでは算出できないから",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 7
+        },
+        "id": "f008"
+      },
+      {
+        "label": "設問3（2）・a",
+        "answer": "実納品原価",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 8
+        },
+        "id": "f009"
+      },
+      {
+        "label": "設問3（2）・b",
+        "answer": "実納品売価",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 9
+        },
+        "id": "f010"
+      },
+      {
+        "label": "設問3（2）・c",
+        "answer": "納品明細",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 10
+        },
+        "id": "f011"
+      },
+      {
+        "label": "設問3（2）・d",
+        "answer": "原価",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 11
+        },
+        "id": "f012"
+      },
+      {
+        "label": "設問3（2）・e",
+        "answer": "売価",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 12
+        },
+        "id": "f013"
+      }
+    ],
+    "2": [
+      {
+        "label": "設問1（1）",
+        "answer": "許可されていない端末を用いた社内システムの利用",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 1
+        },
+        "id": "f001"
+      },
+      {
+        "label": "設問1（2）",
+        "answer": "自社運用システムの利用者ID 及びパスワード",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 2
+        },
+        "id": "f002"
+      },
+      {
+        "label": "設問1（3）",
+        "answer": "新システムの構築と並行して基幹業務システムの再構築を進めているから",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 3
+        },
+        "id": "f003"
+      },
+      {
+        "label": "設問2・タイミング",
+        "answer": "問合せ内容を聞取り終了したタイミング",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 4
+        },
+        "id": "f004"
+      },
+      {
+        "label": "設問2・ステータス",
+        "answer": "受付完了・対応中",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 5
+        },
+        "id": "f005"
+      },
+      {
+        "label": "設問3（1）・a",
+        "answer": "ク",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 6
+        },
+        "id": "f006"
+      },
+      {
+        "label": "設問3（1）・b",
+        "answer": "イ",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 7
+        },
+        "id": "f007"
+      },
+      {
+        "label": "設問3（1）・c",
+        "answer": "イ",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 8
+        },
+        "id": "f008"
+      },
+      {
+        "label": "設問3（1）・d",
+        "answer": "ア",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 9
+        },
+        "id": "f009"
+      },
+      {
+        "label": "設問3（1）・e",
+        "answer": "ア",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 10
+        },
+        "id": "f010"
+      },
+      {
+        "label": "設問3（1）・f",
+        "answer": "オ",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 11
+        },
+        "id": "f011"
+      },
+      {
+        "label": "設問3（1）・g",
+        "answer": "オ",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 12
+        },
+        "id": "f012"
+      },
+      {
+        "label": "設問3（2）",
+        "answer": "D 社が問合せ顧客に直接聞取りするために，担当者に連絡する必要があるから",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 13
+        },
+        "id": "f013"
+      }
+    ],
+    "3": [
+      {
+        "label": "設問1（1）・売上計上できるデータ",
+        "answer": "出荷基準の商品のデータ",
+        "limit": null,
+        "source": {
+          "answerPage": 3,
+          "table": 0,
+          "row": 1
+        },
+        "id": "f001"
+      },
+      {
+        "label": "設問1（1）・売上計上できないデータ",
+        "answer": "検収基準の商品のデータ",
+        "limit": null,
+        "source": {
+          "answerPage": 3,
+          "table": 0,
+          "row": 2
+        },
+        "id": "f002"
+      },
+      {
+        "label": "設問1（2）",
+        "answer": "売上勘定と売掛金勘定への計上処理",
+        "limit": null,
+        "source": {
+          "answerPage": 3,
+          "table": 0,
+          "row": 3
+        },
+        "id": "f003"
+      },
+      {
+        "label": "設問2（1）・①",
+        "answer": "・売上計上済商品の売掛金減算処理",
+        "limit": null,
+        "source": {
+          "answerPage": 3,
+          "table": 0,
+          "row": 4
+        },
+        "id": "f004"
+      },
+      {
+        "label": "設問2（1）・②",
+        "answer": "・良品の返品の在庫への加算処理",
+        "limit": null,
+        "source": {
+          "answerPage": 3,
+          "table": 0,
+          "row": 4
+        },
+        "id": "f005"
+      },
+      {
+        "label": "設問2（2）",
+        "answer": "検収基準での出荷商品の返品データ",
+        "limit": null,
+        "source": {
+          "answerPage": 3,
+          "table": 0,
+          "row": 6
+        },
+        "id": "f006"
+      },
+      {
+        "label": "設問3",
+        "answer": "前月締日翌日から今月締日まで",
+        "limit": null,
+        "source": {
+          "answerPage": 3,
+          "table": 0,
+          "row": 7
+        },
+        "id": "f007"
+      },
+      {
+        "label": "設問4・顧客名",
+        "answer": "F 社",
+        "limit": null,
+        "source": {
+          "answerPage": 3,
+          "table": 0,
+          "row": 8
+        },
+        "id": "f008"
+      },
+      {
+        "label": "設問4・理由",
+        "answer": "支払条件である月末締め翌月末払いのとおりで，支払の遅れがないから",
+        "limit": null,
+        "source": {
+          "answerPage": 3,
+          "table": 0,
+          "row": 9
+        },
+        "id": "f009"
+      }
+    ],
+    "4": [
+      {
+        "label": "設問1（1）・a",
+        "answer": "承諾を求め",
+        "limit": null,
+        "source": {
+          "answerPage": 3,
+          "table": 1,
+          "row": 1
+        },
+        "id": "f001"
+      },
+      {
+        "label": "設問1（2）",
+        "answer": "遠隔操縦者がモバイル端末から離れたときに，他人に操縦されることを防ぎたいから",
+        "limit": null,
+        "source": {
+          "answerPage": 3,
+          "table": 1,
+          "row": 2
+        },
+        "id": "f002"
+      },
+      {
+        "label": "設問2（1）",
+        "answer": "トレイの収納時と引出し時の重量の差を求め，入庫数で割る。",
+        "limit": null,
+        "source": {
+          "answerPage": 3,
+          "table": 1,
+          "row": 3
+        },
+        "id": "f003"
+      },
+      {
+        "label": "設問2（2）",
+        "answer": "伝票番号がサーバにあり，テレビドアホンの映像の処理も行うから",
+        "limit": null,
+        "source": {
+          "answerPage": 3,
+          "table": 1,
+          "row": 4
+        },
+        "id": "f004"
+      },
+      {
+        "label": "設問2（3）・b",
+        "answer": "トレイに移替え",
+        "limit": null,
+        "source": {
+          "answerPage": 3,
+          "table": 1,
+          "row": 5
+        },
+        "id": "f005"
+      },
+      {
+        "label": "設問3（1）",
+        "answer": "対象物の形状認識・把持制御部",
+        "limit": null,
+        "source": {
+          "answerPage": 3,
+          "table": 1,
+          "row": 6
+        },
+        "id": "f006"
+      },
+      {
+        "label": "設問3（2）・問題",
+        "answer": "区別できずに保管場所を取り違える。",
+        "limit": null,
+        "source": {
+          "answerPage": 3,
+          "table": 1,
+          "row": 7
+        },
+        "id": "f007"
+      },
+      {
+        "label": "設問3（2）・対策",
+        "answer": "対象物に識別マークを付ける。",
+        "limit": null,
+        "source": {
+          "answerPage": 3,
+          "table": 1,
+          "row": 8
+        },
+        "id": "f008"
+      },
+      {
+        "label": "設問4",
+        "answer": "新ロボットが実行中の配達物受取りが中断してしまうから",
+        "limit": null,
+        "source": {
+          "answerPage": 3,
+          "table": 1,
+          "row": 9
+        },
+        "id": "f009"
+      }
+    ]
+  }
+}
