@@ -69,3 +69,14 @@ main:has(.pm1-exam){max-width:1650px}
 .pm1-result-actions{display:flex;align-items:center;flex-wrap:wrap;gap:20px;margin-top:30px}
 @media(max-width:980px){main:has(.pm1-exam){max-width:1100px}.pm1-two-pane{grid-template-columns:1fr}.pm1-panel{height:auto;min-height:0}.pm1-question-panel{height:70vh;min-height:420px}.pm1-answer-panel{overflow:visible}}
 @media(max-width:620px){.pm1-toolbar{align-items:start}.pm1-time{min-width:105px;padding:8px}.pm1-time strong{font-size:22px}.pm1-panel{padding:12px}.pm1-question-panel{height:65vh}.pm1-result-overview dl{grid-template-columns:1fr}.pm1-field-top{grid-template-columns:1fr}.pm1-limit-wrap{grid-column:1;grid-row:3;margin-top:5px}.pm1-name-input{grid-row:2}}
+
+/* Official text comparison. Never expose it in the exam editor. */
+.pm1-answer-comparison{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px}
+.pm1-comparison-cell{min-width:0;border:1px solid var(--line);border-radius:8px;padding:14px;background:#fff}
+.pm1-comparison-cell h3{font-size:12px;letter-spacing:.03em;color:var(--muted);margin:0 0 12px}
+.pm1-official-response{background:#f2f7f5;border-color:#b9d0c8}
+.pm1-answer-citation{display:inline-block;margin-top:13px;font-size:12px}
+.pm1-answer-card.is-official{border-left:3px solid var(--accent)}
+.pm1-name-input[readonly],.pm1-limit-wrap input[readonly]{background:#f1f5f2;color:var(--ink);cursor:default}
+.pm1-result-text{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.85}
+@media(max-width:800px){.pm1-answer-comparison{grid-template-columns:1fr}}
