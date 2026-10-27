@@ -32,7 +32,7 @@ main:has(.pm1-exam){max-width:1650px}
 .pm1-answer-panel{overflow-y:auto;overscroll-behavior:contain}
 .pm1-save{font-size:12px;font-weight:700;color:var(--accent)}
 .pm1-tabs{display:flex;gap:8px;margin:4px 0 13px}
-.pm1-tab{min-height:42px;min-width:90px;font:700 15px inherit;background:#fff;border:1px solid #b8c9c5;border-radius:7px;color:var(--ink);cursor:pointer}
+.pm1-tab{min-height:42px;min-width:90px;font-family:inherit;font-size:15px;font-weight:700;background:#fff;border:1px solid #b8c9c5;border-radius:7px;color:var(--ink);cursor:pointer}
 .pm1-tab.is-active{background:var(--accent);border-color:var(--accent);color:white}
 .pm1-tab:focus-visible,.pm1-name-input:focus-visible,.pm1-textarea:focus-visible,.pm1-limit-wrap input:focus-visible,.pm1-delete:focus-visible,.pm1-pick:focus-within{outline:3px solid #d18a36;outline-offset:2px}
 .pm1-fields{display:flex;flex-direction:column;gap:17px}

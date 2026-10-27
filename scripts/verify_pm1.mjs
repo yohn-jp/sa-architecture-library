@@ -83,7 +83,7 @@ try {
   assert.equal(await page.locator('.pm1-result-section').count(), 2);
   const result = await page.locator('#result-questions').innerText();
   assert(result.includes('問3の回答') && result.includes('七文字以上です') && result.includes('解答B'));
-  assert(!(await page.locator('body').innerText()).includes('得点予測'), 'Grading was unexpectedly introduced');
+  assert.equal(await page.locator('#score, [data-grade]').count(), 0, 'Grading output was unexpectedly introduced');
   await page.reload();
   assert((await page.locator('#result-questions').innerText()).includes('問3の回答'), 'Completed answers were lost');
   await page.goto(host + 'practice/pm1/?year=2023r05h');
