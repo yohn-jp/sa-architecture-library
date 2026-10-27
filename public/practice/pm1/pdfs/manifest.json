@@ -38,5 +38,13 @@
     "bytes": 5126373,
     "pages": 28,
     "questionCount": 4
+  },
+  "2019r01a": {
+    "source": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000dict-att/2019r01a_sa_pm1_qs.pdf",
+    "sourcePage": "https://www.ipa.go.jp/shiken/mondai-kaiotu/2019h31.html",
+    "sha256": "f6feb24f9ae4c267ab8be1ec5592c74dd33223d810b47d83e5c239f4c240e5c3",
+    "bytes": 4975581,
+    "pages": 28,
+    "questionCount": 4
   }
 }
