@@ -1,0 +1,434 @@
+{
+  "yearId": "2023r05h",
+  "officialAnswerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_sa_pm1_ans.pdf",
+  "answerSha256": "b9f450293cc2a3f9efb82be2392f0340387d365037f2c64b6909bd20640592e4",
+  "questionSha256": "4d528ef494e9404a86b7cd61249fa476b821b80540857c3e30df3926dfa2520c",
+  "questions": {
+    "1": [
+      {
+        "label": "設問1",
+        "answer": "金曜日までに，月曜日が納品日の品物を発注すること",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 1
+        },
+        "id": "f001"
+      },
+      {
+        "label": "設問2・a",
+        "answer": "現行バージョンのデータ構造から新バージョンのデータ構造に変更",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 2
+        },
+        "id": "f002"
+      },
+      {
+        "label": "設問3（1）",
+        "answer": "経理担当者の事務処理の負担が大きいこと",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 3
+        },
+        "id": "f003"
+      },
+      {
+        "label": "設問3（2）",
+        "answer": "関連会社の新基幹システムのデータはコード変換が行われるから",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 4
+        },
+        "id": "f004"
+      },
+      {
+        "label": "設問3（3）",
+        "answer": "過去の経営状況を新たな切り口でも分析できるようにすること",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 5
+        },
+        "id": "f005"
+      },
+      {
+        "label": "設問3（4）・範囲",
+        "answer": "前々月以前",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 6
+        },
+        "id": "f006"
+      },
+      {
+        "label": "設問3（4）・理由",
+        "answer": "前々月以前の実績データは更新されないから",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 7
+        },
+        "id": "f007"
+      }
+    ],
+    "2": [
+      {
+        "label": "設問1（1）",
+        "answer": "セミナーID，担当役割，担当者ID",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 1
+        },
+        "id": "f001"
+      },
+      {
+        "label": "設問1（2）・a",
+        "answer": "受講申込",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 2
+        },
+        "id": "f002"
+      },
+      {
+        "label": "設問1（2）・b",
+        "answer": "メールアドレス",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 3
+        },
+        "id": "f003"
+      },
+      {
+        "label": "設問2",
+        "answer": "申込確認画面が表示されている間に他者の申込みが確定されて定員に達した場合",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 4
+        },
+        "id": "f004"
+      },
+      {
+        "label": "設問3（1）・チェック",
+        "answer": "当該受講 ID の受講ファイルの接続フラグが“0”のときはエラーとしない。",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 5
+        },
+        "id": "f005"
+      },
+      {
+        "label": "設問3（1）・更新処理",
+        "answer": "受講ファイルの接続フラグに“1”を設定して更新する。",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 6
+        },
+        "id": "f006"
+      },
+      {
+        "label": "設問3（2）・属性",
+        "answer": "アンケートURL",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 7
+        },
+        "id": "f007"
+      },
+      {
+        "label": "設問3（2）・ファイル",
+        "answer": "受講申込",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 8
+        },
+        "id": "f008"
+      },
+      {
+        "label": "設問3（3）・c",
+        "answer": "セミナーファイルの定員",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 9
+        },
+        "id": "f009"
+      },
+      {
+        "label": "設問3（3）・d",
+        "answer": "受講ファイルのレコード件数",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 10
+        },
+        "id": "f010"
+      },
+      {
+        "label": "設問3（3）・e",
+        "answer": "受講申込ファイルのレコード件数",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 11
+        },
+        "id": "f011"
+      },
+      {
+        "label": "設問3（3）・f",
+        "answer": "アンケートファイルの評価点の合計",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 12
+        },
+        "id": "f012"
+      }
+    ],
+    "3": [
+      {
+        "label": "設問1・要望",
+        "answer": "(e)",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 1
+        },
+        "id": "f001"
+      },
+      {
+        "label": "設問1・理由",
+        "answer": "情報セキュリティ規則で外部信用機関との接続は外信端末に限定しているから",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 2
+        },
+        "id": "f002"
+      },
+      {
+        "label": "設問2・a",
+        "answer": "送信元FAX 番号",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 3
+        },
+        "id": "f003"
+      },
+      {
+        "label": "設問2・b",
+        "answer": "金融機関",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 4
+        },
+        "id": "f004"
+      },
+      {
+        "label": "設問2・c",
+        "answer": "受信FAX 番号",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 5
+        },
+        "id": "f005"
+      },
+      {
+        "label": "設問2・d",
+        "answer": "申込種別",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 6
+        },
+        "id": "f006"
+      },
+      {
+        "label": "設問3",
+        "answer": "保証料管理，書類管理",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 7
+        },
+        "id": "f007"
+      },
+      {
+        "label": "設問4（1）",
+        "answer": "外部信用機関に保証完了の報告をするため",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 8
+        },
+        "id": "f008"
+      },
+      {
+        "label": "設問4（2）",
+        "answer": "保証案件の契約状態が“実行中”である融資残高を合計する。",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 9
+        },
+        "id": "f009"
+      },
+      {
+        "label": "設問5",
+        "answer": "申込書類のチェックのルールと保証料の算出に用いる利率",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 10
+        },
+        "id": "f010"
+      }
+    ],
+    "4": [
+      {
+        "label": "設問1（1）・a",
+        "answer": "会員管理システムに送信",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 1,
+          "row": 1
+        },
+        "id": "f001"
+      },
+      {
+        "label": "設問1（2）・b",
+        "answer": "チェックイン完了後のホテルの利用者",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 1,
+          "row": 2
+        },
+        "id": "f002"
+      },
+      {
+        "label": "設問2（1）",
+        "answer": "公的証明書の顔写真と撮影した顔画像とで顔認証を行う。",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 1,
+          "row": 3
+        },
+        "id": "f003"
+      },
+      {
+        "label": "設問2（2）",
+        "answer": "受信した顔情報で認証を実施し，一致した顔情報に識別情報を関連付ける。",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 1,
+          "row": 4
+        },
+        "id": "f004"
+      },
+      {
+        "label": "設問2（3）",
+        "answer": "当該事業者の識別情報を特定するため",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 1,
+          "row": 5
+        },
+        "id": "f005"
+      },
+      {
+        "label": "設問3（1）・①",
+        "answer": "・顔情報",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 1,
+          "row": 6
+        },
+        "id": "f006"
+      },
+      {
+        "label": "設問3（1）・②",
+        "answer": "・識別情報",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 1,
+          "row": 6
+        },
+        "id": "f007"
+      },
+      {
+        "label": "設問3（2）",
+        "answer": "チェックインを予定しているホテルの利用者など，認証対象を絞り込める場合",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 1,
+          "row": 7
+        },
+        "id": "f008"
+      },
+      {
+        "label": "設問3（3）",
+        "answer": "紛失などの場合に，利用者の個人情報を消去するため",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 1,
+          "row": 8
+        },
+        "id": "f009"
+      }
+    ]
+  }
+}
