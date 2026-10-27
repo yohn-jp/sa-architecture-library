@@ -46,5 +46,13 @@
     "pages": 28,
     "sourcePage": "https://www.ipa.go.jp/shiken/mondai-kaiotu/2019h31.html",
     "pdfUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000dict-att/2019r01a_sa_pm1_qs.pdf"
+  },
+  {
+    "id": "2018h30a",
+    "label": "2018年度（平成30年・秋期）",
+    "questionCount": 4,
+    "pages": 28,
+    "sourcePage": "https://www.ipa.go.jp/shiken/mondai-kaiotu/2018h30.html",
+    "pdfUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000f01f-att/2018h30a_sa_pm1_qs.pdf"
   }
 ]
