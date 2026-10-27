@@ -1954,7 +1954,7 @@
       {
         "id": "f009",
         "label": "設問4",
-        "limit": 25,
+        "limit": 35,
         "source": {
           "answerPage": 2,
           "table": 0,

@@ -298,7 +298,7 @@
       {
         "label": "設問4",
         "answer": "延長しない場合は毎月15 日までに営業担当者が必要な処理をするから",
-        "limit": 25,
+        "limit": 35,
         "source": {
           "answerPage": 2,
           "table": 0,
