@@ -1,0 +1,423 @@
+{
+  "yearId": "2022r04h",
+  "officialAnswerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_sa_pm1_ans.pdf",
+  "answerSha256": "1f555afe6b7e67c715dc582ea7302b3cf7d0792f7e8ee3613c1a60d27da741fc",
+  "questionSha256": "f08367a1754bdcb8221fd935f70971728a94551479e1d3abf1796cbee96f0818",
+  "questions": {
+    "1": [
+      {
+        "label": "設問1（1）",
+        "answer": "オペレータが在宅でも働けるようにするため",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 1
+        },
+        "id": "f001"
+      },
+      {
+        "label": "設問1（2）",
+        "answer": "購入方法の情報収集，会員情報の確認",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 2
+        },
+        "id": "f002"
+      },
+      {
+        "label": "設問1（3）",
+        "answer": "オペレータの勤務時間帯以外のとき",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 3
+        },
+        "id": "f003"
+      },
+      {
+        "label": "設問1（4）",
+        "answer": "(c)",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 4
+        },
+        "id": "f004"
+      },
+      {
+        "label": "設問1（5）",
+        "answer": "商品の問合せ，クレーム内容などを商品の改善につなげたいから",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 5
+        },
+        "id": "f005"
+      },
+      {
+        "label": "設問2（1）",
+        "answer": "一人のオペレータが同時に複数の顧客と対応する",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 6
+        },
+        "id": "f006"
+      },
+      {
+        "label": "設問2（2）",
+        "answer": "特定のコンタクトセンタを一時的に閉鎖せざるを得ない状況",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 7
+        },
+        "id": "f007"
+      },
+      {
+        "label": "設問2（3）",
+        "answer": "新商品発売時に，簡単な問合せが急増しないようにするため",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 8
+        },
+        "id": "f008"
+      }
+    ],
+    "2": [
+      {
+        "label": "設問1（1）・a",
+        "answer": "製造日，便コード，品目コード",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 1
+        },
+        "id": "f001"
+      },
+      {
+        "label": "設問1（2）・b",
+        "answer": "各検査担当者の作業負荷の確認",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 2
+        },
+        "id": "f002"
+      },
+      {
+        "label": "設問1（3）",
+        "answer": "変更前の検査担当者の割当てに従って集計するから",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 3
+        },
+        "id": "f003"
+      },
+      {
+        "label": "設問2 ①・項目",
+        "answer": "製造完了日時",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 4
+        },
+        "id": "f004"
+      },
+      {
+        "label": "設問2 ①・条件",
+        "answer": "最も古いこと",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 5
+        },
+        "id": "f005"
+      },
+      {
+        "label": "設問2 ②・項目",
+        "answer": "検査結果",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 6
+        },
+        "id": "f006"
+      },
+      {
+        "label": "設問2 ②・条件",
+        "answer": "“未実施”であること",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 7
+        },
+        "id": "f007"
+      },
+      {
+        "label": "設問3（1）・業務",
+        "answer": "(オ)，(カ)",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 8
+        },
+        "id": "f008"
+      },
+      {
+        "label": "設問3（1）・理由",
+        "answer": "検査責任者が直接，製品検査の完了状況を確認できるから",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 9
+        },
+        "id": "f009"
+      },
+      {
+        "label": "設問3（2）・c",
+        "answer": "追加フラグが“通常”",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 10
+        },
+        "id": "f010"
+      },
+      {
+        "label": "設問3（2）・d",
+        "answer": "検査結果が“合格”",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 11
+        },
+        "id": "f011"
+      },
+      {
+        "label": "設問3（3）",
+        "answer": "出荷前承認には，各部署からの報告に基づいた最終確認が必要だから",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 12
+        },
+        "id": "f012"
+      }
+    ],
+    "3": [
+      {
+        "label": "設問1",
+        "answer": "申込書と基になった提案書の内容が不整合にならないようにしているから",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 1
+        },
+        "id": "f001"
+      },
+      {
+        "label": "設問2（1）",
+        "answer": "“ペーパレス手続選択済”，“申込確認済”，“申込書入力済”",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 2
+        },
+        "id": "f002"
+      },
+      {
+        "label": "設問2（2）",
+        "answer": "申込書入力，告知手続",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 3
+        },
+        "id": "f003"
+      },
+      {
+        "label": "設問2（3）・機能名",
+        "answer": "申込確認，申込書入力，告知手続，取扱報告書作成",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 4
+        },
+        "id": "f004"
+      },
+      {
+        "label": "設問2（3）・内容",
+        "answer": "入力内容をチェックすること",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 5
+        },
+        "id": "f005"
+      },
+      {
+        "label": "設問2（4）・機能名",
+        "answer": "ペーパレス手続メニュー",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 6
+        },
+        "id": "f006"
+      },
+      {
+        "label": "設問2（4）・内容",
+        "answer": "次に実施すべき作業メニューだけ活性化すること",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 7
+        },
+        "id": "f007"
+      },
+      {
+        "label": "設問3（1）",
+        "answer": "払込方法選択日時が当月である申込書データの，払込方法選択日時と申込日時の差",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 8
+        },
+        "id": "f008"
+      },
+      {
+        "label": "設問3（2）",
+        "answer": "連携日時が当月である申込書データの，連携日時と申込日時の差",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 9
+        },
+        "id": "f009"
+      }
+    ],
+    "4": [
+      {
+        "label": "設問1（1）・a",
+        "answer": "劣化の予測モデル",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 1,
+          "row": 1
+        },
+        "id": "f001"
+      },
+      {
+        "label": "設問1（2）",
+        "answer": "ゲートウェイの設置を不要にするため",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 1,
+          "row": 2
+        },
+        "id": "f002"
+      },
+      {
+        "label": "設問1（3）",
+        "answer": "異なる橋梁でセンサノードが再利用できる",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 1,
+          "row": 3
+        },
+        "id": "f003"
+      },
+      {
+        "label": "設問2（1）",
+        "answer": "検出した障害物を回避しながら飛行する。",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 1,
+          "row": 4
+        },
+        "id": "f004"
+      },
+      {
+        "label": "設問2（2）・問題点",
+        "answer": "データがリアルタイムでないため，カメラロボットの飛行制御には適さない",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 1,
+          "row": 5
+        },
+        "id": "f005"
+      },
+      {
+        "label": "設問2（2）・解決策",
+        "answer": "必要なデータを診断サーバを経由してオンデマンドで取得する。",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 1,
+          "row": 6
+        },
+        "id": "f006"
+      },
+      {
+        "label": "設問3（1）",
+        "answer": "F 社のデータだけでは劣化の予測モデルの精度が早期に確保できないから",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 1,
+          "row": 7
+        },
+        "id": "f007"
+      },
+      {
+        "label": "設問3（2）",
+        "answer": "標準化されたデータモデルと現行システムのデータの相互変換を行う。",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 1,
+          "row": 8
+        },
+        "id": "f008"
+      }
+    ]
+  }
+}
