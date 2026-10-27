@@ -1,0 +1,322 @@
+{
+  "yearId": "2024r06h",
+  "officialAnswerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_sa_pm1_ans.pdf",
+  "answerSha256": "b3e26ec2069acfd7c8d1eb698206c92503ac88bf1231d03a48e518259d085f1c",
+  "questionSha256": "ae2eed373953ce292dd88b6fd42dab2d263a9fde3ed3ad9f08ec6a23060e8ede",
+  "questions": {
+    "1": [
+      {
+        "label": "設問1（1）",
+        "answer": "製品を期日までに製造するために逆算して各工程の製造開始日時を決めるから",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 1
+        },
+        "id": "f001"
+      },
+      {
+        "label": "設問1（2）・比例",
+        "answer": "所要時間×製造指示数",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 2
+        },
+        "id": "f002"
+      },
+      {
+        "label": "設問1（2）・一定",
+        "answer": "所要時間",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 3
+        },
+        "id": "f003"
+      },
+      {
+        "label": "設問2（1）",
+        "answer": "製品と仕掛品は“無”，原材料は“有”に設定する。",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 4
+        },
+        "id": "f004"
+      },
+      {
+        "label": "設問2（2）・ファイル①",
+        "answer": "製造",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 5
+        },
+        "id": "f005"
+      },
+      {
+        "label": "設問2（2）・ファイル②",
+        "answer": "投入",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 6
+        },
+        "id": "f006"
+      },
+      {
+        "label": "設問2（2）・要件",
+        "answer": "一つの製品を1 日に複数回製造する場合があるという要件",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 7
+        },
+        "id": "f007"
+      },
+      {
+        "label": "設問2（3）",
+        "answer": "発注書の様式をA 社で定めた様式に変更すること",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 8
+        },
+        "id": "f008"
+      },
+      {
+        "label": "設問3（1）",
+        "answer": "製造担当者が月末に記録表を参照し，まとめて生産管理システムに入力する作業",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 9
+        },
+        "id": "f009"
+      },
+      {
+        "label": "設問3（2）",
+        "answer": "前日までの実績を反映した管理指標値が参照可能になった。",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 10
+        },
+        "id": "f010"
+      }
+    ],
+    "2": [
+      {
+        "label": "設問1",
+        "answer": "次回の実約定日に振替先口座がある金融機関の口振結果営業日数を足す。",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 1
+        },
+        "id": "f001"
+      },
+      {
+        "label": "設問2",
+        "answer": "お知らせサービス，各種情報照会サービス，問合せサービス",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 2
+        },
+        "id": "f002"
+      },
+      {
+        "label": "設問3（1）",
+        "answer": "ボーナス月の変更によってボーナス月が 1 年に 3 回以上とならないようにすること",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 3
+        },
+        "id": "f003"
+      },
+      {
+        "label": "設問3（2）",
+        "answer": "住所変更の有無",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 4
+        },
+        "id": "f004"
+      },
+      {
+        "label": "設問3（3）・条件①",
+        "answer": "電話番号ステータスが“無効”であること",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 5
+        },
+        "id": "f005"
+      },
+      {
+        "label": "設問3（3）・条件②",
+        "answer": "収入証明書有効期限が3 か月以内に到来すること",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 6
+        },
+        "id": "f006"
+      },
+      {
+        "label": "設問4（1）",
+        "answer": "勤務先変更理由が，転職，転籍又は退職の場合",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 7
+        },
+        "id": "f007"
+      },
+      {
+        "label": "設問4（2）",
+        "answer": "契約ステータスが“解約予約”で借入残高が0 円であること",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 8
+        },
+        "id": "f008"
+      }
+    ],
+    "3": [
+      {
+        "label": "設問1",
+        "answer": "登校時と下校時で別の登下校用端末を使用した場合",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 1
+        },
+        "id": "f001"
+      },
+      {
+        "label": "設問2（1）",
+        "answer": "登下校通知メールに写真を添付する要望",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 2
+        },
+        "id": "f002"
+      },
+      {
+        "label": "設問2（2）",
+        "answer": "保護者メールアドレスが同一の複数の生徒が，別々の拠点に所属している場合",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 3
+        },
+        "id": "f003"
+      },
+      {
+        "label": "設問3（1）・機能名",
+        "answer": "生徒情報管理",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 4
+        },
+        "id": "f004"
+      },
+      {
+        "label": "設問3（1）・変更内容",
+        "answer": "全ての生徒の保護者メールアドレスを設定するように変更する。",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 5
+        },
+        "id": "f005"
+      },
+      {
+        "label": "設問3（2）",
+        "answer": "登下校通知メールの送信が遅延する。",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 6
+        },
+        "id": "f006"
+      },
+      {
+        "label": "設問3（3） ①・機能名",
+        "answer": "登下校通知メール送信",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 7
+        },
+        "id": "f007"
+      },
+      {
+        "label": "設問3（3） ①・変更内容",
+        "answer": "拠点名を登下校履歴ファイルの拠点コードから取得するように変更する。",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 8
+        },
+        "id": "f008"
+      },
+      {
+        "label": "設問3（3） ②・機能名",
+        "answer": "拠点在室人数表示",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 9
+        },
+        "id": "f009"
+      },
+      {
+        "label": "設問3（3） ②・変更内容",
+        "answer": "登下校日時が当日で，拠点コードが自拠点のものを抽出するように変更する。",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 10
+        },
+        "id": "f010"
+      }
+    ]
+  }
+}
