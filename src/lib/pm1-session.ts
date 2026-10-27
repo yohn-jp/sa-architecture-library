@@ -56,7 +56,8 @@ export function loadPm1Session(yearId: string): Pm1Session | null {
   if (!findPm1Year(yearId)) return null;
   try {
     const value: unknown = JSON.parse(localStorage.getItem(sessionKey(yearId)) ?? 'null');
-    return validSession(value, yearId) ? value : null;
+    if (!validSession(value, yearId)) return null;
+    return reconcileOfficialFields(value);
   } catch {
     return null;
   }
@@ -92,6 +93,39 @@ export function startPm1Session(yearId: string, selected: number[]): Pm1Session 
     startedAt: now, finishedAt: null, activeQuestion: Math.min(...selected), answers
   };
   return savePm1Session(session) ? session : null;
+}
+
+/**
+ * Upgrade only an active legacy session. Keep the previous free-form answers,
+ * their text and clock. New canonical fields use independent IDs (f001 etc.).
+ * Completed sessions remain immutable; the result view displays their original
+ * answers and pairs canonical fields with the official key without rewriting data.
+ */
+export function reconcileOfficialFields(session: Pm1Session): Pm1Session {
+  if (session.finishedAt !== null) return session;
+  const templates = pm1Fields as Record<string, Record<string,
+    Array<{ id: string; label: string; limit: number | null }>>>;
+  const answers: Record<string, Pm1Answer[]> = {};
+  let changed = false;
+  for (const question of session.selected) {
+    const official = templates[session.yearId]?.[String(question)] ?? [];
+    const saved = session.answers[String(question)] ?? [];
+    const matched = new Set(official.map(field => field.id));
+    const standardized = official.map(field => {
+      const previous = saved.find(item => item.id === field.id);
+      if (!previous || previous.label !== field.label || previous.limit !== field.limit) changed = true;
+      return { id: field.id, label: field.label, limit: field.limit, text: previous?.text ?? '' };
+    });
+    const legacy = saved.filter(row => !matched.has(row.id));
+    // Legacy/extra rows are preserved in their original order and contents.
+    const next = [...standardized, ...legacy];
+    if (next.length > MAX_FIELDS) return session;
+    answers[String(question)] = next;
+    if (saved.length !== next.length) changed = true;
+  }
+  if (!changed) return session;
+  const migrated = { ...session, answers };
+  return savePm1Session(migrated) ? migrated : session;
 }
 
 export function remainingPm1Seconds(session: Pm1Session, now = Date.now()): number {
