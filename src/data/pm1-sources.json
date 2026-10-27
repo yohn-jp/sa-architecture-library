@@ -62,5 +62,13 @@
     "pages": 28,
     "sourcePage": "https://www.ipa.go.jp/shiken/mondai-kaiotu/2017h29.html",
     "pdfUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000fqpm-att/2017h29a_sa_pm1_qs.pdf"
+  },
+  {
+    "id": "2016h28a",
+    "label": "2016年度（平成28年・秋期）",
+    "questionCount": 4,
+    "pages": 28,
+    "sourcePage": "https://www.ipa.go.jp/shiken/mondai-kaiotu/2016h28.html",
+    "pdfUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000g6fw-att/2016h28a_sa_pm1_qs.pdf"
   }
 ]
