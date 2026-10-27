@@ -21,5 +21,5 @@ export function pm1PdfPath(yearId: string): string {
 if (pm1Years.some(year =>
   year.questionCount < PM1_SELECTION_COUNT || year.pages < 2 ||
   !year.pdfUrl.startsWith('https://www.ipa.go.jp/') ||
-  !/^20\d{2}r\d{2}h$/.test(year.id)
+  !/^20\d{2}[rh]\d{2}[ah]$/.test(year.id)
 )) throw new Error('Invalid PM1 official source catalog');

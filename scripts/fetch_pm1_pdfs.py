@@ -47,7 +47,7 @@ def main():
     manifest = {}
     for record in records:
         year_id = record["id"]
-        if not re.fullmatch(r"20\d{2}r\d{2}h", year_id):
+        if not re.fullmatch(r"20\d{2}[rh]\d{2}[ah]", year_id):
             raise ValueError("Invalid year identifier")
         target = OUTPUT / (year_id + ".pdf")
         data = target.read_bytes() if target.exists() else download(record["pdfUrl"])

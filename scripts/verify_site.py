@@ -120,7 +120,10 @@ sources = json.loads(Path('src/data/pm1-sources.json').read_text(encoding='utf-8
 pdf_manifest_path = ROOT / 'practice/pm1/pdfs/manifest.json'
 assert pdf_manifest_path.is_file(), 'PM1 committed PDF manifest is missing'
 pdf_manifest = json.loads(pdf_manifest_path.read_text(encoding='utf-8'))
-assert len(sources) == 3, 'Expected three verified afternoon-I years'
+am2_year_ids = re.findall(r"id:'(20\d{2}[rh]\d{2}[ah])'", answers_source)
+assert len(am2_year_ids) == 9 and len(set(am2_year_ids)) == 9, 'AM2 calendar must contain 9 distinct years'
+assert [year['id'] for year in sources] == am2_year_ids, 'PM1 catalogue must match AM2 years in the same order'
+assert len(sources) == 9, 'Expected nine verified afternoon-I years'
 assert set(pdf_manifest) == {year['id'] for year in sources}, 'PM1 PDF coverage mismatch'
 for year in sources:
     year_id = year['id']

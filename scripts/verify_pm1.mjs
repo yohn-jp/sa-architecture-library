@@ -19,7 +19,11 @@ try {
   assert(ready, 'PM1 local preview server failed to start');
   const sources = JSON.parse(await readFile('src/data/pm1-sources.json', 'utf8'));
   const manifest = JSON.parse(await readFile('dist/practice/pm1/pdfs/manifest.json', 'utf8'));
-  assert.equal(sources.length, 3, 'Three PDF years must be committed');
+  const am2 = await readFile('src/data/am2.ts', 'utf8');
+  const expectedYears = [...am2.matchAll(/id:'(20\d{2}[rh]\d{2}[ah])'/g)].map(match => match[1]);
+  assert.equal(sources.length, 9, 'Nine afternoon-I years must be committed');
+  assert.deepEqual(sources.map(year => year.id), expectedYears, 'PM1 archive must match AM2 years');
+  assert.deepEqual(Object.keys(manifest), expectedYears, 'Manifest must cover exactly the PM1 archive');
   for (const source of sources) {
     const bytes = await readFile('dist/practice/pm1/pdfs/' + source.id + '.pdf');
     assert(bytes.subarray(0, 5).equals(Buffer.from('%PDF-')), source.id + ' is not a PDF');
@@ -36,6 +40,15 @@ try {
   await page.goto(host + 'practice/');
   assert(await page.locator('a[href="/practice/pm1/"]').count(), 'PM1 link is missing from practice home');
   await page.goto(host + 'practice/pm1/');
+  assert.deepEqual(await page.locator('#year option').evaluateAll(options => options.map(option => option.value)), sources.map(source => source.id));
+  for (const source of sources) {
+    await page.locator('#year').selectOption(source.id);
+    assert.equal(await page.locator('#choices input[type=checkbox]').count(), source.questionCount, 'Question count mismatch for ' + source.id);
+    assert.equal(await page.locator('#choices input:checked').count(), 2, 'Default selection must contain two questions');
+    assert((await page.locator('#local-pdf').getAttribute('href')).endsWith('/practice/pm1/pdfs/' + source.id + '.pdf'));
+    assert((await page.locator('#official-source').getAttribute('href')) === source.sourcePage);
+  }
+  await page.locator('#year').selectOption('2025r07h');
   assert.equal(await page.locator('#choices input[type=checkbox]').count(), 3);
   assert.equal(await page.locator('#choices input:checked').count(), 2);
   await page.locator('#year').selectOption('2023r05h');
@@ -112,13 +125,27 @@ try {
   await page.goto(host + 'practice/pm1/?year=2025r07h');
   assert((await page.locator('#session-status').innerText()).includes('新しい演習'));
 
+  // Older fall-season IDs must support the same CBT editing journey.
+  await page.goto(host + 'practice/pm1/?year=2016h28a');
+  assert.equal(await page.locator('#choices input[type=checkbox]').count(), 4);
+  await page.locator('#primary').click();
+  await page.waitForURL('**/practice/pm1/exam/?year=2016h28a');
+  assert((await page.locator('#pm1-pdf').getAttribute('src')).includes('2016h28a.pdf'));
+  await page.locator('.pm1-textarea').fill('2016年度・午後Ⅰの解答');
+  await page.reload();
+  assert.equal(await page.locator('.pm1-textarea').inputValue(), '2016年度・午後Ⅰの解答');
+  page.once('dialog', dialog => dialog.accept());
+  await page.locator('#finish').click();
+  await page.waitForURL('**/practice/pm1/result/?year=2016h28a');
+  assert((await page.locator('#result-questions').innerText()).includes('2016年度・午後Ⅰの解答'));
+
   const mobile = await browser.newPage({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
   mobile.on('pageerror', exception => errors.push(exception.message));
   await mobile.goto(host + 'practice/pm1/');
   assert(await mobile.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'PM1 setup overflows mobile');
   await mobile.close();
   assert.deepEqual(errors, []);
-  console.log('PASS: three vendored PDFs, selector, CBT editor, char limits, autosave, tabs, completion, expiration, persistence, mobile');
+  console.log('PASS: nine vendored PDFs, matching AM2 calendar, selector, CBT editor, char limits, autosave, tabs, completion, expiration, persistence, mobile');
 } finally {
   await browser?.close();
   server.kill();
