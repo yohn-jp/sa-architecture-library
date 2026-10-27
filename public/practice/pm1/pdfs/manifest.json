@@ -1,0 +1,26 @@
+{
+  "2025r07h": {
+    "source": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_sa_pm1_qs.pdf",
+    "sourcePage": "https://www.ipa.go.jp/shiken/mondai-kaiotu/2025r07.html",
+    "sha256": "9fd9e8bb078a6f7503406efcd02c7f92c233c48863dc57c123f03dbbeddeec11",
+    "bytes": 3830661,
+    "pages": 20,
+    "questionCount": 3
+  },
+  "2024r06h": {
+    "source": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_sa_pm1_qs.pdf",
+    "sourcePage": "https://www.ipa.go.jp/shiken/mondai-kaiotu/2024r06.html",
+    "sha256": "ae2eed373953ce292dd88b6fd42dab2d263a9fde3ed3ad9f08ec6a23060e8ede",
+    "bytes": 3639614,
+    "pages": 20,
+    "questionCount": 3
+  },
+  "2023r05h": {
+    "source": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_sa_pm1_qs.pdf",
+    "sourcePage": "https://www.ipa.go.jp/shiken/mondai-kaiotu/2023r05.html",
+    "sha256": "4d528ef494e9404a86b7cd61249fa476b821b80540857c3e30df3926dfa2520c",
+    "bytes": 4975674,
+    "pages": 28,
+    "questionCount": 4
+  }
+}
