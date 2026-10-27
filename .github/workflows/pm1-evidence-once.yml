@@ -1,4 +1,5 @@
 name: One-time official PM1 source transcription
+# Evidence is imported in immutable, per-year commits.
 on:
   push:
     branches: [feat/pm1-official-structured-answers]
