@@ -104,6 +104,8 @@ def commit_year(year):
     subprocess.run(['git','push','origin','HEAD:'+BRANCH],check=True,cwd=ROOT)
 
 def main():
+    subprocess.run(['git','config','user.name','github-actions[bot]'],check=True,cwd=ROOT)
+    subprocess.run(['git','config','user.email','41898282+github-actions[bot]@users.noreply.github.com'],check=True,cwd=ROOT)
     ANSWERS.mkdir(parents=True,exist_ok=True)
     AUDIT.mkdir(parents=True,exist_ok=True)
     for source in SOURCES:
