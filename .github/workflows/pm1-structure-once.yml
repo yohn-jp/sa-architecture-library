@@ -1,4 +1,5 @@
 name: One-time structured official PM1 answers
+# Continued after combined answer-cell normalization.
 on:
   push:
     branches: [feat/pm1-official-structured-answers]
