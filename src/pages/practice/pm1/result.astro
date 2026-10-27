@@ -14,7 +14,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     <header class="practice-intro">
       <p class="eyebrow">AFTERNOON I / WRITTEN RESPONSES</p>
       <h1>演習答案の確認</h1>
-      <p>入力した解答を設問ごとに表示します。<strong>採点・得点予測は行いません。</strong></p>
+      <p>入力した解答とIPA公式解答例を設問ごとに並べて表示します。<strong>採点・得点予測は行いません。</strong></p>
     </header>
     <section class="practice-card pm1-result-overview" aria-label="演習結果の概要">
       <h2 id="year-heading">午後Ⅰ</h2>
@@ -23,7 +23,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
         <div><dt>記述済み解答欄</dt><dd id="answer-count">—</dd></div>
         <div><dt>経過時間</dt><dd id="elapsed">—</dd></div>
       </dl>
-      <p class="practice-note">自己確認用の記録です。公式解答例との照合や評価は含まれていません。</p>
+      <p class="practice-note">公式解答例はIPA原本のテキストを設問ごとに表示します。自動採点・得点予測は行いません。</p>
     </section>
     <section id="result-questions" class="pm1-result-questions" aria-label="保存した記述解答"></section>
     <div class="pm1-result-actions">
@@ -42,6 +42,8 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     loadPm1Session, pm1Expired, finishPm1Session, countPm1Answers, formatPm1Clock
   } from '../../../lib/pm1-session';
   import type { Pm1Session } from '../../../lib/pm1-session';
+  import officialAnswers from '../../../data/pm1-official-answers.json';
+  import pm1Fields from '../../../data/pm1-fields.json';
   const $ = (id: string) => document.getElementById(id)!;
   const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   const year = findPm1Year(new URLSearchParams(location.search).get('year'));
@@ -71,22 +73,92 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
       const heading = document.createElement('h2');
       heading.textContent = '問' + number;
       section.append(heading);
-      for (const answer of complete.answers[String(number)]) {
+      type Example = {
+        id: string;
+        label: string;
+        text: string;
+        source: { answerPage: number; table: number; row: number };
+      };
+      type Archive = Record<string, {
+        sourcePdf: string;
+        sha256: string;
+        questions: Record<string, Example[]>;
+      }>;
+      const archives = officialAnswers as Archive;
+      const source = archives[year.id];
+      const officialRows = source?.questions[String(number)] ?? [];
+      const ownRows = complete.answers[String(number)] ?? [];
+      const byId = new Map(ownRows.map(row => [row.id, row]));
+      const officialIds = new Set(officialRows.map(item => item.id));
+
+      function renderAnswer(
+        labelText: string, ownText: string, limit: number | null, answerText: string | null, pdfPage: number | null
+      ): HTMLElement {
         const card = document.createElement('article');
         card.className = 'pm1-result-answer';
-        const row = document.createElement('div');
-        row.className = 'pm1-result-answer-top';
+        const heading = document.createElement('div');
+        heading.className = 'pm1-result-answer-top';
         const label = document.createElement('strong');
-        label.textContent = answer.label;
+        label.textContent = labelText;
         const count = document.createElement('span');
-        count.textContent = String(Array.from(answer.text).length) + (answer.limit === null ? '字' : ' / ' + answer.limit + '字');
-        if (answer.limit !== null && Array.from(answer.text).length > answer.limit) count.className = 'is-over';
-        row.append(label, count);
-        const text = document.createElement('p');
-        text.className = 'pm1-result-text';
-        text.textContent = answer.text.trim() || '（未記入）';
-        card.append(row, text);
-        section.append(card);
+        count.textContent = String(Array.from(ownText).length) + (limit === null ? '字' : ' / ' + limit + '字');
+        if (limit !== null && Array.from(ownText).length > limit) count.className = 'is-over';
+        heading.append(label, count);
+
+        const comparison = document.createElement('div');
+        comparison.className = 'pm1-answer-comparison';
+        const mine = document.createElement('div');
+        mine.className = 'pm1-comparison-cell';
+        const mineTitle = document.createElement('h3');
+        mineTitle.textContent = '自分の解答';
+        const mineText = document.createElement('p');
+        mineText.className = 'pm1-result-text';
+        mineText.textContent = ownText.trim() || '（未記入）';
+        mine.append(mineTitle, mineText);
+
+        const official = document.createElement('div');
+        official.className = 'pm1-comparison-cell pm1-official-response';
+        const officialTitle = document.createElement('h3');
+        officialTitle.textContent = 'IPA公式解答例';
+        const officialText = document.createElement('p');
+        officialText.className = 'pm1-result-text';
+        officialText.textContent = answerText ?? '（追加したメモ欄のため公式解答例はありません）';
+        official.append(officialTitle, officialText);
+        if (pdfPage !== null && source) {
+          const citation = document.createElement('a');
+          citation.className = 'pm1-answer-citation';
+          citation.href = source.sourcePdf + '#page=' + pdfPage;
+          citation.target = '_blank';
+          citation.rel = 'noopener noreferrer';
+          citation.textContent = 'IPA解答例原本 ' + pdfPage + 'ページ';
+          official.append(citation);
+        }
+        comparison.append(mine, official);
+        card.append(heading, comparison);
+        return card;
+      }
+
+      for (const official of officialRows) {
+        const own = byId.get(official.id);
+        const prescribed = (awaitedField: unknown): number | null => {
+          if (!awaitedField || typeof awaitedField !== 'object') return null;
+          const value = awaitedField as { limit?: unknown };
+          return typeof value.limit === 'number' ? value.limit : null;
+        };
+        const canonical = (pm1Fields as Record<string, Record<string,
+          Array<{ id: string; limit: number | null }>>>)[year.id]?.[String(number)]
+          ?.find(row => row.id === official.id);
+        section.append(renderAnswer(
+          official.label, own?.text ?? '', prescribed(canonical),
+          official.text, official.source.answerPage
+        ));
+      }
+
+      // Preserve answers from sessions created before structured fields were added.
+      // Never conflate a manual/legacy answer with an official answer by position.
+      for (const own of ownRows) {
+        if (officialIds.has(own.id)) continue;
+        section.append(renderAnswer(own.label, own.text, own.limit, null, null));
       }
       root.append(section);
     }
