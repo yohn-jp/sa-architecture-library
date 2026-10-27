@@ -22,5 +22,13 @@
     "bytes": 4975674,
     "pages": 28,
     "questionCount": 4
+  },
+  "2022r04h": {
+    "source": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_sa_pm1_qs.pdf",
+    "sourcePage": "https://www.ipa.go.jp/shiken/mondai-kaiotu/2022r04.html",
+    "sha256": "f08367a1754bdcb8221fd935f70971728a94551479e1d3abf1796cbee96f0818",
+    "bytes": 5173439,
+    "pages": 28,
+    "questionCount": 4
   }
 }

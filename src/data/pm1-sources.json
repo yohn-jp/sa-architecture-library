@@ -22,5 +22,13 @@
     "pages": 28,
     "sourcePage": "https://www.ipa.go.jp/shiken/mondai-kaiotu/2023r05.html",
     "pdfUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_sa_pm1_qs.pdf"
+  },
+  {
+    "id": "2022r04h",
+    "label": "2022年度（令和4年・春期）",
+    "questionCount": 4,
+    "pages": 28,
+    "sourcePage": "https://www.ipa.go.jp/shiken/mondai-kaiotu/2022r04.html",
+    "pdfUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt80000009sgk-att/2022r04h_sa_pm1_qs.pdf"
   }
 ]
