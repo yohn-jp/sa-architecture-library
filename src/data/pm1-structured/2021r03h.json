@@ -1,0 +1,401 @@
+{
+  "yearId": "2021r03h",
+  "officialAnswerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000d5ru-att/2021r03h_sa_pm1_ans.pdf",
+  "answerSha256": "d15991a3b6842c752390534b65671d19e7fa5dc2002ce01a4591f0d831340a1e",
+  "questionSha256": "d57320e132bc1aaef97beaf51eb7e714993266701b6ea5380865e5053377188f",
+  "questions": {
+    "1": [
+      {
+        "label": "設問1・情報",
+        "answer": "利用者カード番号",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 1
+        },
+        "id": "f001"
+      },
+      {
+        "label": "設問1・理由",
+        "answer": "再発行の際，古い利用者カードを使用できないようにしたいから",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 2
+        },
+        "id": "f002"
+      },
+      {
+        "label": "設問2（1）",
+        "answer": "報告書の送付先として利用すること",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 3
+        },
+        "id": "f003"
+      },
+      {
+        "label": "設問2（2）",
+        "answer": "適用料金区分を判断するための情報は，法人情報には含まれないから",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 4
+        },
+        "id": "f004"
+      },
+      {
+        "label": "設問2（3）",
+        "answer": "個人事業者が利用するケース",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 5
+        },
+        "id": "f005"
+      },
+      {
+        "label": "設問3（1）",
+        "answer": "利用者が，仮登録か本登録かを識別する情報",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 6
+        },
+        "id": "f006"
+      },
+      {
+        "label": "設問3（2）・a",
+        "answer": "法人番号",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 7
+        },
+        "id": "f007"
+      },
+      {
+        "label": "設問3（3）",
+        "answer": "他の利用者の利用者カードを借りて利用することの禁止",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 8
+        },
+        "id": "f008"
+      }
+    ],
+    "2": [
+      {
+        "label": "設問1（1）・①",
+        "answer": "あらかじめ決めた配達順序",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 1
+        },
+        "id": "f001"
+      },
+      {
+        "label": "設問1（1）・②",
+        "answer": "配達時に使用する配達車両",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 1
+        },
+        "id": "f002"
+      },
+      {
+        "label": "設問1（2）・①",
+        "answer": "配達員の氏名",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 2
+        },
+        "id": "f003"
+      },
+      {
+        "label": "設問1（2）・②",
+        "answer": "依頼主名",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 2
+        },
+        "id": "f004"
+      },
+      {
+        "label": "設問1（3）・a",
+        "answer": "配達希望日が当日",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 3
+        },
+        "id": "f005"
+      },
+      {
+        "label": "設問1（3）・b",
+        "answer": "配達希望時間帯の受付締切時刻経過後",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 4
+        },
+        "id": "f006"
+      },
+      {
+        "label": "設問2（1）",
+        "answer": "不在連絡票を確認しなくとも再配達依頼ができること",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 5
+        },
+        "id": "f007"
+      },
+      {
+        "label": "設問2（2）",
+        "answer": "各配達員の担当区域は配達システムに登録されていないから",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 6
+        },
+        "id": "f008"
+      },
+      {
+        "label": "設問2（3）・c",
+        "answer": "営業所倉庫保管",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 7
+        },
+        "id": "f009"
+      },
+      {
+        "label": "設問2（3）・作業内容",
+        "answer": "当日の配達業務完了前に荷物を降ろし，営業所倉庫に保管する作業",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 8
+        },
+        "id": "f010"
+      }
+    ],
+    "3": [
+      {
+        "label": "設問1",
+        "answer": "りん議書を作成するために複数のシステムを操作する作業",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 1
+        },
+        "id": "f001"
+      },
+      {
+        "label": "設問2（1）",
+        "answer": "案件ファイルの融資希望金額が店ファイルの決裁可能金額を超えている場合",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 2
+        },
+        "id": "f002"
+      },
+      {
+        "label": "設問2（2）",
+        "answer": "担保評価ファイルの評価日より担保評価システムにある評価日が新しい場合",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 3
+        },
+        "id": "f003"
+      },
+      {
+        "label": "設問2（3）",
+        "answer": "目標期日の到来に気付かず期限を超過すること",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 4
+        },
+        "id": "f004"
+      },
+      {
+        "label": "設問2（4）・a",
+        "answer": "基幹システム",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 5
+        },
+        "id": "f005"
+      },
+      {
+        "label": "設問3・①",
+        "answer": "顧客番号が当該案件の顧客番号と同一であること",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 6
+        },
+        "id": "f006"
+      },
+      {
+        "label": "設問3・②",
+        "answer": "案件ステータスが“受付”，“作成中”又は“回付中”であること",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 6
+        },
+        "id": "f007"
+      }
+    ],
+    "4": [
+      {
+        "label": "設問1（1）・a",
+        "answer": "飛行型監視ロボット",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 1,
+          "row": 1
+        },
+        "id": "f001"
+      },
+      {
+        "label": "設問1（1）・b",
+        "answer": "放水位置 又は 注水目標",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 1,
+          "row": 2
+        },
+        "id": "f002"
+      },
+      {
+        "label": "設問1（2）",
+        "answer": "1 台の搬送指令車で複数のロボットを操作できるようになること",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 1,
+          "row": 3
+        },
+        "id": "f003"
+      },
+      {
+        "label": "設問1（3）",
+        "answer": "消火方法を決定するため",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 1,
+          "row": 4
+        },
+        "id": "f004"
+      },
+      {
+        "label": "設問2（1）",
+        "answer": "消火対象施設周辺の飛行可能な場所の情報",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 1,
+          "row": 5
+        },
+        "id": "f005"
+      },
+      {
+        "label": "設問2（2）",
+        "answer": "適切な放水位置，注水目標による効果的な消火活動",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 1,
+          "row": 6
+        },
+        "id": "f006"
+      },
+      {
+        "label": "設問2（3）",
+        "answer": "継続監視飛行だけでなく，周回飛行も併せて行う。",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 1,
+          "row": 7
+        },
+        "id": "f007"
+      },
+      {
+        "label": "設問3（1）・①",
+        "answer": "時刻情報",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 1,
+          "row": 8
+        },
+        "id": "f008"
+      },
+      {
+        "label": "設問3（1）・②",
+        "answer": "位置情報",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 1,
+          "row": 8
+        },
+        "id": "f009"
+      },
+      {
+        "label": "設問3（2）",
+        "answer": "ホースの敷設ルートの長さ，及び各ロボットの走行に支障がないこと",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 1,
+          "row": 9
+        },
+        "id": "f010"
+      }
+    ]
+  }
+}
