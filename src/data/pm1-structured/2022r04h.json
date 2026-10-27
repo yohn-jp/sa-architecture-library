@@ -8,7 +8,7 @@
       {
         "label": "設問1（1）",
         "answer": "オペレータが在宅でも働けるようにするため",
-        "limit": null,
+        "limit": 25,
         "source": {
           "answerPage": 1,
           "table": 0,
@@ -30,7 +30,7 @@
       {
         "label": "設問1（3）",
         "answer": "オペレータの勤務時間帯以外のとき",
-        "limit": null,
+        "limit": 20,
         "source": {
           "answerPage": 1,
           "table": 0,
@@ -52,7 +52,7 @@
       {
         "label": "設問1（5）",
         "answer": "商品の問合せ，クレーム内容などを商品の改善につなげたいから",
-        "limit": null,
+        "limit": 35,
         "source": {
           "answerPage": 1,
           "table": 0,
@@ -63,7 +63,7 @@
       {
         "label": "設問2（1）",
         "answer": "一人のオペレータが同時に複数の顧客と対応する",
-        "limit": null,
+        "limit": 25,
         "source": {
           "answerPage": 1,
           "table": 0,
@@ -74,7 +74,7 @@
       {
         "label": "設問2（2）",
         "answer": "特定のコンタクトセンタを一時的に閉鎖せざるを得ない状況",
-        "limit": null,
+        "limit": 30,
         "source": {
           "answerPage": 1,
           "table": 0,
@@ -85,7 +85,7 @@
       {
         "label": "設問2（3）",
         "answer": "新商品発売時に，簡単な問合せが急増しないようにするため",
-        "limit": null,
+        "limit": 30,
         "source": {
           "answerPage": 1,
           "table": 0,
@@ -109,7 +109,7 @@
       {
         "label": "設問1（2）・b",
         "answer": "各検査担当者の作業負荷の確認",
-        "limit": null,
+        "limit": 20,
         "source": {
           "answerPage": 1,
           "table": 1,
@@ -120,7 +120,7 @@
       {
         "label": "設問1（3）",
         "answer": "変更前の検査担当者の割当てに従って集計するから",
-        "limit": null,
+        "limit": 30,
         "source": {
           "answerPage": 1,
           "table": 1,
@@ -142,7 +142,7 @@
       {
         "label": "設問2 ①・条件",
         "answer": "最も古いこと",
-        "limit": null,
+        "limit": 15,
         "source": {
           "answerPage": 1,
           "table": 1,
@@ -164,7 +164,7 @@
       {
         "label": "設問2 ②・条件",
         "answer": "“未実施”であること",
-        "limit": null,
+        "limit": 15,
         "source": {
           "answerPage": 1,
           "table": 1,
@@ -186,7 +186,7 @@
       {
         "label": "設問3（1）・理由",
         "answer": "検査責任者が直接，製品検査の完了状況を確認できるから",
-        "limit": null,
+        "limit": 30,
         "source": {
           "answerPage": 1,
           "table": 1,
@@ -197,7 +197,7 @@
       {
         "label": "設問3（2）・c",
         "answer": "追加フラグが“通常”",
-        "limit": null,
+        "limit": 15,
         "source": {
           "answerPage": 1,
           "table": 1,
@@ -208,7 +208,7 @@
       {
         "label": "設問3（2）・d",
         "answer": "検査結果が“合格”",
-        "limit": null,
+        "limit": 15,
         "source": {
           "answerPage": 1,
           "table": 1,
@@ -219,7 +219,7 @@
       {
         "label": "設問3（3）",
         "answer": "出荷前承認には，各部署からの報告に基づいた最終確認が必要だから",
-        "limit": null,
+        "limit": 35,
         "source": {
           "answerPage": 1,
           "table": 1,
@@ -232,7 +232,7 @@
       {
         "label": "設問1",
         "answer": "申込書と基になった提案書の内容が不整合にならないようにしているから",
-        "limit": null,
+        "limit": 40,
         "source": {
           "answerPage": 2,
           "table": 0,
@@ -276,7 +276,7 @@
       {
         "label": "設問2（3）・内容",
         "answer": "入力内容をチェックすること",
-        "limit": null,
+        "limit": 20,
         "source": {
           "answerPage": 2,
           "table": 0,
@@ -298,7 +298,7 @@
       {
         "label": "設問2（4）・内容",
         "answer": "次に実施すべき作業メニューだけ活性化すること",
-        "limit": null,
+        "limit": 25,
         "source": {
           "answerPage": 2,
           "table": 0,
@@ -309,7 +309,7 @@
       {
         "label": "設問3（1）",
         "answer": "払込方法選択日時が当月である申込書データの，払込方法選択日時と申込日時の差",
-        "limit": null,
+        "limit": 40,
         "source": {
           "answerPage": 2,
           "table": 0,
@@ -320,7 +320,7 @@
       {
         "label": "設問3（2）",
         "answer": "連携日時が当月である申込書データの，連携日時と申込日時の差",
-        "limit": null,
+        "limit": 35,
         "source": {
           "answerPage": 2,
           "table": 0,
@@ -344,7 +344,7 @@
       {
         "label": "設問1（2）",
         "answer": "ゲートウェイの設置を不要にするため",
-        "limit": null,
+        "limit": 20,
         "source": {
           "answerPage": 2,
           "table": 1,
@@ -355,7 +355,7 @@
       {
         "label": "設問1（3）",
         "answer": "異なる橋梁でセンサノードが再利用できる",
-        "limit": null,
+        "limit": 25,
         "source": {
           "answerPage": 2,
           "table": 1,
@@ -366,7 +366,7 @@
       {
         "label": "設問2（1）",
         "answer": "検出した障害物を回避しながら飛行する。",
-        "limit": null,
+        "limit": 25,
         "source": {
           "answerPage": 2,
           "table": 1,
@@ -377,7 +377,7 @@
       {
         "label": "設問2（2）・問題点",
         "answer": "データがリアルタイムでないため，カメラロボットの飛行制御には適さない",
-        "limit": null,
+        "limit": 40,
         "source": {
           "answerPage": 2,
           "table": 1,
@@ -388,7 +388,7 @@
       {
         "label": "設問2（2）・解決策",
         "answer": "必要なデータを診断サーバを経由してオンデマンドで取得する。",
-        "limit": null,
+        "limit": 35,
         "source": {
           "answerPage": 2,
           "table": 1,
@@ -399,7 +399,7 @@
       {
         "label": "設問3（1）",
         "answer": "F 社のデータだけでは劣化の予測モデルの精度が早期に確保できないから",
-        "limit": null,
+        "limit": 40,
         "source": {
           "answerPage": 2,
           "table": 1,
@@ -410,7 +410,7 @@
       {
         "label": "設問3（2）",
         "answer": "標準化されたデータモデルと現行システムのデータの相互変換を行う。",
-        "limit": null,
+        "limit": 40,
         "source": {
           "answerPage": 2,
           "table": 1,

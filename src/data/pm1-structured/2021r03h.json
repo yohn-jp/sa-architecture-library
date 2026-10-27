@@ -19,7 +19,7 @@
       {
         "label": "設問1・理由",
         "answer": "再発行の際，古い利用者カードを使用できないようにしたいから",
-        "limit": null,
+        "limit": 35,
         "source": {
           "answerPage": 1,
           "table": 0,
@@ -30,7 +30,7 @@
       {
         "label": "設問2（1）",
         "answer": "報告書の送付先として利用すること",
-        "limit": null,
+        "limit": 20,
         "source": {
           "answerPage": 1,
           "table": 0,
@@ -41,7 +41,7 @@
       {
         "label": "設問2（2）",
         "answer": "適用料金区分を判断するための情報は，法人情報には含まれないから",
-        "limit": null,
+        "limit": 35,
         "source": {
           "answerPage": 1,
           "table": 0,
@@ -52,7 +52,7 @@
       {
         "label": "設問2（3）",
         "answer": "個人事業者が利用するケース",
-        "limit": null,
+        "limit": 15,
         "source": {
           "answerPage": 1,
           "table": 0,
@@ -63,7 +63,7 @@
       {
         "label": "設問3（1）",
         "answer": "利用者が，仮登録か本登録かを識別する情報",
-        "limit": null,
+        "limit": 25,
         "source": {
           "answerPage": 1,
           "table": 0,
@@ -85,7 +85,7 @@
       {
         "label": "設問3（3）",
         "answer": "他の利用者の利用者カードを借りて利用することの禁止",
-        "limit": null,
+        "limit": 30,
         "source": {
           "answerPage": 1,
           "table": 0,
@@ -98,7 +98,7 @@
       {
         "label": "設問1（1）・①",
         "answer": "あらかじめ決めた配達順序",
-        "limit": null,
+        "limit": 15,
         "source": {
           "answerPage": 1,
           "table": 1,
@@ -109,7 +109,7 @@
       {
         "label": "設問1（1）・②",
         "answer": "配達時に使用する配達車両",
-        "limit": null,
+        "limit": 15,
         "source": {
           "answerPage": 1,
           "table": 1,
@@ -120,7 +120,7 @@
       {
         "label": "設問1（2）・①",
         "answer": "配達員の氏名",
-        "limit": null,
+        "limit": 10,
         "source": {
           "answerPage": 1,
           "table": 1,
@@ -131,7 +131,7 @@
       {
         "label": "設問1（2）・②",
         "answer": "依頼主名",
-        "limit": null,
+        "limit": 10,
         "source": {
           "answerPage": 1,
           "table": 1,
@@ -142,7 +142,7 @@
       {
         "label": "設問1（3）・a",
         "answer": "配達希望日が当日",
-        "limit": null,
+        "limit": 20,
         "source": {
           "answerPage": 1,
           "table": 1,
@@ -153,7 +153,7 @@
       {
         "label": "設問1（3）・b",
         "answer": "配達希望時間帯の受付締切時刻経過後",
-        "limit": null,
+        "limit": 20,
         "source": {
           "answerPage": 1,
           "table": 1,
@@ -164,7 +164,7 @@
       {
         "label": "設問2（1）",
         "answer": "不在連絡票を確認しなくとも再配達依頼ができること",
-        "limit": null,
+        "limit": 30,
         "source": {
           "answerPage": 1,
           "table": 1,
@@ -175,7 +175,7 @@
       {
         "label": "設問2（2）",
         "answer": "各配達員の担当区域は配達システムに登録されていないから",
-        "limit": null,
+        "limit": 30,
         "source": {
           "answerPage": 1,
           "table": 1,
@@ -197,7 +197,7 @@
       {
         "label": "設問2（3）・作業内容",
         "answer": "当日の配達業務完了前に荷物を降ろし，営業所倉庫に保管する作業",
-        "limit": null,
+        "limit": 35,
         "source": {
           "answerPage": 1,
           "table": 1,
@@ -210,7 +210,7 @@
       {
         "label": "設問1",
         "answer": "りん議書を作成するために複数のシステムを操作する作業",
-        "limit": null,
+        "limit": 30,
         "source": {
           "answerPage": 2,
           "table": 0,
@@ -221,7 +221,7 @@
       {
         "label": "設問2（1）",
         "answer": "案件ファイルの融資希望金額が店ファイルの決裁可能金額を超えている場合",
-        "limit": null,
+        "limit": 40,
         "source": {
           "answerPage": 2,
           "table": 0,
@@ -232,7 +232,7 @@
       {
         "label": "設問2（2）",
         "answer": "担保評価ファイルの評価日より担保評価システムにある評価日が新しい場合",
-        "limit": null,
+        "limit": 40,
         "source": {
           "answerPage": 2,
           "table": 0,
@@ -243,7 +243,7 @@
       {
         "label": "設問2（3）",
         "answer": "目標期日の到来に気付かず期限を超過すること",
-        "limit": null,
+        "limit": 25,
         "source": {
           "answerPage": 2,
           "table": 0,
@@ -254,7 +254,7 @@
       {
         "label": "設問2（4）・a",
         "answer": "基幹システム",
-        "limit": null,
+        "limit": 10,
         "source": {
           "answerPage": 2,
           "table": 0,
@@ -265,7 +265,7 @@
       {
         "label": "設問3・①",
         "answer": "顧客番号が当該案件の顧客番号と同一であること",
-        "limit": null,
+        "limit": 35,
         "source": {
           "answerPage": 2,
           "table": 0,
@@ -276,7 +276,7 @@
       {
         "label": "設問3・②",
         "answer": "案件ステータスが“受付”，“作成中”又は“回付中”であること",
-        "limit": null,
+        "limit": 35,
         "source": {
           "answerPage": 2,
           "table": 0,
@@ -311,7 +311,7 @@
       {
         "label": "設問1（2）",
         "answer": "1 台の搬送指令車で複数のロボットを操作できるようになること",
-        "limit": null,
+        "limit": 35,
         "source": {
           "answerPage": 2,
           "table": 1,
@@ -322,7 +322,7 @@
       {
         "label": "設問1（3）",
         "answer": "消火方法を決定するため",
-        "limit": null,
+        "limit": 15,
         "source": {
           "answerPage": 2,
           "table": 1,
@@ -333,7 +333,7 @@
       {
         "label": "設問2（1）",
         "answer": "消火対象施設周辺の飛行可能な場所の情報",
-        "limit": null,
+        "limit": 25,
         "source": {
           "answerPage": 2,
           "table": 1,
@@ -344,7 +344,7 @@
       {
         "label": "設問2（2）",
         "answer": "適切な放水位置，注水目標による効果的な消火活動",
-        "limit": null,
+        "limit": 30,
         "source": {
           "answerPage": 2,
           "table": 1,
@@ -355,7 +355,7 @@
       {
         "label": "設問2（3）",
         "answer": "継続監視飛行だけでなく，周回飛行も併せて行う。",
-        "limit": null,
+        "limit": 30,
         "source": {
           "answerPage": 2,
           "table": 1,
@@ -388,7 +388,7 @@
       {
         "label": "設問3（2）",
         "answer": "ホースの敷設ルートの長さ，及び各ロボットの走行に支障がないこと",
-        "limit": null,
+        "limit": 40,
         "source": {
           "answerPage": 2,
           "table": 1,

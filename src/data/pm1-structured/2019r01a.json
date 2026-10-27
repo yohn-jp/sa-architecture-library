@@ -19,7 +19,7 @@
       {
         "label": "設問1・理由",
         "answer": "体組成計の購入者情報及びアンケート情報を管理しているから",
-        "limit": null,
+        "limit": 35,
         "source": {
           "answerPage": 1,
           "table": 0,
@@ -30,7 +30,7 @@
       {
         "label": "設問2",
         "answer": "利用者側の視点から新サービスで必要とされる具体的な機能を考え出すため",
-        "limit": null,
+        "limit": 40,
         "source": {
           "answerPage": 1,
           "table": 0,
@@ -41,7 +41,7 @@
       {
         "label": "設問3（1）",
         "answer": "利用者に継続的にコミュニティ活動を行ってもらうこと",
-        "limit": null,
+        "limit": 30,
         "source": {
           "answerPage": 1,
           "table": 0,
@@ -63,7 +63,7 @@
       {
         "label": "設問3（3）",
         "answer": "利用者によっては，一部のデータは共有したくないから",
-        "limit": null,
+        "limit": 30,
         "source": {
           "answerPage": 1,
           "table": 0,
@@ -85,7 +85,7 @@
       {
         "label": "設問4（2）・c",
         "answer": "利用者の健康づくり",
-        "limit": null,
+        "limit": 15,
         "source": {
           "answerPage": 1,
           "table": 0,
@@ -96,7 +96,7 @@
       {
         "label": "設問4（3）",
         "answer": "段階的に新サービスの機能を拡充させることにしたから",
-        "limit": null,
+        "limit": 30,
         "source": {
           "answerPage": 1,
           "table": 0,
@@ -131,7 +131,7 @@
       {
         "label": "設問2（1）・一致するケース",
         "answer": "RF タグの一括読込みで読込み漏れが発生したとき",
-        "limit": null,
+        "limit": 30,
         "source": {
           "answerPage": 1,
           "table": 1,
@@ -142,7 +142,7 @@
       {
         "label": "設問2（1）・不一致になるケース",
         "answer": "容器返却書の容器返却数と実際の容器の数が違っているとき",
-        "limit": null,
+        "limit": 30,
         "source": {
           "answerPage": 1,
           "table": 1,
@@ -153,7 +153,7 @@
       {
         "label": "設問2（2）",
         "answer": "書込みロックを外して，容器情報領域をクリアする処理",
-        "limit": null,
+        "limit": 30,
         "source": {
           "answerPage": 1,
           "table": 1,
@@ -210,7 +210,7 @@
       {
         "label": "設問1（1）・①",
         "answer": "・出荷までに校正が完了する機器",
-        "limit": null,
+        "limit": 30,
         "source": {
           "answerPage": 2,
           "table": 0,
@@ -221,7 +221,7 @@
       {
         "label": "設問1（1）・②",
         "answer": "・レンタル終了予定日が校正有効期限を超えない機器",
-        "limit": null,
+        "limit": 30,
         "source": {
           "answerPage": 2,
           "table": 0,
@@ -232,7 +232,7 @@
       {
         "label": "設問1（2）・①",
         "answer": "・決裁が下りていること",
-        "limit": null,
+        "limit": 25,
         "source": {
           "answerPage": 2,
           "table": 0,
@@ -243,7 +243,7 @@
       {
         "label": "設問1（2）・②",
         "answer": "・レンタル開始希望日まで15 日以内であること",
-        "limit": null,
+        "limit": 25,
         "source": {
           "answerPage": 2,
           "table": 0,
@@ -254,7 +254,7 @@
       {
         "label": "設問2（1）",
         "answer": "付属品が欠けている機器",
-        "limit": null,
+        "limit": 15,
         "source": {
           "answerPage": 2,
           "table": 0,
@@ -265,7 +265,7 @@
       {
         "label": "設問2（2）",
         "answer": "機器の状態を顧客と合意する必要があるから",
-        "limit": null,
+        "limit": 25,
         "source": {
           "answerPage": 2,
           "table": 0,
@@ -276,7 +276,7 @@
       {
         "label": "設問3・①",
         "answer": "・レンタル期間が6 か月以上であること",
-        "limit": null,
+        "limit": 25,
         "source": {
           "answerPage": 2,
           "table": 0,
@@ -287,7 +287,7 @@
       {
         "label": "設問3・②",
         "answer": "・3 か月後がレンタル期間満了月であること",
-        "limit": null,
+        "limit": 25,
         "source": {
           "answerPage": 2,
           "table": 0,
@@ -298,7 +298,7 @@
       {
         "label": "設問4",
         "answer": "延長しない場合は毎月15 日までに営業担当者が必要な処理をするから",
-        "limit": null,
+        "limit": 25,
         "source": {
           "answerPage": 2,
           "table": 0,
@@ -320,7 +320,7 @@
       {
         "label": "設問5・利用する目的",
         "answer": "購入した機器を対象の受注情報に引当すること",
-        "limit": null,
+        "limit": 25,
         "source": {
           "answerPage": 2,
           "table": 0,
@@ -333,7 +333,7 @@
       {
         "label": "設問1（1）",
         "answer": "ピッキングを確実にしたいから",
-        "limit": null,
+        "limit": 20,
         "source": {
           "answerPage": 2,
           "table": 1,
@@ -344,7 +344,7 @@
       {
         "label": "設問1（2）",
         "answer": "商品の収納にフローラックを用いたこと",
-        "limit": null,
+        "limit": 25,
         "source": {
           "answerPage": 2,
           "table": 1,
@@ -355,7 +355,7 @@
       {
         "label": "設問2（1）",
         "answer": "マーカとフローラックを対応させた情報",
-        "limit": null,
+        "limit": 20,
         "source": {
           "answerPage": 2,
           "table": 1,
@@ -366,7 +366,7 @@
       {
         "label": "設問2（2）",
         "answer": "配送先ごとの個別商品情報",
-        "limit": null,
+        "limit": 15,
         "source": {
           "answerPage": 2,
           "table": 1,
@@ -399,7 +399,7 @@
       {
         "label": "設問3（2）",
         "answer": "H ロボットの充電を最適なスケジューリングで行うため",
-        "limit": null,
+        "limit": 30,
         "source": {
           "answerPage": 2,
           "table": 1,
@@ -410,7 +410,7 @@
       {
         "label": "設問3（3）",
         "answer": "H ロボットの位置情報",
-        "limit": null,
+        "limit": 15,
         "source": {
           "answerPage": 2,
           "table": 1,
@@ -421,7 +421,7 @@
       {
         "label": "設問3（4）",
         "answer": "多くのH ロボットのデータを用いてピッキングの問題点を改善するため",
-        "limit": null,
+        "limit": 40,
         "source": {
           "answerPage": 2,
           "table": 1,

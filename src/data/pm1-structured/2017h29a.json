@@ -8,7 +8,7 @@
       {
         "label": "設問1",
         "answer": "契約管理システムでマイナンバー申告書の印刷を制御するため",
-        "limit": null,
+        "limit": 35,
         "source": {
           "answerPage": 1,
           "table": 0,
@@ -19,7 +19,7 @@
       {
         "label": "設問2",
         "answer": "訂正支払調書を格納したCD を作成するため",
-        "limit": null,
+        "limit": 25,
         "source": {
           "answerPage": 1,
           "table": 0,
@@ -30,7 +30,7 @@
       {
         "label": "設問3（1）",
         "answer": "契約者マイナンバー又は受取人マイナンバーが空白である顧客番号",
-        "limit": null,
+        "limit": 35,
         "source": {
           "answerPage": 1,
           "table": 0,
@@ -52,7 +52,7 @@
       {
         "label": "設問3（2）・理由",
         "answer": "A 社にマイナンバー申告書が届いていない顧客を対象とするから",
-        "limit": null,
+        "limit": 35,
         "source": {
           "answerPage": 1,
           "table": 0,
@@ -74,7 +74,7 @@
       {
         "label": "設問4（1）・理由",
         "answer": "支払調書を提出してから7 年後の日付を設定する必要があるから",
-        "limit": null,
+        "limit": 35,
         "source": {
           "answerPage": 1,
           "table": 0,
@@ -85,7 +85,7 @@
       {
         "label": "設問4（2）",
         "answer": "顧客からマイナンバーの変更の連絡があった場合に削除するため",
-        "limit": null,
+        "limit": 35,
         "source": {
           "answerPage": 1,
           "table": 0,
@@ -98,7 +98,7 @@
       {
         "label": "設問1（1）",
         "answer": "設備機械，作業者などの生産能力の状況",
-        "limit": null,
+        "limit": 20,
         "source": {
           "answerPage": 1,
           "table": 1,
@@ -131,7 +131,7 @@
       {
         "label": "設問2（1）",
         "answer": "加工オーダの作業工程ごとの着手予定日，完了予定日",
-        "limit": null,
+        "limit": 30,
         "source": {
           "answerPage": 1,
           "table": 1,
@@ -142,7 +142,7 @@
       {
         "label": "設問2（2）",
         "answer": "作業工程で使用する設備機械",
-        "limit": null,
+        "limit": 15,
         "source": {
           "answerPage": 1,
           "table": 1,
@@ -175,7 +175,7 @@
       {
         "label": "設問4・生産技術部門",
         "answer": "製造基準の見直しや製造方法の改善",
-        "limit": null,
+        "limit": 20,
         "source": {
           "answerPage": 1,
           "table": 1,
@@ -186,7 +186,7 @@
       {
         "label": "設問4・経理部門",
         "answer": "原価計算処理の加工費計算",
-        "limit": null,
+        "limit": 20,
         "source": {
           "answerPage": 1,
           "table": 1,
@@ -199,7 +199,7 @@
       {
         "label": "設問1（1）",
         "answer": "制度改正に対して人事給与パッケージの標準保守で対応できるようにしたいから",
-        "limit": null,
+        "limit": 40,
         "source": {
           "answerPage": 2,
           "table": 0,
@@ -221,7 +221,7 @@
       {
         "label": "設問2（1）",
         "answer": "前月の出勤簿の記録を庶務事務システムに入力，確定する作業",
-        "limit": null,
+        "limit": 35,
         "source": {
           "answerPage": 2,
           "table": 0,
@@ -232,7 +232,7 @@
       {
         "label": "設問2（2）",
         "answer": "毎朝の出勤時間帯にアクセスが集中するから",
-        "limit": null,
+        "limit": 25,
         "source": {
           "answerPage": 2,
           "table": 0,
@@ -243,7 +243,7 @@
       {
         "label": "設問3（1）",
         "answer": "PC が貸与されていない職員に給与支給明細書を印刷して配布するから",
-        "limit": null,
+        "limit": 40,
         "source": {
           "answerPage": 2,
           "table": 0,
@@ -254,7 +254,7 @@
       {
         "label": "設問3（2）",
         "answer": "一括支給を毎月支給に変更する。",
-        "limit": null,
+        "limit": 20,
         "source": {
           "answerPage": 2,
           "table": 0,
@@ -265,7 +265,7 @@
       {
         "label": "設問3（3）・状況",
         "answer": "支給対象期間中に，世帯の区分の変更，支給対象地域をまたぐ異動などが生じた場合",
-        "limit": null,
+        "limit": 40,
         "source": {
           "answerPage": 2,
           "table": 0,
@@ -276,7 +276,7 @@
       {
         "label": "設問3（3）・機能",
         "answer": "追給及び返納の機能",
-        "limit": null,
+        "limit": 15,
         "source": {
           "answerPage": 2,
           "table": 0,
@@ -289,7 +289,7 @@
       {
         "label": "設問1（1）・①",
         "answer": "・環境モニタリング機能",
-        "limit": null,
+        "limit": 15,
         "source": {
           "answerPage": 2,
           "table": 1,
@@ -300,7 +300,7 @@
       {
         "label": "設問1（1）・②",
         "answer": "・無線LAN 中継機能",
-        "limit": null,
+        "limit": 15,
         "source": {
           "answerPage": 2,
           "table": 1,
@@ -311,7 +311,7 @@
       {
         "label": "設問1（2）",
         "answer": "隣接するモニタリングポストの発電量データと比較する。",
-        "limit": null,
+        "limit": 30,
         "source": {
           "answerPage": 2,
           "table": 1,
@@ -322,7 +322,7 @@
       {
         "label": "設問2（1）・(a)",
         "answer": "データ通信切断時に自動的に走行を停止する。",
-        "limit": null,
+        "limit": 25,
         "source": {
           "answerPage": 2,
           "table": 1,
@@ -333,7 +333,7 @@
       {
         "label": "設問2（1）・(b)",
         "answer": "サーバがデータを受け取ったことを確認する機能",
-        "limit": null,
+        "limit": 25,
         "source": {
           "answerPage": 2,
           "table": 1,
@@ -344,7 +344,7 @@
       {
         "label": "設問2（2）・(a)",
         "answer": "モニタリングポストの位置情報",
-        "limit": null,
+        "limit": 20,
         "source": {
           "answerPage": 2,
           "table": 1,
@@ -355,7 +355,7 @@
       {
         "label": "設問2（2）・(b)",
         "answer": "データ送受信の遅延による位置ずれ",
-        "limit": null,
+        "limit": 20,
         "source": {
           "answerPage": 2,
           "table": 1,
@@ -366,7 +366,7 @@
       {
         "label": "設問2（3）",
         "answer": "前方の障害物を高精度に検出できる。",
-        "limit": null,
+        "limit": 20,
         "source": {
           "answerPage": 2,
           "table": 1,
@@ -377,7 +377,7 @@
       {
         "label": "設問3・データ",
         "answer": "農業機械の動作履歴",
-        "limit": null,
+        "limit": 10,
         "source": {
           "answerPage": 2,
           "table": 1,
@@ -388,7 +388,7 @@
       {
         "label": "設問3・機能",
         "answer": "故障予測",
-        "limit": null,
+        "limit": 10,
         "source": {
           "answerPage": 2,
           "table": 1,
@@ -399,7 +399,7 @@
       {
         "label": "設問4",
         "answer": "高い応答性が要求される。",
-        "limit": null,
+        "limit": 15,
         "source": {
           "answerPage": 2,
           "table": 1,

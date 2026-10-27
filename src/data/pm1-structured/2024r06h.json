@@ -8,7 +8,7 @@
       {
         "label": "設問1（1）",
         "answer": "製品を期日までに製造するために逆算して各工程の製造開始日時を決めるから",
-        "limit": null,
+        "limit": 40,
         "source": {
           "answerPage": 1,
           "table": 0,
@@ -41,7 +41,7 @@
       {
         "label": "設問2（1）",
         "answer": "製品と仕掛品は“無”，原材料は“有”に設定する。",
-        "limit": null,
+        "limit": 30,
         "source": {
           "answerPage": 1,
           "table": 0,
@@ -74,7 +74,7 @@
       {
         "label": "設問2（2）・要件",
         "answer": "一つの製品を1 日に複数回製造する場合があるという要件",
-        "limit": null,
+        "limit": 30,
         "source": {
           "answerPage": 1,
           "table": 0,
@@ -85,7 +85,7 @@
       {
         "label": "設問2（3）",
         "answer": "発注書の様式をA 社で定めた様式に変更すること",
-        "limit": null,
+        "limit": 25,
         "source": {
           "answerPage": 1,
           "table": 0,
@@ -96,7 +96,7 @@
       {
         "label": "設問3（1）",
         "answer": "製造担当者が月末に記録表を参照し，まとめて生産管理システムに入力する作業",
-        "limit": null,
+        "limit": 40,
         "source": {
           "answerPage": 1,
           "table": 0,
@@ -107,7 +107,7 @@
       {
         "label": "設問3（2）",
         "answer": "前日までの実績を反映した管理指標値が参照可能になった。",
-        "limit": null,
+        "limit": 30,
         "source": {
           "answerPage": 1,
           "table": 0,
@@ -120,7 +120,7 @@
       {
         "label": "設問1",
         "answer": "次回の実約定日に振替先口座がある金融機関の口振結果営業日数を足す。",
-        "limit": null,
+        "limit": 40,
         "source": {
           "answerPage": 1,
           "table": 1,
@@ -142,7 +142,7 @@
       {
         "label": "設問3（1）",
         "answer": "ボーナス月の変更によってボーナス月が 1 年に 3 回以上とならないようにすること",
-        "limit": null,
+        "limit": 40,
         "source": {
           "answerPage": 1,
           "table": 1,
@@ -153,7 +153,7 @@
       {
         "label": "設問3（2）",
         "answer": "住所変更の有無",
-        "limit": null,
+        "limit": 10,
         "source": {
           "answerPage": 1,
           "table": 1,
@@ -164,7 +164,7 @@
       {
         "label": "設問3（3）・条件①",
         "answer": "電話番号ステータスが“無効”であること",
-        "limit": null,
+        "limit": 25,
         "source": {
           "answerPage": 1,
           "table": 1,
@@ -175,7 +175,7 @@
       {
         "label": "設問3（3）・条件②",
         "answer": "収入証明書有効期限が3 か月以内に到来すること",
-        "limit": null,
+        "limit": 25,
         "source": {
           "answerPage": 1,
           "table": 1,
@@ -186,7 +186,7 @@
       {
         "label": "設問4（1）",
         "answer": "勤務先変更理由が，転職，転籍又は退職の場合",
-        "limit": null,
+        "limit": 25,
         "source": {
           "answerPage": 1,
           "table": 1,
@@ -197,7 +197,7 @@
       {
         "label": "設問4（2）",
         "answer": "契約ステータスが“解約予約”で借入残高が0 円であること",
-        "limit": null,
+        "limit": 30,
         "source": {
           "answerPage": 1,
           "table": 1,
@@ -210,7 +210,7 @@
       {
         "label": "設問1",
         "answer": "登校時と下校時で別の登下校用端末を使用した場合",
-        "limit": null,
+        "limit": 30,
         "source": {
           "answerPage": 2,
           "table": 0,
@@ -221,7 +221,7 @@
       {
         "label": "設問2（1）",
         "answer": "登下校通知メールに写真を添付する要望",
-        "limit": null,
+        "limit": 25,
         "source": {
           "answerPage": 2,
           "table": 0,
@@ -232,7 +232,7 @@
       {
         "label": "設問2（2）",
         "answer": "保護者メールアドレスが同一の複数の生徒が，別々の拠点に所属している場合",
-        "limit": null,
+        "limit": 40,
         "source": {
           "answerPage": 2,
           "table": 0,
@@ -254,7 +254,7 @@
       {
         "label": "設問3（1）・変更内容",
         "answer": "全ての生徒の保護者メールアドレスを設定するように変更する。",
-        "limit": null,
+        "limit": 35,
         "source": {
           "answerPage": 2,
           "table": 0,
@@ -265,7 +265,7 @@
       {
         "label": "設問3（2）",
         "answer": "登下校通知メールの送信が遅延する。",
-        "limit": null,
+        "limit": 20,
         "source": {
           "answerPage": 2,
           "table": 0,
@@ -287,7 +287,7 @@
       {
         "label": "設問3（3） ①・変更内容",
         "answer": "拠点名を登下校履歴ファイルの拠点コードから取得するように変更する。",
-        "limit": null,
+        "limit": 40,
         "source": {
           "answerPage": 2,
           "table": 0,
@@ -309,7 +309,7 @@
       {
         "label": "設問3（3） ②・変更内容",
         "answer": "登下校日時が当日で，拠点コードが自拠点のものを抽出するように変更する。",
-        "limit": null,
+        "limit": 40,
         "source": {
           "answerPage": 2,
           "table": 0,

@@ -8,7 +8,7 @@
       {
         "label": "設問1（1）",
         "answer": "開催5 週間前に案内メールを送付する運用",
-        "limit": null,
+        "limit": 25,
         "source": {
           "answerPage": 1,
           "table": 0,
@@ -19,7 +19,7 @@
       {
         "label": "設問1（2）",
         "answer": "人事部から情報を入手し次第，受講者に案内メールを送付する。",
-        "limit": null,
+        "limit": 35,
         "source": {
           "answerPage": 1,
           "table": 0,
@@ -30,7 +30,7 @@
       {
         "label": "設問1（3）・受講者",
         "answer": "人事異動の発令を受けた社員",
-        "limit": null,
+        "limit": 20,
         "source": {
           "answerPage": 1,
           "table": 0,
@@ -41,7 +41,7 @@
       {
         "label": "設問1（3）・タイミング",
         "answer": "異動発令日の3 営業日前から前日までに開催される講座",
-        "limit": null,
+        "limit": 30,
         "source": {
           "answerPage": 1,
           "table": 0,
@@ -52,7 +52,7 @@
       {
         "label": "設問2（1）",
         "answer": "当期推奨講座一覧から受講管理システムに連携すること",
-        "limit": null,
+        "limit": 30,
         "source": {
           "answerPage": 1,
           "table": 0,
@@ -107,7 +107,7 @@
       {
         "label": "設問2（3）",
         "answer": "主キーが異なる二つの情報を，どう照合するかという課題",
-        "limit": null,
+        "limit": 30,
         "source": {
           "answerPage": 1,
           "table": 0,
@@ -118,7 +118,7 @@
       {
         "label": "設問3・機能",
         "answer": "過去3 年間の年間受講日数一覧表を出力する機能",
-        "limit": null,
+        "limit": 25,
         "source": {
           "answerPage": 1,
           "table": 0,
@@ -129,7 +129,7 @@
       {
         "label": "設問3・不具合の内容",
         "answer": "講座日数の変更が行われたときに年間受講日数が正しく計算できない不具合",
-        "limit": null,
+        "limit": 40,
         "source": {
           "answerPage": 1,
           "table": 0,
@@ -142,7 +142,7 @@
       {
         "label": "設問1",
         "answer": "登録された文書を上司が確認し，承認する機能",
-        "limit": null,
+        "limit": 25,
         "source": {
           "answerPage": 1,
           "table": 1,
@@ -153,7 +153,7 @@
       {
         "label": "設問2",
         "answer": "年度初めに年間の開示請求件数の約半数が集中すること",
-        "limit": null,
+        "limit": 30,
         "source": {
           "answerPage": 1,
           "table": 1,
@@ -164,7 +164,7 @@
       {
         "label": "設問3（1）",
         "answer": "新システムでは，まず，開示請求が多く開示可能な文書だけを対象にするから",
-        "limit": null,
+        "limit": 40,
         "source": {
           "answerPage": 1,
           "table": 1,
@@ -175,7 +175,7 @@
       {
         "label": "設問3（2）",
         "answer": "運用作業による連携頻度を少なくしたいから",
-        "limit": null,
+        "limit": 25,
         "source": {
           "answerPage": 1,
           "table": 1,
@@ -186,7 +186,7 @@
       {
         "label": "設問4（1）",
         "answer": "情報提供先に電話で連絡することができるようにすること",
-        "limit": null,
+        "limit": 30,
         "source": {
           "answerPage": 1,
           "table": 1,
@@ -197,7 +197,7 @@
       {
         "label": "設問4（2）",
         "answer": "初めての利用でも手続が簡単で即時に文書を取得できること",
-        "limit": null,
+        "limit": 35,
         "source": {
           "answerPage": 1,
           "table": 1,
@@ -208,7 +208,7 @@
       {
         "label": "設問4（3）",
         "answer": "利用者には事業者が多く，携帯電話番号を入力できない場合があるから",
-        "limit": null,
+        "limit": 35,
         "source": {
           "answerPage": 1,
           "table": 1,
@@ -221,7 +221,7 @@
       {
         "label": "設問1（1）・チェック内容",
         "answer": "カード発行依頼書に記載された自動車登録番号と一致するレコードがないこと",
-        "limit": null,
+        "limit": 40,
         "source": {
           "answerPage": 2,
           "table": 0,
@@ -232,7 +232,7 @@
       {
         "label": "設問1（1）・業務上の理由",
         "answer": "1 車両につきカードを1 枚だけ発行するから",
-        "limit": null,
+        "limit": 25,
         "source": {
           "answerPage": 2,
           "table": 0,
@@ -254,7 +254,7 @@
       {
         "label": "設問1（2）・利用目的",
         "answer": "カード有効期限年月を算出すること",
-        "limit": null,
+        "limit": 20,
         "source": {
           "answerPage": 2,
           "table": 0,
@@ -276,7 +276,7 @@
       {
         "label": "設問2（1） ①・抽出条件",
         "answer": "“利用中”であること",
-        "limit": null,
+        "limit": 20,
         "source": {
           "answerPage": 2,
           "table": 0,
@@ -298,7 +298,7 @@
       {
         "label": "設問2（1） ②・抽出条件",
         "answer": "請求対象の月と同一の月であること",
-        "limit": null,
+        "limit": 20,
         "source": {
           "answerPage": 2,
           "table": 0,
@@ -309,7 +309,7 @@
       {
         "label": "設問2（2）",
         "answer": "発行理由が“磁気不良”又は“破損”であるカード",
-        "limit": null,
+        "limit": 30,
         "source": {
           "answerPage": 2,
           "table": 0,
@@ -320,7 +320,7 @@
       {
         "label": "設問3（1）・情報",
         "answer": "顧客の営業日",
-        "limit": null,
+        "limit": 10,
         "source": {
           "answerPage": 2,
           "table": 0,
@@ -331,7 +331,7 @@
       {
         "label": "設問3（1）・データ",
         "answer": "通行記録の利用日が顧客の営業日以外であるデータ",
-        "limit": null,
+        "limit": 30,
         "source": {
           "answerPage": 2,
           "table": 0,
@@ -342,7 +342,7 @@
       {
         "label": "設問3（2）",
         "answer": "通行記録のカード番号と自動車登録番号の組合せが，カードデータの情報と異なるデータ",
-        "limit": null,
+        "limit": 45,
         "source": {
           "answerPage": 2,
           "table": 0,
@@ -377,7 +377,7 @@
       {
         "label": "設問1（2）",
         "answer": "コンテナの移動を可能な限りNCT キャリアで行うようにする。",
-        "limit": null,
+        "limit": 35,
         "source": {
           "answerPage": 2,
           "table": 1,
@@ -388,7 +388,7 @@
       {
         "label": "設問1（3）",
         "answer": "T クレーンとNCT キャリアの移動を同期させる必要がないから",
-        "limit": null,
+        "limit": 35,
         "source": {
           "answerPage": 2,
           "table": 1,
@@ -399,7 +399,7 @@
       {
         "label": "設問2（1）",
         "answer": "トレーラ連結車の到着の順番が変わったこと",
-        "limit": null,
+        "limit": 25,
         "source": {
           "answerPage": 2,
           "table": 1,
@@ -410,7 +410,7 @@
       {
         "label": "設問2（2）",
         "answer": "各々のトレーラ連結車の走行状態のデータ",
-        "limit": null,
+        "limit": 25,
         "source": {
           "answerPage": 2,
           "table": 1,
@@ -421,7 +421,7 @@
       {
         "label": "設問3（1）",
         "answer": "荷役スケジュールの組替えの高頻度化",
-        "limit": null,
+        "limit": 20,
         "source": {
           "answerPage": 2,
           "table": 1,
@@ -432,7 +432,7 @@
       {
         "label": "設問3（2）",
         "answer": "データの蓄積が進むので精度は向上する。",
-        "limit": null,
+        "limit": 25,
         "source": {
           "answerPage": 2,
           "table": 1,
@@ -443,7 +443,7 @@
       {
         "label": "設問3（3）",
         "answer": "衝突しないようにスケジューリングしてNCT キャリアに指示する。",
-        "limit": null,
+        "limit": 35,
         "source": {
           "answerPage": 2,
           "table": 1,
