@@ -1,0 +1,434 @@
+{
+  "yearId": "2019r01a",
+  "officialAnswerUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/gmcbt8000000dict-att/2019r01a_sa_pm1_ans.pdf",
+  "answerSha256": "d1013d115f2d4aaef6493c7c3de6c3975923767880f39036087d3d0d7f29f896",
+  "questionSha256": "f6feb24f9ae4c267ab8be1ec5592c74dd33223d810b47d83e5c239f4c240e5c3",
+  "questions": {
+    "1": [
+      {
+        "label": "設問1・a",
+        "answer": "マーケティング部",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 1
+        },
+        "id": "f001"
+      },
+      {
+        "label": "設問1・理由",
+        "answer": "体組成計の購入者情報及びアンケート情報を管理しているから",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 2
+        },
+        "id": "f002"
+      },
+      {
+        "label": "設問2",
+        "answer": "利用者側の視点から新サービスで必要とされる具体的な機能を考え出すため",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 3
+        },
+        "id": "f003"
+      },
+      {
+        "label": "設問3（1）",
+        "answer": "利用者に継続的にコミュニティ活動を行ってもらうこと",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 4
+        },
+        "id": "f004"
+      },
+      {
+        "label": "設問3（2）・b",
+        "answer": "活動量",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 5
+        },
+        "id": "f005"
+      },
+      {
+        "label": "設問3（3）",
+        "answer": "利用者によっては，一部のデータは共有したくないから",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 6
+        },
+        "id": "f006"
+      },
+      {
+        "label": "設問4（1）",
+        "answer": "B-4",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 7
+        },
+        "id": "f007"
+      },
+      {
+        "label": "設問4（2）・c",
+        "answer": "利用者の健康づくり",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 8
+        },
+        "id": "f008"
+      },
+      {
+        "label": "設問4（3）",
+        "answer": "段階的に新サービスの機能を拡充させることにしたから",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 0,
+          "row": 9
+        },
+        "id": "f009"
+      }
+    ],
+    "2": [
+      {
+        "label": "設問1（1）",
+        "answer": "未使用，合格",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 1
+        },
+        "id": "f001"
+      },
+      {
+        "label": "設問1（2）",
+        "answer": "容器種コード，容器一個当たり標準充填量",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 2
+        },
+        "id": "f002"
+      },
+      {
+        "label": "設問2（1）・一致するケース",
+        "answer": "RF タグの一括読込みで読込み漏れが発生したとき",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 3
+        },
+        "id": "f003"
+      },
+      {
+        "label": "設問2（1）・不一致になるケース",
+        "answer": "容器返却書の容器返却数と実際の容器の数が違っているとき",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 4
+        },
+        "id": "f004"
+      },
+      {
+        "label": "設問2（2）",
+        "answer": "書込みロックを外して，容器情報領域をクリアする処理",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 5
+        },
+        "id": "f005"
+      },
+      {
+        "label": "設問3（1）",
+        "answer": "受注伝票番号，製品コード",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 6
+        },
+        "id": "f006"
+      },
+      {
+        "label": "設問3（2）・a",
+        "answer": "出荷実績を計上する",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 7
+        },
+        "id": "f007"
+      },
+      {
+        "label": "設問3（3）・b",
+        "answer": "出荷",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 8
+        },
+        "id": "f008"
+      },
+      {
+        "label": "設問3（3）・c",
+        "answer": "充填日から製品使用可能日数後の日付",
+        "limit": null,
+        "source": {
+          "answerPage": 1,
+          "table": 1,
+          "row": 9
+        },
+        "id": "f009"
+      }
+    ],
+    "3": [
+      {
+        "label": "設問1（1）・①",
+        "answer": "・出荷までに校正が完了する機器",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 1
+        },
+        "id": "f001"
+      },
+      {
+        "label": "設問1（1）・②",
+        "answer": "・レンタル終了予定日が校正有効期限を超えない機器",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 1
+        },
+        "id": "f002"
+      },
+      {
+        "label": "設問1（2）・①",
+        "answer": "・決裁が下りていること",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 2
+        },
+        "id": "f003"
+      },
+      {
+        "label": "設問1（2）・②",
+        "answer": "・レンタル開始希望日まで15 日以内であること",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 2
+        },
+        "id": "f004"
+      },
+      {
+        "label": "設問2（1）",
+        "answer": "付属品が欠けている機器",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 3
+        },
+        "id": "f005"
+      },
+      {
+        "label": "設問2（2）",
+        "answer": "機器の状態を顧客と合意する必要があるから",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 4
+        },
+        "id": "f006"
+      },
+      {
+        "label": "設問3・①",
+        "answer": "・レンタル期間が6 か月以上であること",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 5
+        },
+        "id": "f007"
+      },
+      {
+        "label": "設問3・②",
+        "answer": "・3 か月後がレンタル期間満了月であること",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 5
+        },
+        "id": "f008"
+      },
+      {
+        "label": "設問4",
+        "answer": "延長しない場合は毎月15 日までに営業担当者が必要な処理をするから",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 6
+        },
+        "id": "f009"
+      },
+      {
+        "label": "設問5・機能",
+        "answer": "自動引当機能",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 7
+        },
+        "id": "f010"
+      },
+      {
+        "label": "設問5・利用する目的",
+        "answer": "購入した機器を対象の受注情報に引当すること",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 0,
+          "row": 8
+        },
+        "id": "f011"
+      }
+    ],
+    "4": [
+      {
+        "label": "設問1（1）",
+        "answer": "ピッキングを確実にしたいから",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 1,
+          "row": 1
+        },
+        "id": "f001"
+      },
+      {
+        "label": "設問1（2）",
+        "answer": "商品の収納にフローラックを用いたこと",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 1,
+          "row": 2
+        },
+        "id": "f002"
+      },
+      {
+        "label": "設問2（1）",
+        "answer": "マーカとフローラックを対応させた情報",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 1,
+          "row": 3
+        },
+        "id": "f003"
+      },
+      {
+        "label": "設問2（2）",
+        "answer": "配送先ごとの個別商品情報",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 1,
+          "row": 4
+        },
+        "id": "f004"
+      },
+      {
+        "label": "設問3（1）・a",
+        "answer": "動画撮影",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 1,
+          "row": 5
+        },
+        "id": "f005"
+      },
+      {
+        "label": "設問3（1）・b",
+        "answer": "配送箱からのはみ出し",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 1,
+          "row": 6
+        },
+        "id": "f006"
+      },
+      {
+        "label": "設問3（2）",
+        "answer": "H ロボットの充電を最適なスケジューリングで行うため",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 1,
+          "row": 7
+        },
+        "id": "f007"
+      },
+      {
+        "label": "設問3（3）",
+        "answer": "H ロボットの位置情報",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 1,
+          "row": 8
+        },
+        "id": "f008"
+      },
+      {
+        "label": "設問3（4）",
+        "answer": "多くのH ロボットのデータを用いてピッキングの問題点を改善するため",
+        "limit": null,
+        "source": {
+          "answerPage": 2,
+          "table": 1,
+          "row": 9
+        },
+        "id": "f009"
+      }
+    ]
+  }
+}
