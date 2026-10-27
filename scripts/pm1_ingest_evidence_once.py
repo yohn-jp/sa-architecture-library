@@ -54,22 +54,29 @@ def answer_url(source):
     return found[0]
 
 def get_ocr(pdf_bytes):
-    document = fitz.open(stream=pdf_bytes,filetype='pdf')
-    def page_ocr(page_no):
-        page = document[page_no]
-        extracted = page.get_text('text',sort=True).strip()
-        if len(extracted) > 350:
-            return {'page':page_no+1, 'method':'embedded', 'text':extracted}
-        pix = page.get_pixmap(matrix=fitz.Matrix(1.7,1.7),alpha=False,colorspace=fitz.csGRAY)
-        env = dict(os.environ);env['OMP_THREAD_LIMIT']='1'
-        done = subprocess.run(['tesseract','stdin','stdout','-l','jpn','--psm','6'],input=pix.tobytes('png'),stdout=subprocess.PIPE,stderr=subprocess.PIPE,env=env,timeout=70)
-        if done.returncode: raise RuntimeError(f"Page {page_no+1} OCR failed: {done.stderr.decode('utf8','replace')[:350]}")
+    # PyMuPDF documents are not thread-safe: render serially, OCR independently.
+    images=[]
+    with fitz.open(stream=pdf_bytes,filetype='pdf') as document:
+        for page_no,page in enumerate(document):
+            extracted=page.get_text('text',sort=True).strip()
+            if len(extracted)>350:
+                images.append((page_no,extracted,None))
+            else:
+                pix=page.get_pixmap(matrix=fitz.Matrix(1.7,1.7),alpha=False,colorspace=fitz.csGRAY)
+                images.append((page_no,None,pix.tobytes('png')))
+    def page_ocr(row):
+        page_no,extracted,png=row
+        if extracted is not None:
+            return {'page':page_no+1,'method':'embedded','text':extracted}
+        env=dict(os.environ);env['OMP_THREAD_LIMIT']='1'
+        done=subprocess.run(['tesseract','stdin','stdout','-l','jpn','--psm','6'],
+            input=png,stdout=subprocess.PIPE,stderr=subprocess.PIPE,env=env,timeout=70)
+        if done.returncode:
+            raise RuntimeError(f"Page {page_no+1} OCR failed: {done.stderr.decode('utf8','replace')[:350]}")
         return {'page':page_no+1,'method':'jpn-ocr','text':done.stdout.decode('utf8','replace').strip()}
-    try:
-        with ThreadPoolExecutor(max_workers=4) as pool:
-            work=[pool.submit(page_ocr,i) for i in range(len(document))]
-            return sorted((f.result() for f in as_completed(work)),key=lambda p:p['page'])
-    finally:document.close()
+    with ThreadPoolExecutor(max_workers=4) as pool:
+        work=[pool.submit(page_ocr,row) for row in images]
+        return sorted((f.result() for f in as_completed(work)),key=lambda p:p['page'])
 
 def get_answer(pdf_bytes):
     document=fitz.open(stream=pdf_bytes,filetype='pdf')
