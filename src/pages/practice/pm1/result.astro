@@ -1,0 +1,110 @@
+---
+import SiteLayout from '../../../layouts/SiteLayout.astro';
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+---
+<SiteLayout title="午後Ⅰ 演習答案" description="午後ⅠCBT型演習で保存した記述答案を採点せずに振り返ります。">
+  <link slot="head" rel="stylesheet" href={base + 'practice-ui.css'} />
+  <link slot="head" rel="stylesheet" href={base + 'pm1-ui.css'} />
+  <div class="practice-shell pm1-result">
+    <nav class="practice-breadcrumb" aria-label="現在の位置">
+      <a href={base + 'practice/'}>演習</a><span aria-hidden="true">/</span>
+      <a id="setup-link" href={base + 'practice/pm1/'}>午後Ⅰ</a><span aria-hidden="true">/</span>
+      <span aria-current="page">答案確認</span>
+    </nav>
+    <header class="practice-intro">
+      <p class="eyebrow">AFTERNOON I / WRITTEN RESPONSES</p>
+      <h1>演習答案の確認</h1>
+      <p>入力した解答を設問ごとに表示します。**採点・得点予測は行いません。**</p>
+    </header>
+    <section class="practice-card pm1-result-overview" aria-label="演習結果の概要">
+      <h2 id="year-heading">午後Ⅰ</h2>
+      <dl>
+        <div><dt>選択問題</dt><dd id="chosen-questions">—</dd></div>
+        <div><dt>記述済み解答欄</dt><dd id="answer-count">—</dd></div>
+        <div><dt>経過時間</dt><dd id="elapsed">—</dd></div>
+      </dl>
+      <p class="practice-note">自己確認用の記録です。公式解答例との照合や評価は含まれていません。</p>
+    </section>
+    <section id="result-questions" class="pm1-result-questions" aria-label="保存した記述解答"></section>
+    <div class="pm1-result-actions">
+      <a id="source-pdf" class="practice-button secondary" href={base + 'practice/pm1/'} target="_blank" rel="noopener noreferrer">公式問題冊子を開く</a>
+      <a id="source-page" href="https://www.ipa.go.jp/shiken/mondai-kaiotu/" target="_blank" rel="noopener noreferrer">IPA配布ページ</a>
+      <a id="back" href={base + 'practice/pm1/'}>年度を選択・新しい演習を開始 →</a>
+    </div>
+    <p id="result-error" class="practice-error" role="alert" hidden></p>
+  </div>
+  <noscript><p>保存した答案の確認にはJavaScriptが必要です。</p></noscript>
+</SiteLayout>
+
+<script>
+  import { findPm1Year } from '../../../data/pm1';
+  import {
+    loadPm1Session, pm1Expired, finishPm1Session, countPm1Answers, formatPm1Clock
+  } from '../../../lib/pm1-session';
+  import type { Pm1Session } from '../../../lib/pm1-session';
+  const $ = (id: string) => document.getElementById(id)!;
+  const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+  const year = findPm1Year(new URLSearchParams(location.search).get('year'));
+  let session = year ? loadPm1Session(year.id) : null;
+  const setupUrl = base + 'practice/pm1/' + (year ? '?year=' + encodeURIComponent(year.id) : '');
+  const examUrl = base + 'practice/pm1/exam/?year=' + encodeURIComponent(year?.id ?? '');
+
+  function render(complete: Pm1Session): void {
+    if (!year) return;
+    $('year-heading').textContent = year.label;
+    $('chosen-questions').textContent = complete.selected.map(n => '問' + n).join('・');
+    $('answer-count').textContent = countPm1Answers(complete) + '欄';
+    const seconds = Math.floor(Math.min(
+      complete.finishedAt! - complete.startedAt, 90 * 60 * 1000
+    ) / 1000);
+    $('elapsed').textContent = formatPm1Clock(seconds);
+    ($('source-pdf') as HTMLAnchorElement).href = base + 'practice/pm1/pdfs/' + year.id + '.pdf';
+    ($('source-page') as HTMLAnchorElement).href = year.sourcePage;
+    ($('back') as HTMLAnchorElement).href = setupUrl;
+    ($('setup-link') as HTMLAnchorElement).href = setupUrl;
+
+    const root = $('result-questions');
+    root.replaceChildren();
+    for (const number of complete.selected) {
+      const section = document.createElement('section');
+      section.className = 'pm1-result-section';
+      const heading = document.createElement('h2');
+      heading.textContent = '問' + number;
+      section.append(heading);
+      for (const answer of complete.answers[String(number)]) {
+        const card = document.createElement('article');
+        card.className = 'pm1-result-answer';
+        const row = document.createElement('div');
+        row.className = 'pm1-result-answer-top';
+        const label = document.createElement('strong');
+        label.textContent = answer.label;
+        const count = document.createElement('span');
+        count.textContent = String(Array.from(answer.text).length) + (answer.limit === null ? '字' : ' / ' + answer.limit + '字');
+        if (answer.limit !== null && Array.from(answer.text).length > answer.limit) count.className = 'is-over';
+        row.append(label, count);
+        const text = document.createElement('p');
+        text.className = 'pm1-result-text';
+        text.textContent = answer.text.trim() || '（未記入）';
+        card.append(row, text);
+        section.append(card);
+      }
+      root.append(section);
+    }
+  }
+
+  if (!year || !session) {
+    location.replace(setupUrl);
+  } else if (session.finishedAt === null && !pm1Expired(session)) {
+    location.replace(examUrl);
+  } else {
+    if (session.finishedAt === null) {
+      const updated = finishPm1Session(session);
+      if (updated) session = updated;
+      else {
+        $('result-error').textContent = '演習終了状態を保存できませんでした。ブラウザの保存先を確認してください。';
+        $('result-error').hidden = false;
+      }
+    }
+    if (session.finishedAt !== null) render(session);
+  }
+</script>

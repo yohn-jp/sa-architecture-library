@@ -1,0 +1,154 @@
+---
+import SiteLayout from '../../../layouts/SiteLayout.astro';
+import { pm1Years } from '../../../data/pm1';
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+---
+<SiteLayout title="午後Ⅰ CBT型記述演習" description="システムアーキテクト午後Ⅰ。公式過去問題をPCで読み、記述答案を入力する90分演習。採点機能はありません。">
+  <link slot="head" rel="stylesheet" href={base + 'practice-ui.css'} />
+  <link slot="head" rel="stylesheet" href={base + 'pm1-ui.css'} />
+  <div class="practice-shell pm1-setup">
+    <nav class="practice-breadcrumb" aria-label="現在の位置">
+      <a href={base + 'practice/'}>演習</a><span aria-hidden="true">/</span><span aria-current="page">午後Ⅰ</span>
+    </nav>
+    <header class="practice-intro">
+      <p class="eyebrow">SYSTEM ARCHITECT / AFTERNOON I</p>
+      <h1>午後Ⅰ 記述演習</h1>
+      <p>IPAの公式問題冊子を画面で読み、2問を選んでキーボードで回答する練習です。採点は行いません。問題冊子はこのサイトに収録した原本PDFを使用します。</p>
+    </header>
+    <div class="practice-steps" aria-label="演習の進め方">
+      <div class="practice-step"><b>01 / SELECT</b><strong>年度と2問を選択</strong><p>設問は原本の問題冊子で確認します。</p></div>
+      <div class="practice-step"><b>02 / WRITE</b><strong>PCで記述解答</strong><p>問題文と答案を左右に並べ、90分を計測します。</p></div>
+      <div class="practice-step"><b>03 / REVIEW</b><strong>自分の答案を確認</strong><p>採点せず、入力した記述をそのまま保持します。</p></div>
+    </div>
+    <section class="practice-card pm1-setup-card" aria-labelledby="year-heading">
+      <h2 id="year-heading">演習の設定</h2>
+      <label class="practice-label" for="year">年度を選択</label>
+      <select id="year" class="practice-year-select">
+        {pm1Years.map(year => <option value={year.id}>{year.label}</option>)}
+      </select>
+      <fieldset id="question-select" class="pm1-question-picker">
+        <legend class="practice-label">解答する2問を選択</legend>
+        <div id="choices" class="pm1-choices"></div>
+        <p id="choice-count" class="practice-note" aria-live="polite">2問選択してください</p>
+      </fieldset>
+      <div class="practice-status" aria-live="polite">
+        <strong id="session-status">新しい演習を開始できます</strong>
+        <p id="session-details">開始時から90分を計測します。</p>
+      </div>
+      <div class="practice-controls">
+        <button type="button" class="practice-button" id="primary">演習を開始 →</button>
+        <button type="button" class="practice-button secondary" id="new-attempt" hidden>新しい演習で上書き</button>
+      </div>
+      <p id="setup-error" class="practice-error" role="alert" hidden></p>
+      <p class="practice-note">解答欄は設問に合わせて追加・名称変更でき、文字数上限も手動指定できます。回答内容はこのブラウザのローカルストレージに保存されます。端末間の同期はできません。</p>
+      <p class="practice-note">途中でページを閉じても時計は止まりません。90分経過すると編集を終了します。</p>
+      <div class="pm1-source"><span id="source-label"></span><a id="official-source" href={pm1Years[0].sourcePage} target="_blank" rel="noopener noreferrer">IPA公式掲載ページ</a> / <a id="local-pdf" href={base + 'practice/pm1/pdfs/' + pm1Years[0].id + '.pdf'} target="_blank" rel="noopener noreferrer">収録PDFを開く</a></div>
+    </section>
+    <p class="pm1-back"><a href={base + 'practice/'}>演習一覧へ戻る</a></p>
+  </div>
+  <noscript><p>記述演習にはJavaScriptが必要です。問題冊子は上記リンクから閲覧できます。</p></noscript>
+</SiteLayout>
+
+<script>
+  import { pm1Years, findPm1Year, questionNumbers, PM1_SELECTION_COUNT } from '../../../data/pm1';
+  import { loadPm1Session, startPm1Session, remainingPm1Seconds, formatPm1Clock, countPm1Answers } from '../../../lib/pm1-session';
+
+  const $ = (id: string) => document.getElementById(id)!;
+  const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+  const yearSelect = $('year') as HTMLSelectElement;
+  const picker = $('choices');
+  const primary = $('primary') as HTMLButtonElement;
+  const newAttempt = $('new-attempt') as HTMLButtonElement;
+  const error = $('setup-error');
+  const initialYear = new URLSearchParams(location.search).get('year');
+  yearSelect.value = findPm1Year(initialYear)?.id ?? pm1Years[0].id;
+
+  function chosen(): number[] {
+    return [...picker.querySelectorAll<HTMLInputElement>('input[name="question"]:checked')]
+      .map(input => Number(input.value)).sort((a, b) => a - b);
+  }
+
+  function renderChoices(): void {
+    const year = findPm1Year(yearSelect.value)!;
+    const saved = loadPm1Session(year.id);
+    const defaults = saved?.selected ?? questionNumbers(year).slice(0, PM1_SELECTION_COUNT);
+    picker.replaceChildren();
+    for (const number of questionNumbers(year)) {
+      const label = document.createElement('label');
+      label.className = 'pm1-pick';
+      const input = document.createElement('input');
+      input.type = 'checkbox';
+      input.name = 'question';
+      input.value = String(number);
+      input.checked = defaults.includes(number);
+      label.append(input, document.createTextNode(' 問' + number));
+      picker.append(label);
+    }
+    updateSelection();
+  }
+
+  function updateSelection(): void {
+    const selected = chosen();
+    const count = selected.length;
+    $('choice-count').textContent = count + ' / ' + PM1_SELECTION_COUNT + '問選択';
+    const saved = loadPm1Session(yearSelect.value);
+    primary.disabled = !saved && count !== PM1_SELECTION_COUNT;
+    newAttempt.disabled = count !== PM1_SELECTION_COUNT;
+    for (const checkbox of picker.querySelectorAll<HTMLInputElement>('input[name="question"]')) {
+      checkbox.disabled = count >= PM1_SELECTION_COUNT && !checkbox.checked;
+    }
+  }
+
+  function displayState(): void {
+    const year = findPm1Year(yearSelect.value)!;
+    const saved = loadPm1Session(year.id);
+    $('source-label').textContent = year.label + ' / 問題冊子原本';
+    ($('official-source') as HTMLAnchorElement).href = year.sourcePage;
+    ($('local-pdf') as HTMLAnchorElement).href = base + 'practice/pm1/pdfs/' + year.id + '.pdf';
+    error.hidden = true;
+    newAttempt.hidden = !saved;
+    if (!saved) {
+      $('session-status').textContent = '新しい演習を開始できます';
+      $('session-details').textContent = '2問を選び、開始ボタンを押すと90分の計時を開始します。';
+      primary.textContent = '演習を開始 →';
+    } else if (saved.finishedAt !== null || remainingPm1Seconds(saved) === 0) {
+      $('session-status').textContent = '前回の演習答案があります';
+      $('session-details').textContent = '選択：問' + saved.selected.join('・問') + '。記述済み' + countPm1Answers(saved) + '欄。終了済みの答案を確認できます。';
+      primary.textContent = '答案を確認 →';
+    } else {
+      $('session-status').textContent = '進行中の演習があります';
+      $('session-details').textContent = '選択：問' + saved.selected.join('・問') + '。残り ' + formatPm1Clock(remainingPm1Seconds(saved)) + '。記述済み' + countPm1Answers(saved) + '欄。';
+      primary.textContent = '演習を再開 →';
+    }
+    updateSelection();
+  }
+
+  function begin(): void {
+    const selected = chosen();
+    if (selected.length !== PM1_SELECTION_COUNT) return;
+    const session = startPm1Session(yearSelect.value, selected);
+    if (!session) {
+      error.textContent = '回答を保存できませんでした。ブラウザの保存設定・空き容量を確認してください。';
+      error.hidden = false;
+      return;
+    }
+    location.assign(base + 'practice/pm1/exam/?year=' + encodeURIComponent(session.yearId));
+  }
+
+  picker.addEventListener('change', updateSelection);
+  yearSelect.addEventListener('change', () => { renderChoices(); displayState(); });
+  primary.addEventListener('click', () => {
+    const saved = loadPm1Session(yearSelect.value);
+    if (!saved) return begin();
+    const target = saved.finishedAt !== null || remainingPm1Seconds(saved) === 0 ? 'result/' : 'exam/';
+    location.assign(base + 'practice/pm1/' + target + '?year=' + encodeURIComponent(saved.yearId));
+  });
+  newAttempt.addEventListener('click', () => {
+    if (confirm('この年度の保存済み答案を上書きして、新しい90分演習を開始しますか？')) begin();
+  });
+  window.addEventListener('storage', event => {
+    if (event.key?.startsWith('sa-pm1-session-v1:')) displayState();
+  });
+  renderChoices();
+  displayState();
+</script>

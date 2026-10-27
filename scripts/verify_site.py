@@ -114,5 +114,31 @@ for year, info in manifest.items():
         crop = ROOT / 'practice/questions' / year / f'q{n:02}.webp'
         assert crop.is_file() and crop.stat().st_size > 1000, f'Missing or empty problem crop: {crop}'
 
+
+# PM1 PDFs are VENDORED in Git. Never fetch them during an ordinary build.
+sources = json.loads(Path('src/data/pm1-sources.json').read_text(encoding='utf-8'))
+pdf_manifest_path = ROOT / 'practice/pm1/pdfs/manifest.json'
+assert pdf_manifest_path.is_file(), 'PM1 committed PDF manifest is missing'
+pdf_manifest = json.loads(pdf_manifest_path.read_text(encoding='utf-8'))
+assert len(sources) == 3, 'Expected three verified afternoon-I years'
+assert set(pdf_manifest) == {year['id'] for year in sources}, 'PM1 PDF coverage mismatch'
+for year in sources:
+    year_id = year['id']
+    entry = pdf_manifest[year_id]
+    pdf = ROOT / 'practice/pm1/pdfs' / (year_id + '.pdf')
+    assert pdf.is_file(), f'PM1 original PDF missing: {year_id}'
+    data = pdf.read_bytes()
+    assert data.startswith(b'%PDF-') and b'%%EOF' in data[-2048:], f'Invalid original PDF: {year_id}'
+    assert len(data) == entry['bytes'] and len(data) > 100000, f'PM1 PDF size mismatch: {year_id}'
+    assert hashlib.sha256(data).hexdigest() == entry['sha256'], f'PM1 PDF hash mismatch: {year_id}'
+    assert all(entry[key] == year[key] for key in ('questionCount','pages')), f'PM1 PDF structure metadata mismatch: {year_id}'
+    assert entry['source'] == year['pdfUrl'] and entry['sourcePage'] == year['sourcePage'], f'PM1 source mismatch: {year_id}'
+for name in ('index','exam/index','result/index'):
+    page = ROOT / 'practice/pm1' / (name + '.html')
+    assert page.is_file(), f'PM1 CBT journey page missing: {page}'
+assert '午後Ⅰ' in hub and '/practice/pm1/' in hub, 'Practice home does not link to afternoon-I'
+assert 'id="pm1-pdf"' in (ROOT / 'practice/pm1/exam/index.html').read_text(encoding='utf-8'), 'PM1 PDF reader missing'
+assert 'id="answer-fields"' in (ROOT / 'practice/pm1/exam/index.html').read_text(encoding='utf-8'), 'PM1 answer editor missing'
+
 assert (ROOT / 'pagefind/pagefind.js').is_file(), 'Search bundle missing'
 print(f'PASS: {len(chapters)} chapters; internal links, assets, anchors, cross-references and original SHA-256 verified')

@@ -1,0 +1,321 @@
+---
+import SiteLayout from '../../../layouts/SiteLayout.astro';
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+---
+<SiteLayout title="午後Ⅰ 記述演習・解答中" description="公式問題PDFと記述入力欄を左右に並べ、90分間のPC演習を行います。">
+  <link slot="head" rel="stylesheet" href={base + 'practice-ui.css'} />
+  <link slot="head" rel="stylesheet" href={base + 'pm1-ui.css'} />
+  <div class="practice-shell pm1-exam">
+    <nav class="practice-breadcrumb" aria-label="現在の位置">
+      <a href={base + 'practice/'}>演習</a><span aria-hidden="true">/</span>
+      <a href={base + 'practice/pm1/'}>午後Ⅰ</a><span aria-hidden="true">/</span>
+      <span aria-current="page">解答中</span>
+    </nav>
+    <div class="pm1-toolbar">
+      <div>
+        <p class="eyebrow">AFTERNOON I / WRITING SESSION</p>
+        <h1 id="year-heading">午後Ⅰ 演習</h1>
+        <p class="practice-note">問題冊子の文章・表・図は左側のPDFで参照してください。答案は右側に自動保存されます。</p>
+      </div>
+      <div class="pm1-time" aria-live="off">
+        <span>残り時間</span>
+        <strong id="timer" role="timer" aria-label="残り時間">90:00</strong>
+      </div>
+    </div>
+    <div class="pm1-two-pane">
+      <section class="pm1-panel pm1-question-panel" aria-labelledby="pdf-heading">
+        <div class="pm1-panel-heading">
+          <h2 id="pdf-heading">公式問題冊子</h2>
+          <a id="pdf-open" target="_blank" rel="noopener noreferrer" href={base + 'practice/pm1/'}>PDFを別タブで開く</a>
+        </div>
+        <p class="pm1-pdf-hint">問題冊子は全問を収録しています。左側のPDFをスクロールして問題文・設問を探してください。</p>
+        <iframe id="pm1-pdf" title="IPA公式システムアーキテクト午後Ⅰ問題冊子" loading="eager"></iframe>
+        <p class="pm1-pdf-fallback">PDFが表示されない場合は、上の「別タブで開く」から原本を閲覧できます。</p>
+      </section>
+      <section class="pm1-panel pm1-answer-panel" aria-labelledby="answers-heading">
+        <div class="pm1-panel-heading">
+          <h2 id="answers-heading">記述解答</h2>
+          <span id="save-state" class="pm1-save" role="status">読込中</span>
+        </div>
+        <div id="question-tabs" class="pm1-tabs" aria-label="解答する問題"></div>
+        <p class="pm1-answer-hint">設問文と指定字数は左の問題冊子で確認してください。解答欄の名称・字数上限は必要に応じて設定できます。初期の字数上限は未設定です。</p>
+        <div id="answer-fields" class="pm1-fields"></div>
+        <div class="pm1-editor-actions">
+          <button type="button" class="practice-button secondary" id="add-answer">＋ 解答欄を追加</button>
+        </div>
+        <p id="editor-error" class="practice-error" role="alert" hidden></p>
+        <div class="pm1-end-panel">
+          <p class="practice-note">終了すると答案は読み取り専用になります。自動採点・AI採点は行いません。</p>
+          <button type="button" class="practice-button" id="finish">演習を終了して答案を確認 →</button>
+          <a id="back-to-setup" href={base + 'practice/pm1/'}>演習設定へ戻る（計時は継続）</a>
+        </div>
+      </section>
+    </div>
+    <p class="practice-note pm1-copyright">出典：情報処理推進機構（IPA）システムアーキテクト試験 午後Ⅰ 過去問題。問題冊子のPDFは原本をそのまま収録しています。</p>
+  </div>
+  <noscript><p>記述演習にはJavaScriptが必要です。</p></noscript>
+</SiteLayout>
+
+<script>
+  import { findPm1Year } from '../../../data/pm1';
+  import {
+    loadPm1Session, savePm1Session, remainingPm1Seconds, pm1Expired,
+    formatPm1Clock, finishPm1Session
+  } from '../../../lib/pm1-session';
+  import type { Pm1Session, Pm1Answer } from '../../../lib/pm1-session';
+
+  const $ = (id: string) => document.getElementById(id)!;
+  const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+  const yearParam = new URLSearchParams(location.search).get('year');
+  const year = findPm1Year(yearParam);
+  let session: Pm1Session | null = year ? loadPm1Session(year.id) : null;
+  const setupUrl = base + 'practice/pm1/' + (year ? '?year=' + encodeURIComponent(year.id) : '');
+  const resultUrl = base + 'practice/pm1/result/?year=' + encodeURIComponent(year?.id ?? '');
+  const fields = $('answer-fields');
+  const tabs = $('question-tabs');
+  const saveState = $('save-state');
+  const error = $('editor-error');
+  const pdf = $('pm1-pdf') as HTMLIFrameElement;
+
+  function fail(reason: string): void {
+    error.textContent = reason;
+    error.hidden = false;
+    saveState.textContent = '保存できませんでした';
+  }
+
+  function succeed(): void {
+    error.hidden = true;
+    saveState.textContent = 'このブラウザに保存済み';
+  }
+
+  function write(next: Pm1Session): boolean {
+    if (!session || session.finishedAt !== null || pm1Expired(session)) {
+      refreshTimer();
+      return false;
+    }
+    if (!savePm1Session(next)) {
+      fail('入力を保存できませんでした。ブラウザのストレージ設定と容量を確認してください。');
+      return false;
+    }
+    session = next;
+    succeed();
+    return true;
+  }
+
+  function updateRows(rows: Pm1Answer[]): boolean {
+    if (!session) return false;
+    const next: Pm1Session = {
+      ...session,
+      answers: { ...session.answers, [String(session.activeQuestion)]: rows }
+    };
+    return write(next);
+  }
+
+  function updateRow(id: string, update: Partial<Pm1Answer>): boolean {
+    if (!session) return false;
+    const current = session.answers[String(session.activeQuestion)]!;
+    return updateRows(current.map(row => row.id === id ? { ...row, ...update } : row));
+  }
+
+  function makeText(tag: string, className: string, value: string): HTMLElement {
+    const element = document.createElement(tag);
+    element.className = className;
+    element.textContent = value;
+    return element;
+  }
+
+  function renderTabs(): void {
+    if (!session) return;
+    tabs.replaceChildren();
+    for (const number of session.selected) {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'pm1-tab' + (number === session.activeQuestion ? ' is-active' : '');
+      button.textContent = '問' + number;
+      button.setAttribute('aria-current', number === session.activeQuestion ? 'step' : 'false');
+      button.addEventListener('click', () => {
+        if (!session || session.activeQuestion === number) return;
+        if (write({ ...session, activeQuestion: number })) {
+          renderTabs();
+          renderRows();
+        }
+      });
+      tabs.append(button);
+    }
+  }
+
+  function renderRows(): void {
+    if (!session) return;
+    fields.replaceChildren();
+    const number = session.activeQuestion;
+    const rows = session.answers[String(number)]!;
+    for (const row of rows) {
+      const card = document.createElement('div');
+      card.className = 'pm1-answer-card';
+      const top = makeText('div', 'pm1-field-top', '');
+      const fieldId = 'pm1-answer-' + number + '-' + row.id;
+      const titleLabel = document.createElement('label');
+      titleLabel.className = 'pm1-label';
+      titleLabel.htmlFor = fieldId;
+      titleLabel.textContent = '解答欄の名称';
+      const labelInput = document.createElement('input');
+      labelInput.type = 'text';
+      labelInput.className = 'pm1-name-input';
+      labelInput.value = row.label;
+      labelInput.maxLength = 80;
+      labelInput.setAttribute('aria-label', '問' + number + ' 解答欄の名称');
+      labelInput.addEventListener('change', () => {
+        const name = labelInput.value.trim();
+        if (!name) {
+          labelInput.value = row.label;
+          fail('解答欄の名称を空にはできません。');
+          return;
+        }
+        if (updateRow(row.id, { label: name })) renderRows();
+      });
+      const limitWrap = document.createElement('label');
+      limitWrap.className = 'pm1-limit-wrap';
+      limitWrap.textContent = '上限（任意） ';
+      const limitInput = document.createElement('input');
+      limitInput.type = 'number';
+      limitInput.min = '1';
+      limitInput.max = '10000';
+      limitInput.step = '1';
+      limitInput.inputMode = 'numeric';
+      limitInput.value = row.limit === null ? '' : String(row.limit);
+      limitInput.setAttribute('aria-label', row.label + ' の文字数上限');
+      limitInput.addEventListener('change', () => {
+        const value = limitInput.value.trim();
+        const limit = value === '' ? null : Number(value);
+        if (limit !== null && (!Number.isInteger(limit) || limit < 1 || limit > 10000)) {
+          limitInput.value = row.limit === null ? '' : String(row.limit);
+          fail('字数上限は1～10000の整数で設定してください。');
+          return;
+        }
+        if (updateRow(row.id, { limit })) renderRows();
+      });
+      limitWrap.append(limitInput, document.createTextNode('字'));
+      top.append(titleLabel, labelInput, limitWrap);
+
+      const textLabel = document.createElement('label');
+      textLabel.htmlFor = fieldId;
+      textLabel.className = 'pm1-answer-label';
+      textLabel.textContent = '問' + number + ' / ' + row.label;
+      const textarea = document.createElement('textarea');
+      textarea.id = fieldId;
+      textarea.className = 'pm1-textarea';
+      textarea.rows = 5;
+      textarea.value = row.text;
+      textarea.maxLength = 10000;
+      textarea.placeholder = '問題冊子を読んで、ここに記述します';
+      textarea.spellcheck = false;
+      const counter = makeText('span', 'pm1-counter', '');
+      const tally = (value: string): void => {
+        const length = Array.from(value).length;
+        counter.textContent = String(length) + (row.limit === null ? '字' : ' / ' + row.limit + '字');
+        const tooLong = row.limit !== null && length > row.limit;
+        counter.classList.toggle('is-over', tooLong);
+        counter.setAttribute('aria-label', tooLong ? '設定した文字数上限を超えています' : '入力文字数');
+      };
+      tally(row.text);
+      textarea.addEventListener('input', () => {
+        if (updateRow(row.id, { text: textarea.value })) {
+          // Re-read the current limit, which may have been edited before this input.
+          const current = session?.answers[String(number)].find(entry => entry.id === row.id);
+          const length = Array.from(textarea.value).length;
+          counter.textContent = String(length) + (current?.limit == null ? '字' : ' / ' + current.limit + '字');
+          counter.classList.toggle('is-over', current?.limit != null && length > current.limit);
+        }
+      });
+      const bottom = makeText('div', 'pm1-field-bottom', '');
+      const del = document.createElement('button');
+      del.type = 'button';
+      del.className = 'pm1-delete';
+      del.textContent = '解答欄を削除';
+      del.setAttribute('aria-label', row.label + ' を削除');
+      del.addEventListener('click', () => {
+        if (!session) return;
+        const now = session.answers[String(number)];
+        if (now.length <= 1) return fail('解答欄は各問に最低1つ必要です。');
+        const selected = now.find(item => item.id === row.id);
+        if (selected?.text.trim() && !confirm('この解答欄の入力内容を削除しますか？')) return;
+        if (updateRows(now.filter(item => item.id !== row.id))) renderRows();
+      });
+      if (rows.length <= 1) del.disabled = true;
+      bottom.append(counter, del);
+      card.append(top, textLabel, textarea, bottom);
+      fields.append(card);
+    }
+  }
+
+  function addRow(): void {
+    if (!session) return;
+    const rows = session.answers[String(session.activeQuestion)]!;
+    if (rows.length >= 60) return fail('1問あたりの解答欄は60個までです。');
+    const max = rows.reduce((value, row) => Math.max(value, Number(row.id.slice(1)) || 0), 0);
+    const newRow: Pm1Answer = { id: 'a' + (max + 1), label: '設問' + (rows.length + 1), text: '', limit: null };
+    if (updateRows([...rows, newRow])) {
+      renderRows();
+      fields.lastElementChild?.scrollIntoView({ block: 'nearest' });
+      (fields.lastElementChild?.querySelector('input') as HTMLInputElement | null)?.focus();
+    }
+  }
+
+  function finish(): void {
+    if (!session) return;
+    if (!confirm('演習を終了しますか？終了後は解答を編集できません。')) return;
+    const finished = finishPm1Session(session);
+    if (!finished) return fail('終了状態を保存できませんでした。再度お試しください。');
+    session = finished;
+    location.assign(resultUrl);
+  }
+
+  function refreshTimer(): void {
+    if (!session) return;
+    const seconds = remainingPm1Seconds(session);
+    $('timer').textContent = formatPm1Clock(seconds);
+    $('timer').classList.toggle('is-low', seconds <= 300);
+    if (session.finishedAt !== null) return location.replace(resultUrl);
+    if (pm1Expired(session)) {
+      const finished = finishPm1Session(session);
+      if (!finished) {
+        fail('制限時間になりましたが、終了状態を保存できませんでした。保存先を確認してください。');
+        for (const input of document.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('#answer-fields input, #answer-fields textarea')) {
+          input.disabled = true;
+        }
+        ($('add-answer') as HTMLButtonElement).disabled = true;
+        ($('finish') as HTMLButtonElement).disabled = true;
+        return;
+      }
+      session = finished;
+      location.replace(resultUrl);
+    }
+  }
+
+  if (!year || !session) {
+    location.replace(setupUrl);
+  } else if (session.finishedAt !== null) {
+    location.replace(resultUrl);
+  } else {
+    $('year-heading').textContent = year.label + ' / 午後Ⅰ';
+    const localPdf = base + 'practice/pm1/pdfs/' + year.id + '.pdf';
+    pdf.src = localPdf + '#toolbar=1&navpanes=0';
+    ($('pdf-open') as HTMLAnchorElement).href = localPdf;
+    ($('back-to-setup') as HTMLAnchorElement).href = setupUrl;
+    $('add-answer').addEventListener('click', addRow);
+    $('finish').addEventListener('click', finish);
+    window.addEventListener('storage', event => {
+      if (event.key === 'sa-pm1-session-v1:' + year.id) {
+        fail('別のタブで演習データが変更されました。上書き防止のため再読み込みしてください。');
+        for (const element of document.querySelectorAll<HTMLInputElement | HTMLTextAreaElement | HTMLButtonElement>('.pm1-answer-panel input, .pm1-answer-panel textarea, .pm1-answer-panel button')) {
+          element.disabled = true;
+        }
+      }
+    });
+    succeed();
+    renderTabs();
+    renderRows();
+    refreshTimer();
+    setInterval(refreshTimer, 1000);
+  }
+</script>

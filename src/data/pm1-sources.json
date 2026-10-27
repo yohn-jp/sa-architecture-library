@@ -1,0 +1,26 @@
+[
+  {
+    "id": "2025r07h",
+    "label": "2025年度（令和7年・春期）",
+    "questionCount": 3,
+    "pages": 20,
+    "sourcePage": "https://www.ipa.go.jp/shiken/mondai-kaiotu/2025r07.html",
+    "pdfUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/nl10bi0000009lh8-att/2025r07h_sa_pm1_qs.pdf"
+  },
+  {
+    "id": "2024r06h",
+    "label": "2024年度（令和6年・春期）",
+    "questionCount": 3,
+    "pages": 20,
+    "sourcePage": "https://www.ipa.go.jp/shiken/mondai-kaiotu/2024r06.html",
+    "pdfUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/m42obm000000afqx-att/2024r06h_sa_pm1_qs.pdf"
+  },
+  {
+    "id": "2023r05h",
+    "label": "2023年度（令和5年・春期）",
+    "questionCount": 4,
+    "pages": 28,
+    "sourcePage": "https://www.ipa.go.jp/shiken/mondai-kaiotu/2023r05.html",
+    "pdfUrl": "https://www.ipa.go.jp/shiken/mondai-kaiotu/ps6vr70000010d6y-att/2023r05h_sa_pm1_qs.pdf"
+  }
+]

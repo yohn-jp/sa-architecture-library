@@ -1,0 +1,71 @@
+/* Afternoon-I CBT-inspired reading and writing workspace. */
+.pm1-setup{max-width:1080px}
+.pm1-setup-card{margin-top:25px}
+.pm1-setup-card h2{font-size:22px;margin:0 0 22px}
+.pm1-question-picker{border:0;padding:25px 0 0;margin:0}
+.pm1-question-picker legend{padding:25px 0 0}
+.pm1-choices{display:flex;flex-wrap:wrap;gap:12px;margin:8px 0}
+.pm1-pick{display:flex;align-items:center;gap:9px;border:1px solid var(--line);border-radius:8px;background:#fff;padding:12px 20px;font-size:18px;font-weight:700;cursor:pointer}
+.pm1-pick:has(input:checked){border-color:var(--accent);background:#edf5f2}
+.pm1-pick:has(input:disabled){opacity:.55;cursor:not-allowed}
+.pm1-pick input{accent-color:var(--accent);width:17px;height:17px}
+.pm1-source{padding-top:17px;margin-top:20px;border-top:1px solid var(--line);font-size:13px;color:var(--muted);display:flex;gap:9px;flex-wrap:wrap;align-items:center}
+.pm1-back{margin-top:24px}
+main:has(.pm1-exam){max-width:1650px}
+.pm1-exam{max-width:1595px;padding-top:22px;padding-bottom:40px}
+.pm1-exam .practice-breadcrumb{margin-bottom:15px}
+.pm1-toolbar{display:flex;justify-content:space-between;align-items:center;gap:22px;margin-bottom:20px}
+.pm1-toolbar h1{font:700 clamp(22px,2.5vw,30px)/1.4 "Yu Mincho","Hiragino Mincho ProN",serif;margin:4px 0}
+.pm1-toolbar .practice-note{margin:0}
+.pm1-time{min-width:145px;border:1px solid var(--line);border-radius:11px;background:#fff;padding:9px 17px;display:flex;flex-direction:column;align-items:flex-end;line-height:1.4}
+.pm1-time span{font-size:12px;color:var(--muted)}
+.pm1-time strong{font-size:28px;font-variant-numeric:tabular-nums;letter-spacing:.03em}
+.pm1-time .is-low{color:#a83827}
+.pm1-two-pane{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(360px,.88fr);align-items:stretch;gap:16px;min-width:0}
+.pm1-panel{background:#fff;border:1px solid var(--line);border-radius:11px;padding:17px;min-width:0;height:clamp(560px,calc(100vh - 215px),1080px);display:flex;flex-direction:column}
+.pm1-panel-heading{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.pm1-panel-heading h2{font-size:18px;margin:0}
+.pm1-panel-heading a{font-size:13px}
+.pm1-pdf-hint,.pm1-pdf-fallback,.pm1-answer-hint{font-size:12px;color:var(--muted);margin:0 0 10px;line-height:1.65}
+.pm1-pdf-fallback{margin:9px 0 0}
+#pm1-pdf{width:100%;height:100%;flex:1;min-height:0;border:1px solid #d7e0db;border-radius:6px;background:#f5f5f5}
+.pm1-answer-panel{overflow-y:auto;overscroll-behavior:contain}
+.pm1-save{font-size:12px;font-weight:700;color:var(--accent)}
+.pm1-tabs{display:flex;gap:8px;margin:4px 0 13px}
+.pm1-tab{min-height:42px;min-width:90px;font:700 15px inherit;background:#fff;border:1px solid #b8c9c5;border-radius:7px;color:var(--ink);cursor:pointer}
+.pm1-tab.is-active{background:var(--accent);border-color:var(--accent);color:white}
+.pm1-tab:focus-visible,.pm1-name-input:focus-visible,.pm1-textarea:focus-visible,.pm1-limit-wrap input:focus-visible,.pm1-delete:focus-visible,.pm1-pick:focus-within{outline:3px solid #d18a36;outline-offset:2px}
+.pm1-fields{display:flex;flex-direction:column;gap:17px}
+.pm1-answer-card{border:1px solid var(--line);border-radius:9px;padding:15px;background:#fdfefd}
+.pm1-field-top{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:12px;row-gap:3px;margin-bottom:14px}
+.pm1-label{grid-column:1/2;color:var(--muted);font-weight:650;font-size:12px}
+.pm1-name-input{grid-column:1/2;font:inherit;min-width:0;border:1px solid #bbc9c4;border-radius:6px;padding:7px 9px;background:#fff}
+.pm1-limit-wrap{grid-column:2/3;grid-row:1/3;font-size:12px;color:var(--muted);display:flex;align-items:center;gap:6px;white-space:nowrap}
+.pm1-limit-wrap input{font:inherit;font-size:14px;width:71px;border:1px solid #bbc9c4;border-radius:6px;padding:8px 6px;color:var(--ink);background:#fff}
+.pm1-answer-label{display:block;font-size:13px;font-weight:750;margin-bottom:7px}
+.pm1-textarea{width:100%;display:block;resize:vertical;min-height:115px;font:16px/1.75 "Hiragino Kaku Gothic ProN","Yu Gothic",system-ui,sans-serif;padding:12px 13px;border:1px solid #b7c7c2;border-radius:7px;background:#fff;color:var(--ink)}
+.pm1-textarea:focus{border-color:var(--accent)}
+.pm1-field-bottom{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:8px}
+.pm1-counter{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.is-over{font-weight:800;color:#aa3327!important}
+.pm1-delete{font:inherit;font-size:12px;color:#a13b31;background:transparent;border:0;cursor:pointer;text-decoration:underline}
+.pm1-delete:disabled{opacity:.35;cursor:not-allowed;text-decoration:none}
+.pm1-editor-actions{margin:18px 0 0}
+.pm1-end-panel{border-top:1px solid var(--line);padding-top:16px;margin-top:25px;display:grid;gap:13px}
+.pm1-end-panel p{margin:0}
+.pm1-end-panel a{font-size:13px}
+.pm1-copyright{margin-top:17px}
+.pm1-result-overview{margin-top:27px}
+.pm1-result-overview h2{font-size:21px;margin:0 0 15px}
+.pm1-result-overview dl{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin:0}
+.pm1-result-overview dt{font-size:12px;color:var(--muted)}
+.pm1-result-overview dd{font-size:19px;font-weight:750;margin:2px 0}
+.pm1-result-questions{display:grid;gap:25px;margin-top:35px}
+.pm1-result-section h2{border-bottom:1px solid var(--line);padding-bottom:10px}
+.pm1-result-answer{background:#fff;border:1px solid var(--line);border-radius:9px;padding:16px 20px;margin:12px 0}
+.pm1-result-answer-top{display:flex;align-items:center;justify-content:space-between;gap:15px;font-size:14px}
+.pm1-result-answer-top span{font-variant-numeric:tabular-nums;color:var(--muted);white-space:nowrap}
+.pm1-result-text{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.8;margin:11px 0 0}
+.pm1-result-actions{display:flex;align-items:center;flex-wrap:wrap;gap:20px;margin-top:30px}
+@media(max-width:980px){main:has(.pm1-exam){max-width:1100px}.pm1-two-pane{grid-template-columns:1fr}.pm1-panel{height:auto;min-height:0}.pm1-question-panel{height:70vh;min-height:420px}.pm1-answer-panel{overflow:visible}}
+@media(max-width:620px){.pm1-toolbar{align-items:start}.pm1-time{min-width:105px;padding:8px}.pm1-time strong{font-size:22px}.pm1-panel{padding:12px}.pm1-question-panel{height:65vh}.pm1-result-overview dl{grid-template-columns:1fr}.pm1-field-top{grid-template-columns:1fr}.pm1-limit-wrap{grid-column:1;grid-row:3;margin-top:5px}.pm1-name-input{grid-row:2}}

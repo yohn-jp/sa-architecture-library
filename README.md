@@ -3,6 +3,7 @@
 システムアーキテクトの知識と設計判断をつなぐ、静的な読書ライブラリ。
 
 - [公開サイト](https://yohn-jp.github.io/sa-architecture-library/)
+- [午後Ⅰ CBT型記述演習](https://architect.library.yohn.jp/practice/pm1/)
 - [コンプリートテキスト](https://yohn-jp.github.io/sa-architecture-library/complete/)
 - [第1巻・業務分析と要求工学（7章）](https://yohn-jp.github.io/sa-architecture-library/books/requirements/)
 - [副読本一覧](https://yohn-jp.github.io/sa-architecture-library/books/)
@@ -30,4 +31,4 @@ npm run verify:reader
 
 GitHub Actionsで静的検査、ビルド、内部リンク・アンカー・原本ハッシュ、デスクトップ／モバイル表示・読書操作・日本語検索を確認してからPagesへ配信する。検証の成功は文章内容が自動的に正しいことを意味しない。本文の事実と出典は別に照合する。
 
-[編集方針](docs/EDITORIAL.md) / [構成](docs/ARCHITECTURE.md) / [再開位置](docs/PROGRESS.md)
+[午後Ⅰ演習契約](docs/PM1.md) / [編集方針](docs/EDITORIAL.md) / [構成](docs/ARCHITECTURE.md) / [再開位置](docs/PROGRESS.md)

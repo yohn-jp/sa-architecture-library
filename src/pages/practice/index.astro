@@ -30,6 +30,12 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
         <span class="mode-action">ランダム演習を開く <span aria-hidden="true">→</span></span>
       </a>
     </section>
+    <section class="practice-card" aria-labelledby="pm1-entry" style="margin:18px 0 26px">
+      <p class="eyebrow">AFTERNOON I / CBT PRACTICE</p>
+      <h2 id="pm1-entry">午後Ⅰ 記述演習</h2>
+      <p class="mode-description">IPA公式問題冊子を画面で読み、PCで記述解答。年度と2問を選び、90分のタイマーで演習できます。自動採点はありません。</p>
+      <p style="margin:18px 0 0"><a class="practice-button" href={base + 'practice/pm1/'}>午後Ⅰ演習を開く →</a></p>
+    </section>
     <a class="review-entry" href={base + 'practice/review/'}>
       <div><span class="eyebrow">MISTAKE NOTEBOOK</span><h2>間違えた問題を復習する</h2><p>両モードで間違えた問題を自動保存。解説を確認して、復習済みの問題を整理できます。</p></div>
       <span class="review-entry-arrow" aria-hidden="true">→</span>
