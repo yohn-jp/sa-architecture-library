@@ -2,45 +2,34 @@ name: GitHub Pages
 on:
   push:
     branches: [main]
-  pull_request:
-    branches: [main]
   workflow_dispatch:
 permissions:
   contents: read
   pages: write
   id-token: write
 concurrency:
-  group: pages-${{ github.ref }}
+  group: pages
   cancel-in-progress: true
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - parallel:
-          - name: Install Node dependencies
-            uses: actions/setup-node@v4
-            with:
-              node-version: '22'
-              cache: npm
-          - name: Generate all 225 per-question images
-            run: |
-              python3 -m venv .venv-practice
-              .venv-practice/bin/pip install --disable-pip-version-check -q 'PyMuPDF==1.26.5' 'Pillow==11.3.0' 'numpy==2.3.4'
-              .venv-practice/bin/python scripts/generate_practice_assets.py
-      - run: npm ci --no-audit --no-fund
-      - run: npm run build
-      - uses: actions/upload-pages-artifact@v3
-        if: github.ref == 'refs/heads/main'
-        with:
-          path: dist
   deploy:
-    if: github.ref == 'refs/heads/main'
-    needs: build
     runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-audit --no-fund
+      - name: Generate practice assets
+        run: |
+          python3 -m venv .venv-practice
+          .venv-practice/bin/pip install --disable-pip-version-check -q 'PyMuPDF==1.26.5' 'Pillow==11.3.0' 'numpy==2.3.4'
+          .venv-practice/bin/python scripts/generate_practice_assets.py
+      - run: npm run build
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
       - id: deployment
         uses: actions/deploy-pages@v4
