@@ -4,6 +4,7 @@ import pm1Fields from '../data/pm1-fields.json';
 export type Pm1Answer = { id: string; label: string; text: string; limit: number | null };
 export type Pm1Session = {
   version: 1;
+  durationMinutes?: 30 | 90;
   yearId: string;
   selected: number[];
   startedAt: number;
@@ -34,9 +35,10 @@ export function validSession(value: unknown, yearId: string): value is Pm1Sessio
   if (!year || !value || typeof value !== 'object') return false;
   const session = value as Partial<Pm1Session>;
   if (session.version !== 1 || session.yearId !== yearId ||
-    !Array.isArray(session.selected) || session.selected.length !== PM1_SELECTION_COUNT ||
-    new Set(session.selected).size !== PM1_SELECTION_COUNT ||
+    !Array.isArray(session.selected) || ![1, PM1_SELECTION_COUNT].includes(session.selected.length) ||
+    new Set(session.selected).size !== session.selected.length ||
     !session.selected.every(n => Number.isInteger(n) && n >= 1 && n <= year.questionCount) ||
+    (session.durationMinutes !== undefined && !([30, 90].includes(session.durationMinutes) && session.selected.length === (session.durationMinutes === 30 ? 1 : 2))) ||
     !Number.isInteger(session.activeQuestion) || !session.selected.includes(session.activeQuestion!) ||
     !Number.isFinite(session.startedAt) || session.startedAt! <= 0 ||
     session.startedAt! > Date.now() + 60000 ||
@@ -73,9 +75,9 @@ export function savePm1Session(session: Pm1Session): boolean {
   }
 }
 
-export function startPm1Session(yearId: string, selected: number[]): Pm1Session | null {
+export function startPm1Session(yearId: string, selected: number[], durationMinutes: 30 | 90 = 90): Pm1Session | null {
   const year = findPm1Year(yearId);
-  if (!year || selected.length !== PM1_SELECTION_COUNT ||
+  if (!year || selected.length !== (durationMinutes === 30 ? 1 : PM1_SELECTION_COUNT) ||
     new Set(selected).size !== PM1_SELECTION_COUNT ||
     !selected.every(n => Number.isInteger(n) && n >= 1 && n <= year.questionCount)) return null;
   const now = Date.now();
@@ -89,7 +91,7 @@ export function startPm1Session(yearId: string, selected: number[]): Pm1Session 
     }));
   }
   const session: Pm1Session = {
-    version: 1, yearId, selected: [...selected].sort((a, b) => a - b),
+    version: 1, durationMinutes, yearId, selected: [...selected].sort((a, b) => a - b),
     startedAt: now, finishedAt: null, activeQuestion: Math.min(...selected), answers
   };
   return savePm1Session(session) ? session : null;
@@ -129,12 +131,12 @@ export function reconcileOfficialFields(session: Pm1Session): Pm1Session {
 }
 
 export function remainingPm1Seconds(session: Pm1Session, now = Date.now()): number {
-  const end = Math.min(session.finishedAt ?? now, session.startedAt + PM1_DURATION_MINUTES * 60000);
-  return Math.max(0, Math.ceil((session.startedAt + PM1_DURATION_MINUTES * 60000 - end) / 1000));
+  const end = Math.min(session.finishedAt ?? now, session.startedAt + (session.durationMinutes ?? PM1_DURATION_MINUTES) * 60000);
+  return Math.max(0, Math.ceil((session.startedAt + (session.durationMinutes ?? PM1_DURATION_MINUTES) * 60000 - end) / 1000));
 }
 
 export function pm1Expired(session: Pm1Session, now = Date.now()): boolean {
-  return session.startedAt + PM1_DURATION_MINUTES * 60000 <= now;
+  return session.startedAt + (session.durationMinutes ?? PM1_DURATION_MINUTES) * 60000 <= now;
 }
 
 export function formatPm1Clock(seconds: number): string {
