@@ -59,7 +59,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     $('chosen-questions').textContent = complete.selected.map(n => '問' + n).join('・');
     $('answer-count').textContent = countPm1Answers(complete) + '欄';
     const seconds = Math.floor(Math.min(
-      complete.finishedAt! - complete.startedAt, 90 * 60 * 1000
+      complete.finishedAt! - complete.startedAt, (complete.durationMinutes ?? 90) * 60 * 1000
     ) / 1000);
     $('elapsed').textContent = formatPm1Clock(seconds);
     ($('source-pdf') as HTMLAnchorElement).href = base + 'practice/pm1/pdfs/' + year.id + '.pdf';
