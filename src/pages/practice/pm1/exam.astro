@@ -38,7 +38,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
           <span id="save-state" class="pm1-save" role="status">読込中</span>
         </div>
         <div id="question-tabs" class="pm1-tabs" aria-label="解答する問題"></div>
-        <p class="pm1-answer-hint">解答欄は公式問題と解答例の設問構造に合わせて自動生成しています。文字数上限は公式問題の指定に準拠し、指定がない欄は上限なしです。追加のメモ欄は手動で作成できます。</p>
+        <p class="pm1-answer-hint">各欄には設問の要旨を表示します。原文・図表は左側の公式問題PDFで確認してください。文字数上限は公式問題の指定に準拠し、追加メモ欄も作成できます。</p>
         <div id="answer-fields" class="pm1-fields"></div>
         <div class="pm1-editor-actions">
           <button type="button" class="practice-button secondary" id="add-answer">＋ 解答欄を追加</button>
@@ -240,15 +240,16 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
       textLabel.className = 'pm1-answer-label';
       textLabel.textContent = '問' + number + ' / ' + row.label;
       const prompt = officialField ? questionPrompt(number, row.label) : null;
-      const promptBlock = makeText('p', 'pm1-question-prompt', prompt ?? '');
+      const promptBlock = makeText('p', 'pm1-question-prompt', prompt ? '設問の要旨：' + prompt : '');
       if (prompt) {
         promptBlock.id = fieldId + '-prompt';
-        textLabel.setAttribute('aria-describedby', promptBlock.id);
+
       } else {
         promptBlock.hidden = true;
       }
       const textarea = (inputType === 'short' ? document.createElement('input') : document.createElement('textarea')) as HTMLInputElement | HTMLTextAreaElement;
       textarea.id = fieldId;
+      if (prompt) textarea.setAttribute('aria-describedby', promptBlock.id);
       textarea.className = 'pm1-textarea pm1-input-' + inputType;
       if (textarea instanceof HTMLTextAreaElement) textarea.rows = inputType === 'free' ? 5 : inputType === 'compact' ? 2 : 3;
       if (textarea instanceof HTMLInputElement) textarea.type = 'text';
