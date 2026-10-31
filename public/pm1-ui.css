@@ -94,3 +94,13 @@ main:has(.pm1-exam){max-width:1650px}
 .pm1-answer-card.is-unlimited .pm1-limit-wrap{color:#69717c}
 .pm1-answer-card.is-answered .pm1-textarea{border-color:#88b79d}
 .pm1-answer-card:focus-within{border-color:var(--accent);box-shadow:0 0 0 2px rgba(36,114,85,.13)}
+
+/* Per-field question context and native form controls. */
+.pm1-question-prompt{margin:2px 0 15px;padding:12px 14px;border-left:3px solid #688d9c;background:#eef4f7;color:#263944;font-size:13px;line-height:1.9;white-space:pre-wrap;overflow-wrap:anywhere}
+.pm1-input-short{min-height:47px!important;height:47px;resize:none;line-height:1.4!important;font-weight:600}
+.pm1-input-compact{min-height:82px!important}
+.pm1-input-bounded{min-height:110px!important}
+.pm1-input-free{min-height:150px!important}
+.pm1-answer-card[data-input-type="short"] .pm1-answer-label{color:#3a627a}
+.pm1-answer-card[data-input-type="free"] .pm1-answer-label{color:#415970}
+.pm1-answer-card .pm1-textarea:focus-visible{outline:3px solid rgba(36,114,85,.25);outline-offset:2px}
