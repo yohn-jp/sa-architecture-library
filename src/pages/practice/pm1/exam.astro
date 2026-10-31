@@ -154,6 +154,9 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
       const card = document.createElement('div');
       card.className = 'pm1-answer-card';
       if (officialField) card.classList.add('is-official');
+      const shortAnswer = /(?:機能名|名称|金額|時間帯|数値|項目名|用語|日付|コード|ステータス)/.test(row.label) || (row.limit !== null && row.limit <= 15);
+      const inputType = shortAnswer ? 'short' : row.limit === null ? 'free' : 'bounded';
+      card.dataset.inputType = inputType;
       card.classList.add(row.limit === null ? 'is-unlimited' : 'is-limited');
       const syncAnswered = (value: string): void => {
         const answered = value.trim().length > 0;
@@ -217,10 +220,10 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
       const textarea = document.createElement('textarea');
       textarea.id = fieldId;
       textarea.className = 'pm1-textarea';
-      textarea.rows = row.limit === null ? 5 : 3;
+      textarea.rows = inputType === 'short' ? 2 : inputType === 'free' ? 5 : 3;
       textarea.value = row.text;
       textarea.maxLength = 10000;
-      textarea.placeholder = '問題冊子を読んで、ここに記述します';
+      textarea.placeholder = inputType === 'short' ? '用語・名称などを入力' : inputType === 'bounded' ? '指定文字数内で解答を入力' : '問題冊子を読んで、ここに記述します';
       textarea.spellcheck = false;
       const counter = makeText('span', 'pm1-counter', '');
       const tally = (value: string): void => {
