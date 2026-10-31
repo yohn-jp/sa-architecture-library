@@ -58,6 +58,8 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 
 <script>
   import { findPm1Year } from '../../../data/pm1';
+  import officialFields from '../../../data/pm1-fields.json';
+  import questionPrompts from '../../../data/pm1-question-prompts.json';
   import {
     loadPm1Session, savePm1Session, remainingPm1Seconds, pm1Expired,
     formatPm1Clock, finishPm1Session
@@ -144,6 +146,26 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     }
   }
 
+  type FieldMeta = {id: string; inputType?: 'short' | 'compact' | 'bounded' | 'free'};
+  const metadata = officialFields as Record<string, Record<string, FieldMeta[]>>;
+  const prompts = questionPrompts as Record<string, Record<string, Record<string, string>>>;
+
+  function questionPrompt(question: number, label: string): string | null {
+    if (!year) return null;
+    const group = label.match(/^設問\s*([1-9])/);
+    if (!group) return null;
+    const text = prompts[year.id]?.[String(question)]?.[group[1]];
+    if (!text) return null;
+    const sub = label.match(/[（(]([1-9])[）)]/);
+    if (!sub) return text;
+    const markers = Array.from(text.matchAll(/[（(]([1-9])[）)]/g)).filter(match => match[1] !== '');
+    const selected = markers.find(match => match[1] === sub[1]);
+    if (!selected || selected.index === undefined) return text;
+    const next = markers.find(match => match.index !== undefined && match.index > selected.index!);
+    const introduction = text.slice(0, markers[0].index).trim();
+    return introduction + ' ' + text.slice(selected.index, next?.index ?? text.length).trim();
+  }
+
   function renderRows(): void {
     if (!session) return;
     fields.replaceChildren();
@@ -154,8 +176,8 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
       const card = document.createElement('div');
       card.className = 'pm1-answer-card';
       if (officialField) card.classList.add('is-official');
-      const shortAnswer = /(?:機能名|名称|金額|時間帯|数値|項目名|用語|日付|コード|ステータス)/.test(row.label) || (row.limit !== null && row.limit <= 15);
-      const inputType = shortAnswer ? 'short' : row.limit === null ? 'free' : 'bounded';
+      const meta = metadata[session.yearId]?.[String(number)]?.find(field => field.id === row.id);
+      const inputType = meta?.inputType ?? (row.limit === null ? 'free' : 'bounded');
       card.dataset.inputType = inputType;
       card.classList.add(row.limit === null ? 'is-unlimited' : 'is-limited');
       const syncAnswered = (value: string): void => {
@@ -217,13 +239,22 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
       textLabel.htmlFor = fieldId;
       textLabel.className = 'pm1-answer-label';
       textLabel.textContent = '問' + number + ' / ' + row.label;
-      const textarea = document.createElement('textarea');
+      const prompt = officialField ? questionPrompt(number, row.label) : null;
+      const promptBlock = makeText('p', 'pm1-question-prompt', prompt ?? '');
+      if (prompt) {
+        promptBlock.id = fieldId + '-prompt';
+        textLabel.setAttribute('aria-describedby', promptBlock.id);
+      } else {
+        promptBlock.hidden = true;
+      }
+      const textarea = (inputType === 'short' ? document.createElement('input') : document.createElement('textarea')) as HTMLInputElement | HTMLTextAreaElement;
       textarea.id = fieldId;
-      textarea.className = 'pm1-textarea';
-      textarea.rows = inputType === 'short' ? 2 : inputType === 'free' ? 5 : 3;
+      textarea.className = 'pm1-textarea pm1-input-' + inputType;
+      if (textarea instanceof HTMLTextAreaElement) textarea.rows = inputType === 'free' ? 5 : inputType === 'compact' ? 2 : 3;
+      if (textarea instanceof HTMLInputElement) textarea.type = 'text';
       textarea.value = row.text;
       textarea.maxLength = 10000;
-      textarea.placeholder = inputType === 'short' ? '用語・名称などを入力' : inputType === 'bounded' ? '指定文字数内で解答を入力' : '問題冊子を読んで、ここに記述します';
+      textarea.placeholder = inputType === 'short' ? '短答を入力' : inputType === 'compact' ? '簡潔に解答を入力' : inputType === 'bounded' ? '指定文字数で解答を入力' : '自由記述';
       textarea.spellcheck = false;
       const counter = makeText('span', 'pm1-counter', '');
       const tally = (value: string): void => {
@@ -260,7 +291,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
       });
       if (officialField || rows.length <= 1) del.disabled = true;
       bottom.append(counter, del);
-      card.append(top, textLabel, textarea, bottom);
+      card.append(top, promptBlock, textLabel, textarea, bottom);
       fields.append(card);
     }
   }
