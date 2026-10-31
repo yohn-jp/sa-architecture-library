@@ -13,39 +13,22 @@ concurrency:
   group: pages-${{ github.ref }}
   cancel-in-progress: true
 jobs:
-  assets:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Cache original IPA AM2 question PDFs
-        uses: actions/cache@v4
-        with:
-          path: .cache/ipa-am2
-          key: sa-am2-ipa-originals-2026-10
-      - name: Generate all 225 per-question images
-        run: |
-          python3 -m venv .venv-practice
-          .venv-practice/bin/pip install --disable-pip-version-check -q 'PyMuPDF==1.26.5' 'Pillow==11.3.0' 'numpy==2.3.4'
-          .venv-practice/bin/python scripts/generate_practice_assets.py
-      - uses: actions/upload-artifact@v4
-        with:
-          name: practice-assets
-          path: public/practice/questions/
-          retention-days: 1
   build:
-    needs: assets
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-          cache: npm
+      - parallel:
+          - name: Install Node dependencies
+            uses: actions/setup-node@v4
+            with:
+              node-version: '22'
+              cache: npm
+          - name: Generate all 225 per-question images
+            run: |
+              python3 -m venv .venv-practice
+              .venv-practice/bin/pip install --disable-pip-version-check -q 'PyMuPDF==1.26.5' 'Pillow==11.3.0' 'numpy==2.3.4'
+              .venv-practice/bin/python scripts/generate_practice_assets.py
       - run: npm ci --no-audit --no-fund
-      - uses: actions/download-artifact@v4
-        with:
-          name: practice-assets
-          path: public/practice/questions/
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3
         if: github.ref == 'refs/heads/main'
