@@ -131,7 +131,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 
   function begin(): void {
     const selected = chosen();
-    if (selected.length !== PM1_SELECTION_COUNT) return;
+    if (selected.length !== requiredCount()) return;
     const session = startPm1Session(yearSelect.value, selected, Number(modeSelect.value) as 30 | 90);
     if (!session) {
       error.textContent = '回答を保存できませんでした。ブラウザの保存設定・空き容量を確認してください。';
