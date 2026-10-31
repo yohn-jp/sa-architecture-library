@@ -9,7 +9,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 1
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f002",
@@ -19,7 +20,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 2
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f003",
@@ -29,7 +31,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 3
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f004",
@@ -39,7 +42,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 4
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f005",
@@ -49,7 +53,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 5
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f006",
@@ -59,7 +64,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 6
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f007",
@@ -69,7 +75,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 7
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f008",
@@ -79,7 +86,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 8
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f009",
@@ -89,7 +97,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 9
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f010",
@@ -99,7 +108,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 10
-        }
+        },
+        "inputType": "bounded"
       }
     ],
     "2": [
@@ -111,7 +121,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 1
-        }
+        },
+        "inputType": "free"
       },
       {
         "id": "f002",
@@ -121,7 +132,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 2
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f003",
@@ -131,7 +143,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 3
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f004",
@@ -141,7 +154,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 4
-        }
+        },
+        "inputType": "free"
       },
       {
         "id": "f005",
@@ -151,7 +165,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 5
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f006",
@@ -161,7 +176,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 6
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f007",
@@ -171,7 +187,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 7
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f008",
@@ -181,7 +198,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 8
-        }
+        },
+        "inputType": "bounded"
       }
     ],
     "3": [
@@ -193,7 +211,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 1
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f002",
@@ -203,7 +222,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 2
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f003",
@@ -213,7 +233,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 2
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f004",
@@ -223,7 +244,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 3
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f005",
@@ -233,7 +255,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 4
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f006",
@@ -243,7 +266,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 5
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f007",
@@ -253,7 +277,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 6
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f008",
@@ -263,7 +288,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 7
-        }
+        },
+        "inputType": "bounded"
       }
     ]
   },
@@ -277,7 +303,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 1
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f002",
@@ -287,7 +314,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 2
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f003",
@@ -297,7 +325,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 3
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f004",
@@ -307,7 +336,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 4
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f005",
@@ -317,7 +347,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 5
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f006",
@@ -327,7 +358,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 6
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f007",
@@ -337,7 +369,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 7
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f008",
@@ -347,7 +380,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 8
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f009",
@@ -357,7 +391,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 9
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f010",
@@ -367,7 +402,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 10
-        }
+        },
+        "inputType": "bounded"
       }
     ],
     "2": [
@@ -379,7 +415,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 1
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f002",
@@ -389,7 +426,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 2
-        }
+        },
+        "inputType": "free"
       },
       {
         "id": "f003",
@@ -399,7 +437,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 3
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f004",
@@ -409,7 +448,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 4
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f005",
@@ -419,7 +459,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 5
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f006",
@@ -429,7 +470,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 6
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f007",
@@ -439,7 +481,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 7
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f008",
@@ -449,7 +492,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 8
-        }
+        },
+        "inputType": "bounded"
       }
     ],
     "3": [
@@ -461,7 +505,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 1
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f002",
@@ -471,7 +516,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 2
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f003",
@@ -481,7 +527,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 3
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f004",
@@ -491,7 +538,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 4
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f005",
@@ -501,7 +549,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 5
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f006",
@@ -511,7 +560,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 6
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f007",
@@ -521,7 +571,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 7
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f008",
@@ -531,7 +582,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 8
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f009",
@@ -541,7 +593,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 9
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f010",
@@ -551,7 +604,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 10
-        }
+        },
+        "inputType": "bounded"
       }
     ]
   },
@@ -565,7 +619,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 1
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f002",
@@ -575,7 +630,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 2
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f003",
@@ -585,7 +641,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 3
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f004",
@@ -595,7 +652,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 4
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f005",
@@ -605,7 +663,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 5
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f006",
@@ -615,7 +674,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 6
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f007",
@@ -625,7 +685,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 7
-        }
+        },
+        "inputType": "compact"
       }
     ],
     "2": [
@@ -637,7 +698,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 1
-        }
+        },
+        "inputType": "free"
       },
       {
         "id": "f002",
@@ -647,7 +709,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 2
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f003",
@@ -657,7 +720,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 3
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f004",
@@ -667,7 +731,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 4
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f005",
@@ -677,7 +742,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 5
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f006",
@@ -687,7 +753,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 6
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f007",
@@ -697,7 +764,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 7
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f008",
@@ -707,7 +775,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 8
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f009",
@@ -717,7 +786,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 9
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f010",
@@ -727,7 +797,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 10
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f011",
@@ -737,7 +808,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 11
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f012",
@@ -747,7 +819,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 12
-        }
+        },
+        "inputType": "compact"
       }
     ],
     "3": [
@@ -759,7 +832,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 1
-        }
+        },
+        "inputType": "free"
       },
       {
         "id": "f002",
@@ -769,7 +843,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 2
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f003",
@@ -779,7 +854,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 3
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f004",
@@ -789,7 +865,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 4
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f005",
@@ -799,7 +876,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 5
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f006",
@@ -809,7 +887,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 6
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f007",
@@ -819,7 +898,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 7
-        }
+        },
+        "inputType": "free"
       },
       {
         "id": "f008",
@@ -829,7 +909,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 8
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f009",
@@ -839,7 +920,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 9
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f010",
@@ -849,7 +931,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 10
-        }
+        },
+        "inputType": "bounded"
       }
     ],
     "4": [
@@ -861,7 +944,8 @@
           "answerPage": 2,
           "table": 1,
           "row": 1
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f002",
@@ -871,7 +955,8 @@
           "answerPage": 2,
           "table": 1,
           "row": 2
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f003",
@@ -881,7 +966,8 @@
           "answerPage": 2,
           "table": 1,
           "row": 3
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f004",
@@ -891,7 +977,8 @@
           "answerPage": 2,
           "table": 1,
           "row": 4
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f005",
@@ -901,7 +988,8 @@
           "answerPage": 2,
           "table": 1,
           "row": 5
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f006",
@@ -911,7 +999,8 @@
           "answerPage": 2,
           "table": 1,
           "row": 6
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f007",
@@ -921,7 +1010,8 @@
           "answerPage": 2,
           "table": 1,
           "row": 6
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f008",
@@ -931,7 +1021,8 @@
           "answerPage": 2,
           "table": 1,
           "row": 7
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f009",
@@ -941,7 +1032,8 @@
           "answerPage": 2,
           "table": 1,
           "row": 8
-        }
+        },
+        "inputType": "bounded"
       }
     ]
   },
@@ -955,7 +1047,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 1
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f002",
@@ -965,7 +1058,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 2
-        }
+        },
+        "inputType": "free"
       },
       {
         "id": "f003",
@@ -975,7 +1069,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 3
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f004",
@@ -985,7 +1080,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 4
-        }
+        },
+        "inputType": "free"
       },
       {
         "id": "f005",
@@ -995,7 +1091,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 5
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f006",
@@ -1005,7 +1102,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 6
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f007",
@@ -1015,7 +1113,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 7
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f008",
@@ -1025,7 +1124,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 8
-        }
+        },
+        "inputType": "bounded"
       }
     ],
     "2": [
@@ -1037,7 +1137,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 1
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f002",
@@ -1047,7 +1148,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 2
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f003",
@@ -1057,7 +1159,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 3
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f004",
@@ -1067,7 +1170,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 4
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f005",
@@ -1077,7 +1181,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 5
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f006",
@@ -1087,7 +1192,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 6
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f007",
@@ -1097,7 +1203,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 7
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f008",
@@ -1107,7 +1214,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 8
-        }
+        },
+        "inputType": "free"
       },
       {
         "id": "f009",
@@ -1117,7 +1225,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 9
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f010",
@@ -1127,7 +1236,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 10
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f011",
@@ -1137,7 +1247,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 11
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f012",
@@ -1147,7 +1258,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 12
-        }
+        },
+        "inputType": "bounded"
       }
     ],
     "3": [
@@ -1159,7 +1271,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 1
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f002",
@@ -1169,7 +1282,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 2
-        }
+        },
+        "inputType": "free"
       },
       {
         "id": "f003",
@@ -1179,7 +1293,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 3
-        }
+        },
+        "inputType": "free"
       },
       {
         "id": "f004",
@@ -1189,7 +1304,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 4
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f005",
@@ -1199,7 +1315,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 5
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f006",
@@ -1209,7 +1326,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 6
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f007",
@@ -1219,7 +1337,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 7
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f008",
@@ -1229,7 +1348,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 8
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f009",
@@ -1239,7 +1359,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 9
-        }
+        },
+        "inputType": "bounded"
       }
     ],
     "4": [
@@ -1251,7 +1372,8 @@
           "answerPage": 2,
           "table": 1,
           "row": 1
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f002",
@@ -1261,7 +1383,8 @@
           "answerPage": 2,
           "table": 1,
           "row": 2
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f003",
@@ -1271,7 +1394,8 @@
           "answerPage": 2,
           "table": 1,
           "row": 3
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f004",
@@ -1281,7 +1405,8 @@
           "answerPage": 2,
           "table": 1,
           "row": 4
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f005",
@@ -1291,7 +1416,8 @@
           "answerPage": 2,
           "table": 1,
           "row": 5
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f006",
@@ -1301,7 +1427,8 @@
           "answerPage": 2,
           "table": 1,
           "row": 6
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f007",
@@ -1311,7 +1438,8 @@
           "answerPage": 2,
           "table": 1,
           "row": 7
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f008",
@@ -1321,7 +1449,8 @@
           "answerPage": 2,
           "table": 1,
           "row": 8
-        }
+        },
+        "inputType": "bounded"
       }
     ]
   },
@@ -1335,7 +1464,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 1
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f002",
@@ -1345,7 +1475,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 2
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f003",
@@ -1355,7 +1486,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 3
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f004",
@@ -1365,7 +1497,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 4
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f005",
@@ -1375,7 +1508,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 5
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f006",
@@ -1385,7 +1519,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 6
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f007",
@@ -1395,7 +1530,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 7
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f008",
@@ -1405,7 +1541,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 8
-        }
+        },
+        "inputType": "bounded"
       }
     ],
     "2": [
@@ -1417,7 +1554,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 1
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f002",
@@ -1427,7 +1565,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 1
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f003",
@@ -1437,7 +1576,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 2
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f004",
@@ -1447,7 +1587,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 2
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f005",
@@ -1457,7 +1598,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 3
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f006",
@@ -1467,7 +1609,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 4
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f007",
@@ -1477,7 +1620,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 5
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f008",
@@ -1487,7 +1631,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 6
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f009",
@@ -1497,7 +1642,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 7
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f010",
@@ -1507,7 +1653,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 8
-        }
+        },
+        "inputType": "bounded"
       }
     ],
     "3": [
@@ -1519,7 +1666,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 1
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f002",
@@ -1529,7 +1677,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 2
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f003",
@@ -1539,7 +1688,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 3
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f004",
@@ -1549,7 +1699,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 4
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f005",
@@ -1559,7 +1710,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 5
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f006",
@@ -1569,7 +1721,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 6
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f007",
@@ -1579,7 +1732,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 6
-        }
+        },
+        "inputType": "bounded"
       }
     ],
     "4": [
@@ -1591,7 +1745,8 @@
           "answerPage": 2,
           "table": 1,
           "row": 1
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f002",
@@ -1601,7 +1756,8 @@
           "answerPage": 2,
           "table": 1,
           "row": 2
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f003",
@@ -1611,7 +1767,8 @@
           "answerPage": 2,
           "table": 1,
           "row": 3
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f004",
@@ -1621,7 +1778,8 @@
           "answerPage": 2,
           "table": 1,
           "row": 4
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f005",
@@ -1631,7 +1789,8 @@
           "answerPage": 2,
           "table": 1,
           "row": 5
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f006",
@@ -1641,7 +1800,8 @@
           "answerPage": 2,
           "table": 1,
           "row": 6
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f007",
@@ -1651,7 +1811,8 @@
           "answerPage": 2,
           "table": 1,
           "row": 7
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f008",
@@ -1661,7 +1822,8 @@
           "answerPage": 2,
           "table": 1,
           "row": 8
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f009",
@@ -1671,7 +1833,8 @@
           "answerPage": 2,
           "table": 1,
           "row": 8
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f010",
@@ -1681,7 +1844,8 @@
           "answerPage": 2,
           "table": 1,
           "row": 9
-        }
+        },
+        "inputType": "bounded"
       }
     ]
   },
@@ -1695,7 +1859,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 1
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f002",
@@ -1705,7 +1870,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 2
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f003",
@@ -1715,7 +1881,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 3
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f004",
@@ -1725,7 +1892,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 4
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f005",
@@ -1735,7 +1903,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 5
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f006",
@@ -1745,7 +1914,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 6
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f007",
@@ -1755,7 +1925,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 7
-        }
+        },
+        "inputType": "free"
       },
       {
         "id": "f008",
@@ -1765,7 +1936,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 8
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f009",
@@ -1775,7 +1947,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 9
-        }
+        },
+        "inputType": "bounded"
       }
     ],
     "2": [
@@ -1787,7 +1960,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 1
-        }
+        },
+        "inputType": "free"
       },
       {
         "id": "f002",
@@ -1797,7 +1971,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 2
-        }
+        },
+        "inputType": "free"
       },
       {
         "id": "f003",
@@ -1807,7 +1982,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 3
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f004",
@@ -1817,7 +1993,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 4
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f005",
@@ -1827,7 +2004,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 5
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f006",
@@ -1837,7 +2015,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 6
-        }
+        },
+        "inputType": "free"
       },
       {
         "id": "f007",
@@ -1847,7 +2026,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 7
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f008",
@@ -1857,7 +2037,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 8
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f009",
@@ -1867,7 +2048,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 9
-        }
+        },
+        "inputType": "short"
       }
     ],
     "3": [
@@ -1879,7 +2061,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 1
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f002",
@@ -1889,7 +2072,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 1
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f003",
@@ -1899,7 +2083,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 2
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f004",
@@ -1909,7 +2094,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 2
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f005",
@@ -1919,7 +2105,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 3
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f006",
@@ -1929,7 +2116,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 4
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f007",
@@ -1939,7 +2127,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 5
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f008",
@@ -1949,7 +2138,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 5
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f009",
@@ -1959,7 +2149,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 6
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f010",
@@ -1969,7 +2160,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 7
-        }
+        },
+        "inputType": "free"
       },
       {
         "id": "f011",
@@ -1979,7 +2171,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 8
-        }
+        },
+        "inputType": "compact"
       }
     ],
     "4": [
@@ -1991,7 +2184,8 @@
           "answerPage": 2,
           "table": 1,
           "row": 1
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f002",
@@ -2001,7 +2195,8 @@
           "answerPage": 2,
           "table": 1,
           "row": 2
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f003",
@@ -2011,7 +2206,8 @@
           "answerPage": 2,
           "table": 1,
           "row": 3
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f004",
@@ -2021,7 +2217,8 @@
           "answerPage": 2,
           "table": 1,
           "row": 4
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f005",
@@ -2031,7 +2228,8 @@
           "answerPage": 2,
           "table": 1,
           "row": 5
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f006",
@@ -2041,7 +2239,8 @@
           "answerPage": 2,
           "table": 1,
           "row": 6
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f007",
@@ -2051,7 +2250,8 @@
           "answerPage": 2,
           "table": 1,
           "row": 7
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f008",
@@ -2061,7 +2261,8 @@
           "answerPage": 2,
           "table": 1,
           "row": 8
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f009",
@@ -2071,7 +2272,8 @@
           "answerPage": 2,
           "table": 1,
           "row": 9
-        }
+        },
+        "inputType": "bounded"
       }
     ]
   },
@@ -2085,7 +2287,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 1
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f002",
@@ -2095,7 +2298,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 2
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f003",
@@ -2105,7 +2309,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 3
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f004",
@@ -2115,7 +2320,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 4
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f005",
@@ -2125,7 +2331,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 5
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f006",
@@ -2135,7 +2342,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 6
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f007",
@@ -2145,7 +2353,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 7
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f008",
@@ -2155,7 +2364,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 8
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f009",
@@ -2165,7 +2375,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 9
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f010",
@@ -2175,7 +2386,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 10
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f011",
@@ -2185,7 +2397,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 11
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f012",
@@ -2195,7 +2408,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 12
-        }
+        },
+        "inputType": "bounded"
       }
     ],
     "2": [
@@ -2207,7 +2421,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 1
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f002",
@@ -2217,7 +2432,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 2
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f003",
@@ -2227,7 +2443,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 3
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f004",
@@ -2237,7 +2454,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 4
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f005",
@@ -2247,7 +2465,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 5
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f006",
@@ -2257,7 +2476,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 6
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f007",
@@ -2267,7 +2487,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 7
-        }
+        },
+        "inputType": "bounded"
       }
     ],
     "3": [
@@ -2279,7 +2500,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 1
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f002",
@@ -2289,7 +2511,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 2
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f003",
@@ -2299,7 +2522,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 3
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f004",
@@ -2309,7 +2533,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 4
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f005",
@@ -2319,7 +2544,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 5
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f006",
@@ -2329,7 +2555,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 6
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f007",
@@ -2339,7 +2566,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 7
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f008",
@@ -2349,7 +2577,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 8
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f009",
@@ -2359,7 +2588,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 9
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f010",
@@ -2369,7 +2599,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 10
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f011",
@@ -2379,7 +2610,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 11
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f012",
@@ -2389,7 +2621,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 12
-        }
+        },
+        "inputType": "bounded"
       }
     ],
     "4": [
@@ -2401,7 +2634,8 @@
           "answerPage": 2,
           "table": 1,
           "row": 1
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f002",
@@ -2411,7 +2645,8 @@
           "answerPage": 2,
           "table": 1,
           "row": 2
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f003",
@@ -2421,7 +2656,8 @@
           "answerPage": 2,
           "table": 1,
           "row": 3
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f004",
@@ -2431,7 +2667,8 @@
           "answerPage": 2,
           "table": 1,
           "row": 4
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f005",
@@ -2441,7 +2678,8 @@
           "answerPage": 2,
           "table": 1,
           "row": 5
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f006",
@@ -2451,7 +2689,8 @@
           "answerPage": 2,
           "table": 1,
           "row": 6
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f007",
@@ -2461,7 +2700,8 @@
           "answerPage": 2,
           "table": 1,
           "row": 7
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f008",
@@ -2471,7 +2711,8 @@
           "answerPage": 2,
           "table": 1,
           "row": 8
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f009",
@@ -2481,7 +2722,8 @@
           "answerPage": 2,
           "table": 1,
           "row": 9
-        }
+        },
+        "inputType": "bounded"
       }
     ]
   },
@@ -2495,7 +2737,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 1
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f002",
@@ -2505,7 +2748,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 2
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f003",
@@ -2515,7 +2759,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 3
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f004",
@@ -2525,7 +2770,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 4
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f005",
@@ -2535,7 +2781,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 5
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f006",
@@ -2545,7 +2792,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 6
-        }
+        },
+        "inputType": "free"
       },
       {
         "id": "f007",
@@ -2555,7 +2803,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 7
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f008",
@@ -2565,7 +2814,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 8
-        }
+        },
+        "inputType": "bounded"
       }
     ],
     "2": [
@@ -2577,7 +2827,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 1
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f002",
@@ -2587,7 +2838,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 2
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f003",
@@ -2597,7 +2849,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 2
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f004",
@@ -2607,7 +2860,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 3
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f005",
@@ -2617,7 +2871,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 4
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f006",
@@ -2627,7 +2882,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 5
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f007",
@@ -2637,7 +2893,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 5
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f008",
@@ -2647,7 +2904,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 6
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f009",
@@ -2657,7 +2915,8 @@
           "answerPage": 1,
           "table": 1,
           "row": 7
-        }
+        },
+        "inputType": "compact"
       }
     ],
     "3": [
@@ -2669,7 +2928,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 1
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f002",
@@ -2679,7 +2939,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 2
-        }
+        },
+        "inputType": "free"
       },
       {
         "id": "f003",
@@ -2689,7 +2950,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 3
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f004",
@@ -2699,7 +2961,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 4
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f005",
@@ -2709,7 +2972,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 5
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f006",
@@ -2719,7 +2983,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 6
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f007",
@@ -2729,7 +2994,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 7
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f008",
@@ -2739,7 +3005,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 8
-        }
+        },
+        "inputType": "short"
       }
     ],
     "4": [
@@ -2751,7 +3018,8 @@
           "answerPage": 2,
           "table": 1,
           "row": 1
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f002",
@@ -2761,7 +3029,8 @@
           "answerPage": 2,
           "table": 1,
           "row": 1
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f003",
@@ -2771,7 +3040,8 @@
           "answerPage": 2,
           "table": 1,
           "row": 2
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f004",
@@ -2781,7 +3051,8 @@
           "answerPage": 2,
           "table": 1,
           "row": 3
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f005",
@@ -2791,7 +3062,8 @@
           "answerPage": 2,
           "table": 1,
           "row": 4
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f006",
@@ -2801,7 +3073,8 @@
           "answerPage": 2,
           "table": 1,
           "row": 5
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f007",
@@ -2811,7 +3084,8 @@
           "answerPage": 2,
           "table": 1,
           "row": 6
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f008",
@@ -2821,7 +3095,8 @@
           "answerPage": 2,
           "table": 1,
           "row": 7
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f009",
@@ -2831,7 +3106,8 @@
           "answerPage": 2,
           "table": 1,
           "row": 8
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f010",
@@ -2841,7 +3117,8 @@
           "answerPage": 2,
           "table": 1,
           "row": 9
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f011",
@@ -2851,7 +3128,8 @@
           "answerPage": 2,
           "table": 1,
           "row": 10
-        }
+        },
+        "inputType": "short"
       }
     ]
   },
@@ -2865,7 +3143,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 1
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f002",
@@ -2875,7 +3154,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 2
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f003",
@@ -2885,7 +3165,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 3
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f004",
@@ -2895,7 +3176,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 3
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f005",
@@ -2905,7 +3187,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 4
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f006",
@@ -2915,7 +3198,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 5
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f007",
@@ -2925,7 +3209,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 6
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f008",
@@ -2935,7 +3220,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 7
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f009",
@@ -2945,7 +3231,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 8
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f010",
@@ -2955,7 +3242,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 9
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f011",
@@ -2965,7 +3253,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 10
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f012",
@@ -2975,7 +3264,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 11
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f013",
@@ -2985,7 +3275,8 @@
           "answerPage": 1,
           "table": 0,
           "row": 12
-        }
+        },
+        "inputType": "short"
       }
     ],
     "2": [
@@ -2997,7 +3288,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 1
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f002",
@@ -3007,7 +3299,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 2
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f003",
@@ -3017,7 +3310,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 3
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f004",
@@ -3027,7 +3321,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 4
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f005",
@@ -3037,7 +3332,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 5
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f006",
@@ -3047,7 +3343,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 6
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f007",
@@ -3057,7 +3354,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 7
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f008",
@@ -3067,7 +3365,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 8
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f009",
@@ -3077,7 +3376,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 9
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f010",
@@ -3087,7 +3387,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 10
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f011",
@@ -3097,7 +3398,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 11
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f012",
@@ -3107,7 +3409,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 12
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f013",
@@ -3117,7 +3420,8 @@
           "answerPage": 2,
           "table": 0,
           "row": 13
-        }
+        },
+        "inputType": "bounded"
       }
     ],
     "3": [
@@ -3129,7 +3433,8 @@
           "answerPage": 3,
           "table": 0,
           "row": 1
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f002",
@@ -3139,7 +3444,8 @@
           "answerPage": 3,
           "table": 0,
           "row": 2
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f003",
@@ -3149,7 +3455,8 @@
           "answerPage": 3,
           "table": 0,
           "row": 3
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f004",
@@ -3159,7 +3466,8 @@
           "answerPage": 3,
           "table": 0,
           "row": 4
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f005",
@@ -3169,7 +3477,8 @@
           "answerPage": 3,
           "table": 0,
           "row": 4
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f006",
@@ -3179,7 +3488,8 @@
           "answerPage": 3,
           "table": 0,
           "row": 6
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f007",
@@ -3189,7 +3499,8 @@
           "answerPage": 3,
           "table": 0,
           "row": 7
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f008",
@@ -3199,7 +3510,8 @@
           "answerPage": 3,
           "table": 0,
           "row": 8
-        }
+        },
+        "inputType": "free"
       },
       {
         "id": "f009",
@@ -3209,7 +3521,8 @@
           "answerPage": 3,
           "table": 0,
           "row": 9
-        }
+        },
+        "inputType": "bounded"
       }
     ],
     "4": [
@@ -3221,7 +3534,8 @@
           "answerPage": 3,
           "table": 1,
           "row": 1
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f002",
@@ -3231,7 +3545,8 @@
           "answerPage": 3,
           "table": 1,
           "row": 2
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f003",
@@ -3241,7 +3556,8 @@
           "answerPage": 3,
           "table": 1,
           "row": 3
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f004",
@@ -3251,7 +3567,8 @@
           "answerPage": 3,
           "table": 1,
           "row": 4
-        }
+        },
+        "inputType": "bounded"
       },
       {
         "id": "f005",
@@ -3261,7 +3578,8 @@
           "answerPage": 3,
           "table": 1,
           "row": 5
-        }
+        },
+        "inputType": "short"
       },
       {
         "id": "f006",
@@ -3271,7 +3589,8 @@
           "answerPage": 3,
           "table": 1,
           "row": 6
-        }
+        },
+        "inputType": "free"
       },
       {
         "id": "f007",
@@ -3281,7 +3600,8 @@
           "answerPage": 3,
           "table": 1,
           "row": 7
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f008",
@@ -3291,7 +3611,8 @@
           "answerPage": 3,
           "table": 1,
           "row": 8
-        }
+        },
+        "inputType": "compact"
       },
       {
         "id": "f009",
@@ -3301,7 +3622,8 @@
           "answerPage": 3,
           "table": 1,
           "row": 9
-        }
+        },
+        "inputType": "bounded"
       }
     ]
   }
