@@ -80,3 +80,17 @@ main:has(.pm1-exam){max-width:1650px}
 .pm1-name-input[readonly],.pm1-limit-wrap input[readonly]{background:#f1f5f2;color:var(--ink);cursor:default}
 .pm1-result-text{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.85}
 @media(max-width:800px){.pm1-answer-comparison{grid-template-columns:1fr}}
+
+/* Answer progress and differentiated field types. */
+.pm1-answer-card{position:relative;transition:background-color .16s,border-color .16s,box-shadow .16s}
+.pm1-answer-card.is-unanswered{background:#f7f8fa;border-color:#cbd1d8}
+.pm1-answer-card.is-unanswered::before{content:"未入力";display:inline-block;margin-bottom:10px;padding:3px 9px;border-radius:4px;background:#e8ebef;color:#59616c;font-size:12px;font-weight:750}
+.pm1-answer-card.is-answered{background:#eff8f3;border-color:#81b79b;box-shadow:inset 3px 0 0 #33845a}
+.pm1-answer-card.is-answered::before{content:"入力済み";display:inline-block;margin-bottom:10px;padding:3px 9px;border-radius:4px;background:#d9f0e2;color:#236c48;font-size:12px;font-weight:750}
+.pm1-answer-card.is-limited .pm1-textarea{min-height:84px}
+.pm1-answer-card.is-unlimited .pm1-textarea{min-height:150px}
+.pm1-answer-card.is-limited .pm1-limit-wrap{font-weight:750;color:#385d81}
+.pm1-answer-card.is-limited .pm1-limit-wrap input{border-color:#a6bed5;background:#eaf2fa;font-weight:750}
+.pm1-answer-card.is-unlimited .pm1-limit-wrap{color:#69717c}
+.pm1-answer-card.is-answered .pm1-textarea{border-color:#88b79d}
+.pm1-answer-card:focus-within{border-color:var(--accent);box-shadow:0 0 0 2px rgba(36,114,85,.13)}
