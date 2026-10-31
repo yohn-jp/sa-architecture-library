@@ -41,7 +41,7 @@ try {
       assert(bytes.subarray(0,5).equals(Buffer.from('%PDF-')), id+': invalid PDF header');
       assert.equal(createHash('sha256').update(bytes).digest('hex'),hash,id+': unexpected original PDF');
       const rel = local.slice('dist/'.length);
-      const response = await fetch(base+rel);
+      const response = await fetch(base+rel, { method: 'HEAD' });
       assert.equal(response.status,200,id+': PDF not served from local origin');
       assert((response.headers.get('content-type')??'').includes('application/pdf'),id+': invalid content type');
     }
