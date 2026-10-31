@@ -27,6 +27,8 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     </section>
     <section id="result-questions" class="pm1-result-questions" aria-label="保存した記述解答"></section>
     <div class="pm1-result-actions">
+      <button id="copy-ai-prompt" type="button" class="practice-button" disabled>AI採点・解説用プロンプトをコピー</button>
+      <span id="copy-ai-status" role="status" aria-live="polite"></span>
       <a id="source-pdf" class="practice-button secondary" href={base + 'practice/pm1/'} target="_blank" rel="noopener noreferrer">公式問題冊子を開く</a>
       <a id="source-page" href="https://www.ipa.go.jp/shiken/mondai-kaiotu/" target="_blank" rel="noopener noreferrer">IPA配布ページ</a>
       <a id="back" href={base + 'practice/pm1/'}>年度を選択・新しい演習を開始 →</a>
@@ -163,6 +165,64 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
       root.append(section);
     }
   }
+
+  function buildAiPrompt(complete: Pm1Session): string {
+    if (!year) return '';
+    type Example = { id: string; label: string; text: string };
+    type Archive = Record<string, { sourcePdf: string; questions: Record<string, Example[]> }>;
+    const archive = (officialAnswers as Archive)[year.id];
+    const fields = (pm1Fields as Record<string, Record<string, Array<{ id: string; limit: number | null }>>>)[year.id];
+    const repo = 'https://github.com/yohn-jp/sa-architecture-library';
+    const lines = [
+      'あなたはシステムアーキテクト試験・午後Ⅰの採点者です。',
+      '設問要求と問題文の文脈を踏まえ、受験者解答をIPA公式解答例と比較して採点・解説してください。',
+      '表現の一致だけで判定せず、意味の一致と重要要素を評価し、部分点を認めてください。',
+      '公式配点が不明な場合は推定採点と明示してください。根拠のない断定は避けてください。',
+      '各設問の評価、採点根拠、過不足、字数制限内の改善解答、総合評価と復習論点を示してください。',
+      '参照資料を取得できない場合はその旨を明示し、未確認の問題文や図表を推測で補わないでください。',
+      '',
+      '【試験】' + year.label + ' システムアーキテクト試験 午後Ⅰ',
+      '【演習結果】' + location.href,
+      '【問題冊子】' + new URL(base + 'practice/pm1/pdfs/' + year.id + '.pdf', location.origin).href,
+      '【問題・解答データのリポジトリ】' + repo,
+      '【公式解答例原本】' + (archive?.sourcePdf ?? year.sourcePage),
+      ''
+    ];
+    for (const number of complete.selected) {
+      lines.push('## 問' + number);
+      const ownRows = complete.answers[String(number)] ?? [];
+      const byId = new Map(ownRows.map(row => [row.id, row]));
+      const officialRows = archive?.questions[String(number)] ?? [];
+      for (const item of officialRows) {
+        const limit = fields?.[String(number)]?.find(row => row.id === item.id)?.limit;
+        lines.push('【' + item.label + '】',
+          '字数制限：' + (typeof limit === 'number' ? limit + '字' : '指定なし'),
+          '受験者解答：' + (byId.get(item.id)?.text.trim() || '（未記入）'),
+          'IPA公式解答例：' + item.text, '');
+      }
+      const officialIds = new Set(officialRows.map(item => item.id));
+      for (const item of ownRows) {
+        if (officialIds.has(item.id)) continue;
+        lines.push('【' + item.label + '（追加・旧形式の解答欄）】',
+          '字数制限：' + (item.limit === null ? '指定なし' : item.limit + '字'),
+          '受験者解答：' + (item.text.trim() || '（未記入）'),
+          'IPA公式解答例：なし', '');
+      }
+    }
+    return lines.join('\\n');
+  }
+
+  const copyButton = $('copy-ai-prompt') as HTMLButtonElement;
+  copyButton.disabled = !session?.finishedAt;
+  copyButton.addEventListener('click', async () => {
+    if (!session?.finishedAt) return;
+    try {
+      await navigator.clipboard.writeText(buildAiPrompt(session));
+      $('copy-ai-status').textContent = 'プロンプトをコピーしました。';
+    } catch {
+      $('copy-ai-status').textContent = 'コピーできませんでした。ブラウザのクリップボード権限を確認してください。';
+    }
+  });
 
   if (!year || !session) {
     location.replace(setupUrl);
