@@ -318,6 +318,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
         }
       }
     });
+    $('timer').textContent = formatPm1Clock((session.durationMinutes ?? 90) * 60);
     succeed();
     renderTabs();
     renderRows();
