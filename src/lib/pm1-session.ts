@@ -78,7 +78,7 @@ export function savePm1Session(session: Pm1Session): boolean {
 export function startPm1Session(yearId: string, selected: number[], durationMinutes: 30 | 90 = 90): Pm1Session | null {
   const year = findPm1Year(yearId);
   if (!year || selected.length !== (durationMinutes === 30 ? 1 : PM1_SELECTION_COUNT) ||
-    new Set(selected).size !== PM1_SELECTION_COUNT ||
+    new Set(selected).size !== selected.length ||
     !selected.every(n => Number.isInteger(n) && n >= 1 && n <= year.questionCount)) return null;
   const now = Date.now();
   const answers: Record<string, Pm1Answer[]> = {};
