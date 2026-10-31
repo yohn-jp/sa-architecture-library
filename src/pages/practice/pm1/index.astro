@@ -75,7 +75,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   function renderChoices(): void {
     const year = findPm1Year(yearSelect.value)!;
     const saved = loadPm1Session(year.id);
-    const defaults = saved?.selected ?? questionNumbers(year).slice(0, requiredCount());
+    const defaults = saved?.selected.length === requiredCount() ? saved.selected : questionNumbers(year).slice(0, requiredCount());
     picker.replaceChildren();
     for (const number of questionNumbers(year)) {
       const label = document.createElement('label');
@@ -112,7 +112,6 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     ($('local-pdf') as HTMLAnchorElement).href = base + 'practice/pm1/pdfs/' + year.id + '.pdf';
     error.hidden = true;
     newAttempt.hidden = !saved;
-    if (saved) modeSelect.value = String(saved.durationMinutes ?? 90);
     if (!saved) {
       $('session-status').textContent = '新しい演習を開始できます';
       $('session-details').textContent = '問題を選び、開始ボタンを押すと' + modeSelect.value + '分の計時を開始します。';
@@ -147,6 +146,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   primary.addEventListener('click', () => {
     const saved = loadPm1Session(yearSelect.value);
     if (!saved) return begin();
+    if (Number(modeSelect.value) !== (saved.durationMinutes ?? 90)) return begin();
     const target = saved.finishedAt !== null || remainingPm1Seconds(saved) === 0 ? 'result/' : 'exam/';
     location.assign(base + 'practice/pm1/' + target + '?year=' + encodeURIComponent(saved.yearId));
   });
